@@ -170,7 +170,7 @@
         </div>
     </nav>
 
-   <script>
+  <script>
     const totalCapitulos = {
         "Genesis": 50, "Exodo": 40, "Levitico": 27, "Numeros": 36, "Deuteronomio": 34,
         "Josue": 24, "Jueces": 21, "Rut": 4, "1 Samuel": 31, "2 Samuel": 24,
@@ -220,8 +220,8 @@
         c.innerHTML = `<span class="font-bold text-amber-800">${estados[e]?.v || 'Versículo'}</span><p>${estados[e]?.m || 'Dios te ama.'}</p>`;
     }
 
-    // --- NUEVO CONTROL DE CONVERSACIÓN INTELIGENTE ---
-    let historialConversacion = [];
+    // --- CICLO DE 7 PREGUNTAS DE ESCUCHA ACTIVA ---
+    let faseEscucha = 0; // Controla en cuál de las 7 preguntas vamos
 
     function enviarMensaje() {
         const input = document.getElementById('chat-input');
@@ -230,7 +230,7 @@
 
         const chat = document.getElementById('chat-messages');
 
-        // 1. Pintar mensaje del usuario
+        // 1. Mostrar lo que escribe el usuario
         chat.innerHTML += `
             <div class="flex justify-end">
                 <div class="bg-blue-900 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-sm">
@@ -240,55 +240,72 @@
         
         input.value = '';
         chat.scrollTop = chat.scrollHeight;
-        historialConversacion.push(texto);
 
-        // 2. Analizar si el usuario dio una respuesta muy corta o un saludo
+        // 2. Procesar respuesta adaptativa guiada por el usuario
         setTimeout(() => {
             const textoMinus = texto.toLowerCase();
             const esSaludo = textoMinus.match(/^(hola|buenos dias|buenas tardes|buenas noches|saludos|hey|hi)$/);
             
-            // Si el texto tiene menos de 4 palabras (como "tristeza", "estoy mal", "no sé"), la IA sigue escuchando y preguntando
-            const esRespuestaBreve = texto.split(" ").length < 4;
+            let respuestaTexto = "";
 
-            let respuestaHtml = "";
+            const envolverMensaje = (contenido) => `
+                <div class="flex items-start gap-2">
+                    <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
+                    <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[85%] space-y-2 text-slate-700">
+                        ${contenido}
+                    </div>
+                </div>`;
 
-            if (esSaludo) {
-                respuestaHtml = `
-                    <div class="flex items-start gap-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
-                        <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[85%] space-y-2 text-slate-700">
-                            <p>¡Hola! Qué alegría saludarte. Estoy aquí para acompañarte paso a paso. Cuéntame, ¿qué situación hay en tu corazón hoy?</p>
-                        </div>
-                    </div>`;
-            } else if (esRespuestaBreve && historialConversacion.length < 3) {
-                // FASE DE ESCUCHA ACTIVA: Invita a profundizar con empatía
-                respuestaHtml = `
-                    <div class="flex items-start gap-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
-                        <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[85%] space-y-2 text-slate-700">
-                            <p>Te entiendo... La tristeza o el peso que sientes puede volverse muy abrumador. Cuéntame un poco más: ¿hay algo específico que haya provocado este sentimiento, o es un cansancio acumulado de estos días?</p>
-                        </div>
-                    </div>`;
+            if (esSaludo && faseEscucha === 0) {
+                respuestaTexto = `<p>¡Hola! Qué alegría saludarte. Estoy aquí enteramente para ti, sin prisas. Cuéntame, ¿qué hay en tu mente o en tu corazón en este día?</p>`;
             } else {
-                // FASE DE CONSEJO PROFUNDO: Se activa cuando el usuario ya desarrolló su problema o lleva varios turnos
-                respuestaHtml = `
-                    <div class="flex items-start gap-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
-                        <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[85%] space-y-3 text-slate-700">
-                            <p><strong>Comprendo profundamente el dolor y el cansancio que estás cargando...</strong> No estás solo atravesando por este momento de sombra.</p>
-                            
-                            <p>Las escrituras nos recuerdan en Salmos 34:18 que <em>"Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu"</em>. Dios no es ajeno a tus lágrimas ni a lo que pesa en tu interior.</p>
-                            
-                            <p>Hoy te invito a hacer una pausa, respirar profundo y permitirte descansar en Su gracia. No tienes que resolverlo todo hoy; entrégale esta carga en oración y da solo un pequeño paso de cuidado personal.</p>
-                            
-                            <p class="text-blue-900 font-semibold pt-1 border-t border-slate-100">Que el Señor traiga consuelo y paz a tu alma. Amén.</p>
-                        </div>
-                    </div>`;
+                faseEscucha++; // Avanzamos al siguiente nivel de escucha profunda
+
+                switch(faseEscucha) {
+                    case 1:
+                        respuestaTexto = `<p>Te escucho con atención y respeto. Sé que abrir el corazón no siempre es fácil. Cuéntame un poco más: ¿desde cuándo estás sintiendo o cargando con esta situación?</p>`;
+                        break;
+                    case 2:
+                        respuestaTexto = `<p>Comprendo. Es una carga bastante pesada para llevarla a solas. Cuando piensas en esto, ¿cuál dirías que es el pensamiento que más te atormenta o te quita la paz?</p>`;
+                        break;
+                    case 3:
+                        respuestaTexto = `<p>Duele escuchar que estás pasando por eso, y es completamente natural que te sientas así. ¿De qué manera dirías que esta situación está afectando tus días, tu trabajo o tus momentos de descanso?</p>`;
+                        break;
+                    case 4:
+                        respuestaTexto = `<p>Gracias por tener la confianza de compartirlo conmigo. A veces este tipo de pruebas nos hace sentir solos. ¿Has podido desahogarte con alguien de tu confianza o familia sobre lo que te pasa?</p>`;
+                        break;
+                    case 5:
+                        respuestaTexto = `<p>Entiendo perfectamente. A veces los seres queridos también tienen sus propias luchas. Si pudieras cambiar algo de esta situación ahora mismo para sentir un poco de alivio, ¿qué te gustaría que pasara?</p>`;
+                        break;
+                    case 6:
+                        respuestaTexto = `<p>Te sigo acompañando en cada palabra que me dices. Siento el esfuerzo que haces por mantenerte de pie a pesar de la incertidumbre. ¿Cómo te imaginas los próximos días si logramos dar un pasito muy pequeño hacia la tranquilidad?</p>`;
+                        break;
+                    case 7:
+                        // Última pregunta antes de dar el consejo final
+                        respuestaTexto = `<p>Has compartido cosas muy profundas conmigo hoy, y valoro enormemente tu apertura. Antes de que pensemos juntos en una palabra de aliento, dime: ¿hay algo más que sientas que deba saber de esto?</p>`;
+                        break;
+                    default:
+                        // FASE FINAL: Consejo Sagrado estructurado y completo
+                        respuestaTexto = `
+                            <div class="space-y-3">
+                                <p><strong>He recorrido cada palabra contigo y comprendo profundamente la dimensión de tu dolor y tu cansancio...</strong> Has sido muy valiente al ponerlo en palabras.</p>
+                                
+                                <p>Mirando las escrituras y trayendo este momento a la luz de la enseñanza de Jesús, Él nos recuerda en Mateo 6:34 que no nos agobiemos por el mañana, porque cada día tiene su propia carga, y nos invita a confiar en el amor providente del Padre celestial que jamás nos abandona en el valle.</p>
+                                
+                                <p>Hoy te invito a hacer una pausa, respirar hondo y descansar en Su gracia. No tienes que resolverlo todo en este instante; entrégale tu carga en una oración sincera y concéntrate únicamente en regalarte paz por el resto del día.</p>
+                                
+                                <p class="text-blue-900 font-semibold pt-1 border-t border-slate-100">Que el Señor fortalezca tus manos, guíe tus pasos y envuelva tu alma en Su paz. Amén.</p>
+                            </div>`;
+                        
+                        // Reseteamos el ciclo por si el usuario desea conversar sobre otro tema nuevo
+                        faseEscucha = 0;
+                        break;
+                }
             }
 
-            chat.innerHTML += respuestaHtml;
+            chat.innerHTML += envolverMensaje(respuestaTexto);
             chat.scrollTop = chat.scrollHeight;
-        }, 800);
+        }, 1000);
     }
 
     async function cargarBibliaCompleta() {
