@@ -50,7 +50,7 @@
                 <div class="flex items-start gap-2">
                     <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
                     <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm">
-                        <p>Hola, qué gusto saludarte. Estoy aquí para acompañarte y escucharte. ¿Cómo te sientes en este día o qué hay en tu corazón?</p>
+                        <p>Hola, qué gusto saludarte. Estoy aquí para escucharte con atención y caminar contigo. Cuéntame, ¿qué situación o pensamiento hay en tu corazón hoy?</p>
                     </div>
                 </div>
             </div>
@@ -220,7 +220,9 @@
             c.innerHTML = `<span class="font-bold text-amber-800">${estados[e]?.v || 'Versículo'}</span><p>${estados[e]?.m || 'Dios te ama.'}</p>`;
         }
 
-        // --- MOTOR DE CHAT INTELIGENTE Y NATURAL ---
+        // --- CONTADOR DE INTERACCIONES PARA LA ESCUCHA ACTIVA ---
+        let contadorMensajesUsuario = 0;
+
         function enviarMensaje() {
             const input = document.getElementById('chat-input');
             const texto = input.value.trim();
@@ -238,8 +240,9 @@
             
             input.value = '';
             chat.scrollTop = chat.scrollHeight;
+            contadorMensajesUsuario++;
 
-            // 2. Analizar si es un saludo simple o si describe un problema real
+            // 2. Lógica de Consejería Progresiva (Escuchar primero, aconsejar después)
             setTimeout(() => {
                 const textoMinus = texto.toLowerCase();
                 const esSaludo = textoMinus.match(/^(hola|buenos dias|buenas tardes|buenas noches|saludos|hey|hi)$/);
@@ -247,27 +250,36 @@
                 let respuestaHtml = "";
 
                 if (esSaludo) {
-                    // Si es un saludo, responde con calidez y abre la conversación humanamente
+                    // Si es un saludo inicial
                     respuestaHtml = `
                         <div class="flex items-start gap-2">
                             <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
                             <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[85%] space-y-2 text-slate-700">
-                                <p>¡Hola de nuevo! Qué alegría saludarte. 😊 ¿Cómo ha estado tu día y de qué te gustaría que hablemos o nos enfoquemos en oración hoy?</p>
+                                <p>¡Hola! Qué alegría saludarte. Estoy aquí para acompañarte. Cuéntame con confianza, ¿qué hay en tu mente o corazón en este día?</p>
+                            </div>
+                        </div>`;
+                } else if (contadorMensajesUsuario === 1) {
+                    // PRIMER MENSAJE DEL PROBLEMA: La IA se detiene a estudiar y escuchar al usuario
+                    respuestaHtml = `
+                        <div class="flex items-start gap-2">
+                            <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
+                            <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[85%] space-y-2 text-slate-700">
+                                <p>Te escucho con atención. Comprendo que lo que me compartes no es fácil de llevar... Cuéntame un poco más: ¿cómo te ha hecho sentir esto en los últimos días, o hay algo en particular que te preocupe de esta situación?</p>
                             </div>
                         </div>`;
                 } else {
-                    // Si el usuario comparte un problema, aplica la estructura ministerial completa que pediste
+                    // A PARTIR DEL SEGUNDO MENSAJE: La IA ya entendió el contexto y despliega la estructura completa solicitada
                     respuestaHtml = `
                         <div class="flex items-start gap-2">
                             <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
                             <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[85%] space-y-3 text-slate-700">
-                                <p><strong>Comprendo la angustia y la carga que hay en tu corazón en este momento...</strong> No estás solo transitando por esta situación tan difícil.</p>
+                                <p><strong>Comprendo profundamente la angustia y el peso que hay en tu corazón debido a todo esto que me has contado...</strong> No estás solo transitando por este valle.</p>
                                 
-                                <p>Jesús nos enseñó en Mateo 6:25-26 a no angustiarnos por el mañana, recordándonos que si Dios cuida con tanto detalle de las aves del cielo, cuánto más cuida de ti, que tienes un valor incalculable para Él.</p>
+                                <p>Mirando las escrituras, Jesús nos enseñó en Mateo 6:25-26 a no permitir que el agobio paralice nuestra fe, recordándonos que si Dios cuida con tanto detalle de las maravillas de su creación, cuánto más cuida de ti, que eres su hijo amado.</p>
                                 
-                                <p>Hoy te animo a poner esto en práctica: dedica un tiempo a soltar el control mediante la <em>oración sincera</em> y la paciencia activa, enfocándote en hacer tu parte con esfuerzo honrado y dejando el resto en manos del Padre.</p>
+                                <p>Hoy te animo a poner esto en práctica: aparta un momento para hacer una <em>oración sincera</em> entregando el control de lo que no puedes cambiar, y enfócate con paciencia en dar pequeños pasos con esfuerzo honrado.</p>
                                 
-                                <p class="text-blue-900 font-semibold pt-1 border-t border-slate-100">Que la paz de Cristo fortalezca tu vida hoy y siempre. Amén.</p>
+                                <p class="text-blue-900 font-semibold pt-1 border-t border-slate-100">Que la paz de Cristo fortalezca tu vida y renueve tus fuerzas hoy. Amén.</p>
                             </div>
                         </div>`;
                 }
@@ -288,7 +300,7 @@
                 const data = await response.json();
                 
                 if (data.error) {
-                    res.json = "No se pudo cargar este capítulo. Intenta nuevamente.";
+                    res.innerHTML = "No se pudo cargar este capítulo. Intenta nuevamente.";
                 } else {
                     res.innerHTML = `<h3 class="font-bold text-blue-900 mb-3 text-lg">${data.reference}</h3>
                                      <p class="text-sm italic leading-relaxed">${data.text}</p>`;
