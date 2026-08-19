@@ -6,156 +6,86 @@
     <title>El Camino - App</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
 
     <!-- HEADER -->
     <header class="bg-white shadow-sm py-4 px-6 flex items-center justify-between sticky top-0 z-50">
         <div class="flex items-center space-x-3">
             <div class="w-10 h-10 bg-gradient-to-tr from-amber-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md">✝</div>
-            <div>
-                <h1 class="font-bold text-lg leading-tight tracking-wide text-slate-900">EL CAMINO</h1>
-                <p class="text-xs text-slate-500">2026 · Guía Espiritual</p>
-            </div>
+            <h1 class="font-bold text-lg text-slate-900">EL CAMINO</h1>
         </div>
     </header>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <main class="flex-1 max-w-md w-full mx-auto p-4 pb-28" id="app-view">
+    <main class="flex-1 max-w-md w-full mx-auto p-4 pb-28">
         
-        <!-- VISTAS -->
+        <!-- VISTA: INICIO (Tu código anterior) -->
         <div id="view-inicio" class="space-y-6">
             <div class="bg-gradient-to-r from-blue-900 to-indigo-800 text-white p-6 rounded-2xl shadow-lg">
                 <h2 class="text-2xl font-bold mb-2">Hola, damos un paso juntos</h2>
-                <p class="text-blue-200 text-sm">"Lámpara es a mis pies tu lumbrera, y lumbrera a mi camino."</p>
             </div>
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-lg">🕊️ ¿Cómo está tu corazón hoy?</h3>
-                <div class="grid grid-cols-2 gap-2 mb-4">
-                    <button onclick="seleccionarEstado('ansioso')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl text-left">😰 Ansioso</button>
-                    <button onclick="seleccionarEstado('triste')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl text-left">🌧️ Triste</button>
-                    <button onclick="seleccionarEstado('economico')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl text-left">📉 Preocupado</button>
-                    <button onclick="seleccionarEstado('solo')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl text-left">👤 Solo</button>
-                    <button onclick="seleccionarEstado('bendecido')" class="p-3 text-sm bg-emerald-50 border border-emerald-200 rounded-xl text-left text-emerald-800 font-medium">✨ Bendecido</button>
-                    <button onclick="seleccionarEstado('contento')" class="p-3 text-sm bg-emerald-50 border border-emerald-200 rounded-xl text-left text-emerald-800 font-medium">😊 Contento</button>
-                    <button onclick="seleccionarEstado('agradecido')" class="p-3 text-sm bg-emerald-50 border border-emerald-200 rounded-xl text-left text-emerald-800 font-medium">🙏 Agradecido</button>
-                    <button onclick="seleccionarEstado('motivado')" class="p-3 text-sm bg-emerald-50 border border-emerald-200 rounded-xl text-left text-emerald-800 font-medium">🚀 Motivado</button>
-                </div>
-                <div id="resultado-animo" class="hidden bg-amber-50/60 border border-amber-200/60 p-4 rounded-xl mt-3"></div>
+            <!-- ... resto de tu contenido de inicio ... -->
+        </div>
+
+        <!-- VISTA: CHAT (Tu código anterior) -->
+        <div id="view-chat" class="hidden">...</div>
+
+        <!-- VISTA: BIBLIA (Profesional y Funcional) -->
+        <div id="view-biblia" class="hidden space-y-4">
+            <h2 class="text-xl font-bold text-slate-900 mb-2">Santa Biblia</h2>
+            <div class="flex gap-2">
+                <input type="text" id="biblia-ref" placeholder="Ej: Juan 3:16" class="flex-1 p-3 border rounded-xl text-sm shadow-sm outline-none">
+                <button onclick="buscarBiblia()" class="bg-blue-900 text-white px-4 py-2 rounded-xl text-sm font-bold">Buscar</button>
+            </div>
+            <div id="biblia-resultado" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 min-h-[300px] whitespace-pre-line leading-relaxed">
+                <p class="text-slate-400 text-center mt-10">Ingresa un libro, capítulo y versículo para comenzar tu lectura.</p>
             </div>
         </div>
 
-        <div id="view-chat" class="hidden flex flex-col h-[70vh]">
-            <div id="chat-messages" class="flex-1 overflow-y-auto space-y-4 pr-2 mb-3">
-                <div class="flex items-start gap-2">
-                    <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
-                    <div class="bg-white border border-slate-200 p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[90%]">
-                        <p class="text-slate-800 leading-relaxed">¡Hola! Qué bueno que te detuviste a charlar. ¿Cómo estuvo tu día realmente? Soy todo oídos.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex gap-2 bg-white p-2 rounded-2xl border border-slate-200 shadow-sm">
-                <input type="text" id="chat-input" placeholder="Escribe aquí..." class="flex-1 px-3 py-2 text-sm focus:outline-none bg-transparent" onkeypress="if(event.key === 'Enter') enviarMensaje()">
-                <button onclick="enviarMensaje()" class="bg-blue-900 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-800">Enviar</button>
-            </div>
-        </div>
-
-    <div id="view-biblia" class="hidden space-y-6">
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-        <h2 class="text-xl font-bold text-slate-900 mb-4">📖 Lecturas Bíblicas</h2>
-        <input type="text" id="search-biblia" placeholder="Buscar versículo o tema..." class="w-full p-3 border border-slate-200 rounded-xl text-sm mb-4 focus:ring-2 focus:ring-blue-500 outline-none">
-        
-        <div id="biblia-list" class="space-y-3">
-            <!-- Aquí se cargarán los pasajes mediante JS -->
-            <div class="p-4 bg-slate-50 rounded-xl cursor-pointer hover:bg-blue-50 transition border border-slate-100" onclick="leerPasaje('Juan 3:16')">
-                <h4 class="font-bold text-sm text-blue-900">Juan 3:16</h4>
-                <p class="text-xs text-slate-600 mt-1">Porque de tal manera amó Dios al mundo...</p>
-            </div>
-            <div class="p-4 bg-slate-50 rounded-xl cursor-pointer hover:bg-blue-50 transition border border-slate-100" onclick="leerPasaje('Salmos 23:1')">
-                <h4 class="font-bold text-sm text-blue-900">Salmos 23:1</h4>
-                <p class="text-xs text-slate-600 mt-1">Jehová es mi pastor; nada me faltará.</p>
-            </div>
-        </div>
-    </div>
-</div>
-        
-        <div id="view-empleo" class="hidden text-center py-10"><h2 class="text-xl font-bold">💼 Empleo</h2><p class="text-slate-500">Próximamente...</p></div>
-        <div id="view-apoyar" class="hidden text-center py-10"><h2 class="text-xl font-bold">❤️ Apoyar</h2><p class="text-slate-500">Próximamente...</p></div>
+        <!-- VISTAS: EMPLEO Y APOYAR -->
+        <div id="view-empleo" class="hidden">...</div>
+        <div id="view-apoyar" class="hidden">...</div>
     </main>
 
-    <!-- MENÚ INFERIOR COMPLETO -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 py-3 px-2 shadow-lg z-50">
+    <!-- MENÚ INFERIOR -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t py-3 px-2 shadow-lg z-50">
         <div class="flex justify-around items-center max-w-md mx-auto">
-            <button onclick="cambiarVista('inicio', this)" class="nav-btn flex flex-col items-center text-blue-600 transition">🏠<span class="text-[10px] font-semibold">Inicio</span></button>
-            <button onclick="cambiarVista('chat', this)" class="nav-btn flex flex-col items-center text-slate-400 transition">💬<span class="text-[10px] font-semibold">Chat IA</span></button>
-            <button onclick="cambiarVista('biblia', this)" class="nav-btn flex flex-col items-center text-slate-400 transition">📖<span class="text-[10px] font-semibold">Biblia</span></button>
-            <button onclick="cambiarVista('empleo', this)" class="nav-btn flex flex-col items-center text-slate-400 transition">💼<span class="text-[10px] font-semibold">Empleo</span></button>
-            <button onclick="cambiarVista('apoyar', this)" class="nav-btn flex flex-col items-center text-slate-400 transition">❤️<span class="text-[10px] font-semibold">Apoyar</span></button>
+            <button onclick="cambiarVista('inicio', this)" class="nav-btn flex flex-col items-center text-blue-600">🏠<span class="text-[10px]">Inicio</span></button>
+            <button onclick="cambiarVista('chat', this)" class="nav-btn flex flex-col items-center text-slate-400">💬<span class="text-[10px]">Chat IA</span></button>
+            <button onclick="cambiarVista('biblia', this)" class="nav-btn flex flex-col items-center text-slate-400">📖<span class="text-[10px]">Biblia</span></button>
+            <button onclick="cambiarVista('empleo', this)" class="nav-btn flex flex-col items-center text-slate-400">💼<span class="text-[10px]">Empleo</span></button>
+            <button onclick="cambiarVista('apoyar', this)" class="nav-btn flex flex-col items-center text-slate-400">❤️<span class="text-[10px]">Apoyar</span></button>
         </div>
     </nav>
 
     <script>
+        // Lógica de navegación
         function cambiarVista(vista, el) {
-            ['inicio', 'chat', 'biblia', 'empleo', 'apoyar'].forEach(v => document.getElementById('view-' + v).classList.add('hidden'));
+            document.querySelectorAll('[id^="view-"]').forEach(v => v.classList.add('hidden'));
             document.getElementById('view-' + vista).classList.remove('hidden');
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.replace('text-blue-600', 'text-slate-400'));
             el.classList.replace('text-slate-400', 'text-blue-600');
         }
 
-        const estados = {
-            ansioso: { v: 'Filipenses 4:6-7', m: 'No te afanes por nada. Yo tengo el control.' },
-            triste: { v: 'Salmos 34:18', m: 'Estoy cerca de tu corazón.' },
-            economico: { v: 'Mateo 6:33', m: 'Busca mi reino primero.' },
-            solo: { v: 'Josué 1:9', m: 'Nunca te dejaré.' },
-            bendecido: { v: 'Números 6:24-26', m: 'El Señor te bendice.' },
-            contento: { v: 'Salmos 118:24', m: 'Disfruta este día.' },
-            agradecido: { v: '1 Tesalonicenses 5:18', m: 'Gracias por reconocer lo bueno.' },
-            motivado: { v: 'Filipenses 4:13', m: 'Todo lo puedes en mí.' }
-        };
+        // Lógica de búsqueda bíblica profesional
+        async function buscarBiblia() {
+            const ref = document.getElementById('biblia-ref').value;
+            const resDiv = document.getElementById('biblia-resultado');
+            if (!ref) return;
 
-        function seleccionarEstado(e) {
-            const s = estados[e];
-            const c = document.getElementById('resultado-animo');
-            c.classList.remove('hidden');
-            c.innerHTML = `<span class="text-xs font-bold text-amber-800 uppercase">${s.v}</span><p class="text-sm mt-1">${s.m}</p>`;
+            resDiv.innerHTML = "Buscando en las escrituras...";
+            try {
+                // Usamos una API gratuita de Biblia
+                const response = await fetch(`https://bible-api.com/${ref}?translation=rv1960`);
+                const data = await response.json();
+                
+                if (data.error) throw new Error("No encontrado");
+                
+                resDiv.innerHTML = `<h3 class="font-bold text-blue-900 mb-2">${data.reference}</h3><p class="text-slate-700 italic">"${data.text}"</p>`;
+            } catch (err) {
+                resDiv.innerHTML = `<p class="text-red-500 text-center">No encontramos ese pasaje. Verifica el nombre del libro (ej: Juan 3:16).</p>`;
+            }
         }
-
-        function enviarMensaje() {
-            const input = document.getElementById('chat-input');
-            const texto = input.value.trim();
-            if (!texto) return;
-            const chat = document.getElementById('chat-messages');
-            chat.innerHTML += `<div class="flex items-start justify-end"><div class="bg-blue-900 text-white p-3 rounded-2xl rounded-tr-none text-sm">${texto}</div></div>`;
-            input.value = '';
-            setTimeout(() => {
-                chat.innerHTML += `<div class="flex items-start gap-2"><div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div><div class="bg-white border border-slate-200 p-4 rounded-2xl rounded-tl-none text-sm"><p>Te escucho. ¿Querés contarme más sobre lo que sentís?</p></div></div>`;
-                chat.scrollTop = chat.scrollHeight;
-            }, 800);
-        }
-        // Datos de ejemplo para la biblioteca
-const bibliaData = {
-    'Juan 3:16': 'Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.',
-    'Salmos 23:1': 'Jehová es mi pastor; nada me faltará.'
-};
-
-function leerPasaje(referencia) {
-    // Reutilizamos el espacio de resultado para mostrar el pasaje de forma profesional
-    const lista = document.getElementById('biblia-list');
-    lista.innerHTML = `
-        <div class="animate-in fade-in zoom-in duration-300">
-            <button onclick="location.reload()" class="text-xs text-blue-600 font-bold mb-4 underline">← Volver a la lista</button>
-            <h3 class="text-2xl font-bold text-slate-900 mb-2">${referencia}</h3>
-            <p class="text-slate-700 leading-relaxed italic border-l-4 border-blue-600 pl-4 py-2">
-                "${bibliaData[referencia] || 'Contenido en desarrollo...'}"
-            </p>
-        </div>
-    `;
-}
-
-// Búsqueda simple
-document.getElementById('search-biblia').addEventListener('input', (e) => {
-    const term = e.target.value.toLowerCase();
-    // Aquí puedes implementar una lógica de filtrado más robusta según crezca la base de datos
-});
     </script>
 </body>
 </html>
