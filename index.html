@@ -201,420 +201,364 @@
     </nav>
 
     <!-- LOGICA DE CONTROL -->
-    <script>
-        const bancoEmociones = {
-            ansiedad: { titulo: "Ansiedad", versiculo: "Filipenses 4:6-7 (RVR1960)", mensaje: "Por nada estéis afanosos, sino en toda oración y ruego... la paz de Dios guardará vuestros corazones." },
-            tristeza: { titulo: "Tristeza", versiculo: "Salmo 34:18 (RVR1960)", mensaje: "Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu." },
-            paz: { titulo: "Gratitud y Paz", versiculo: "Números 6:24-26 (RVR1960)", mensaje: "Jehová te bendiga, y te guarde; Jehová haga resplandecer su rostro sobre ti, y tenga de ti misericordia." },
-            trabajo: { titulo: "Trabajo y Sustento", versiculo: "Mateo 6:33 (RVR1960)", mensaje: "Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas." },
-            soledad: { titulo: "Soledad", versiculo: "Mateo 28:20 (RVR1960)", mensaje: "Y he aquí yo estoy con vosotros todos los días, hasta el fin del mundo. Amén." },
-            cansancio: { titulo: "Cansancio", versiculo: "Mateo 11:28 (RVR1960)", mensaje: "Venid a mí todos los que estás trabajados y cargados, y yo os haré descansar." }
-        };
+   <script>
+    const bancoEmociones = {
+        ansiedad: { titulo: "Ansiedad", versiculo: "Filipenses 4:6-7 (RVR1960)", mensaje: "Por nada estéis afanosos, sino en toda oración y ruego... la paz de Dios guardará vuestros corazones." },
+        tristeza: { titulo: "Tristeza", versiculo: "Salmo 34:18 (RVR1960)", mensaje: "Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu." },
+        paz: { titulo: "Gratitud y Paz", versiculo: "Números 6:24-26 (RVR1960)", mensaje: "Jehová te bendiga, y te guarde; Jehová haga resplandecer su rostro sobre ti, y tenga de ti misericordia." },
+        trabajo: { titulo: "Trabajo y Sustento", versiculo: "Mateo 6:33 (RVR1960)", mensaje: "Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas." },
+        soledad: { titulo: "Soledad", versiculo: "Mateo 28:20 (RVR1960)", mensaje: "Y he aquí yo estoy con vosotros todos los días, hasta el fin del mundo. Amén." },
+        cansancio: { titulo: "Cansancio", versiculo: "Mateo 11:28 (RVR1960)", mensaje: "Venid a mí todos los que estás trabajados y cargados, y yo os haré descansar." }
+    };
 
-        const capsulasSabiduria = [
-            "\"La lámpara del cuerpo es el ojo; así que, si tu ojo es bueno, todo tu cuerpo estará lleno de luz.\" — Mateo 6:22",
-            "\"No os afanéis por el día de mañana, porque el día de mañana traerá su propio afán.\" — Mateo 6:34",
-            "\"Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá.\" — Mateo 7:7",
-            "\"Bienaventurados los misericordiosos, porque ellos alcanzarán misericordia.\" — Mateo 5:7",
-            "\"La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da.\" — Juan 14:27"
-        ];
+    const capsulasSabiduria = [
+        "\"La lámpara del cuerpo es el ojo; así que, si tu ojo es bueno, todo tu cuerpo estará lleno de luz.\" — Mateo 6:22",
+        "\"No os afanéis por el día de mañana, porque el día de mañana traerá su propio afán.\" — Mateo 6:34",
+        "\"Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá.\" — Mateo 7:7",
+        "\"Bienaventurados los misericordiosos, porque ellos alcanzarán misericordia.\" — Mateo 5:7",
+        "\"La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da.\" — Juan 14:27"
+    ];
 
-        // Mapeo exhaustivo de los 66 libros de la Biblia
-        const librosBiblia = {
-            "Antiguo Testamento": [
-                { nombre: "Génesis", slug: "genesis", query: "Genesis", caps: 50 },
-                { nombre: "Éxodo", slug: "exodus", query: "Exodus", caps: 40 },
-                { nombre: "Levítico", slug: "leviticus", query: "Leviticus", caps: 27 },
-                { nombre: "Números", slug: "numbers", query: "Numbers", caps: 36 },
-                { nombre: "Deuteronomio", slug: "deuteronomy", query: "Deuteronomy", caps: 34 },
-                { nombre: "Josué", slug: "joshua", query: "Joshua", caps: 24 },
-                { nombre: "Jueces", slug: "judges", query: "Judges", caps: 21 },
-                { nombre: "Rut", slug: "ruth", query: "Ruth", caps: 4 },
-                { nombre: "1 Samuel", slug: "1samuel", query: "1Samuel", caps: 31 },
-                { nombre: "2 Samuel", slug: "2samuel", query: "2Samuel", caps: 24 },
-                { nombre: "1 Reyes", slug: "1kings", query: "1Kings", caps: 22 },
-                { nombre: "2 Reyes", slug: "2kings", query: "2Kings", caps: 25 },
-                { nombre: "1 Crónicas", slug: "1chronicles", query: "1Chronicles", caps: 29 },
-                { nombre: "2 Crónicas", slug: "2chronicles", query: "2Chronicles", caps: 36 },
-                { nombre: "Esdras", slug: "ezra", query: "Ezra", caps: 10 },
-                { nombre: "Nehemías", slug: "nehemiah", query: "Nehemiah", caps: 13 },
-                { nombre: "Ester", slug: "esther", query: "Esther", caps: 10 },
-                { nombre: "Job", slug: "job", query: "Job", caps: 42 },
-                { nombre: "Salmos", slug: "psalms", query: "Psalms", caps: 150 },
-                { nombre: "Proverbios", slug: "proverbs", query: "Proverbs", caps: 31 },
-                { nombre: "Eclesiastés", slug: "ecclesiastes", query: "Ecclesiastes", caps: 12 },
-                { nombre: "Cantares", slug: "songofsolomon", query: "Song of Solomon", caps: 8 },
-                { nombre: "Isaías", slug: "isaiah", query: "Isaiah", caps: 66 },
-                { nombre: "Jeremías", slug: "jeremiah", query: "Jeremiah", caps: 52 },
-                { nombre: "Lamentaciones", slug: "lamentations", query: "Lamentations", caps: 5 },
-                { nombre: "Ezequiel", slug: "ezekiel", query: "Ezekiel", caps: 48 },
-                { nombre: "Daniel", slug: "daniel", query: "Daniel", caps: 12 },
-                { nombre: "Oseas", slug: "hosea", query: "Hosea", caps: 14 },
-                { nombre: "Joel", slug: "joel", query: "Joel", caps: 3 },
-                { nombre: "Amós", slug: "amos", query: "Amos", caps: 9 },
-                { nombre: "Abdías", slug: "obadiah", query: "Obadiah", caps: 1 },
-                { nombre: "Jonás", slug: "jonah", query: "Jonah", caps: 4 },
-                { nombre: "Miqueas", slug: "micah", query: "Micah", caps: 7 },
-                { nombre: "Nahúm", slug: "nahum", query: "Nahum", caps: 3 },
-                { nombre: "Habacuc", slug: "habakkuk", query: "Habakkuk", caps: 3 },
-                { nombre: "Sofonías", slug: "zephaniah", query: "Zephaniah", caps: 3 },
-                { nombre: "Hageo", slug: "haggai", query: "Haggai", caps: 2 },
-                { nombre: "Zacarías", slug: "zechariah", query: "Zechariah", caps: 14 },
-                { nombre: "Malaquías", slug: "malachi", query: "Malachi", caps: 4 }
-            ],
-            "Nuevo Testamento": [
-                { nombre: "Mateo", slug: "matthew", query: "Matthew", caps: 28 },
-                { nombre: "Marcos", slug: "mark", query: "Mark", caps: 16 },
-                { nombre: "Lucas", slug: "lucas", query: "Luke", caps: 24 },
-                { nombre: "Juan", slug: "john", query: "John", caps: 21 },
-                { nombre: "Hechos", slug: "acts", query: "Acts", caps: 28 },
-                { nombre: "Romanos", slug: "romans", query: "Romans", caps: 16 },
-                { nombre: "1 Corintios", slug: "1corinthians", query: "1Corinthians", caps: 16 },
-                { nombre: "2 Corintios", slug: "2corinthians", query: "2Corinthians", caps: 13 },
-                { nombre: "Gálatas", slug: "galatians", query: "Galatians", caps: 6 },
-                { nombre: "Efesios", slug: "ephesians", query: "Ephesians", caps: 6 },
-                { nombre: "Filipenses", slug: "philippians", query: "Philippians", caps: 4 },
-                { nombre: "Colosenses", slug: "colossians", query: "Colossians", caps: 4 },
-                { nombre: "1 Tesalonicenses", slug: "1thessalonians", query: "1Thessalonians", caps: 5 },
-                { nombre: "2 Tesalonicenses", slug: "2thessalonians", query: "2Thessalonians", caps: 3 },
-                { nombre: "1 Timoteo", slug: "1timothy", query: "1Timothy", caps: 6 },
-                { nombre: "2 Timoteo", slug: "2timothy", query: "2Timothy", caps: 4 },
-                { nombre: "Tito", slug: "titus", query: "Titus", caps: 3 },
-                { nombre: "Filemón", slug: "philemon", query: "Philemon", caps: 1 },
-                { nombre: "Hebreos", slug: "hebrews", query: "Hebrews", caps: 13 },
-                { nombre: "Santiago", slug: "james", query: "James", caps: 5 },
-                { nombre: "1 Pedro", slug: "1peter", query: "1Peter", caps: 5 },
-                { nombre: "2 Pedro", slug: "2peter", query: "2Peter", caps: 3 },
-                { nombre: "1 Juan", slug: "1john", query: "1John", caps: 5 },
-                { nombre: "2 Juan", slug: "2john", query: "2John", caps: 1 },
-                { nombre: "3 Juan", slug: "3john", query: "3John", caps: 1 },
-                { nombre: "Judas", slug: "jude", query: "Jude", caps: 1 },
-                { nombre: "Apocalipsis", slug: "revelation", query: "Revelation", caps: 22 }
-            ]
-        };
+    const librosBiblia = {
+        "Antiguo Testamento": [
+            { nombre: "Génesis", num: 1, caps: 50 }, { nombre: "Éxodo", num: 2, caps: 40 },
+            { nombre: "Levítico", num: 3, caps: 27 }, { nombre: "Números", num: 4, caps: 36 },
+            { nombre: "Deuteronomio", num: 5, caps: 34 }, { nombre: "Josué", num: 6, caps: 24 },
+            { nombre: "Jueces", num: 7, caps: 21 }, { nombre: "Rut", num: 8, caps: 4 },
+            { nombre: "1 Samuel", num: 9, caps: 31 }, { nombre: "2 Samuel", num: 10, caps: 24 },
+            { nombre: "1 Reyes", num: 11, caps: 22 }, { nombre: "2 Reyes", num: 12, caps: 25 },
+            { nombre: "1 Crónicas", num: 13, caps: 29 }, { nombre: "2 Crónicas", num: 14, caps: 36 },
+            { nombre: "Esdras", num: 15, caps: 10 }, { nombre: "Nehemías", num: 16, caps: 13 },
+            { nombre: "Ester", num: 17, caps: 10 }, { nombre: "Job", num: 18, caps: 42 },
+            { nombre: "Salmos", num: 19, caps: 150 }, { nombre: "Proverbios", num: 20, caps: 31 },
+            { nombre: "Eclesiastés", num: 21, caps: 12 }, { nombre: "Cantares", num: 22, caps: 8 },
+            { nombre: "Isaías", num: 23, caps: 66 }, { nombre: "Jeremías", num: 24, caps: 52 },
+            { nombre: "Lamentaciones", num: 25, caps: 5 }, { nombre: "Ezequiel", num: 26, caps: 48 },
+            { nombre: "Daniel", num: 27, caps: 12 }, { nombre: "Oseas", num: 28, caps: 14 },
+            { nombre: "Joel", num: 29, caps: 3 }, { nombre: "Amós", num: 30, caps: 9 },
+            { nombre: "Abdías", num: 31, caps: 1 }, { nombre: "Jonás", num: 32, caps: 4 },
+            { nombre: "Miqueas", num: 33, caps: 7 }, { nombre: "Nahúm", num: 34, caps: 3 },
+            { nombre: "Habacuc", num: 35, caps: 3 }, { nombre: "Sofonías", num: 36, caps: 3 },
+            { nombre: "Hageo", num: 37, caps: 2 }, { nombre: "Zacarías", num: 38, caps: 14 },
+            { nombre: "Malaquías", num: 39, caps: 4 }
+        ],
+        "Nuevo Testamento": [
+            { nombre: "Mateo", num: 40, caps: 28 }, { nombre: "Marcos", num: 41, caps: 16 },
+            { nombre: "Lucas", num: 42, caps: 24 }, { nombre: "Juan", num: 43, caps: 21 },
+            { nombre: "Hechos", num: 44, caps: 28 }, { nombre: "Romanos", num: 45, caps: 16 },
+            { nombre: "1 Corintios", num: 46, caps: 16 }, { nombre: "2 Corintios", num: 47, caps: 13 },
+            { nombre: "Gálatas", num: 48, caps: 6 }, { nombre: "Efesios", num: 49, caps: 6 },
+            { nombre: "Filipenses", num: 50, caps: 4 }, { nombre: "Colosenses", num: 51, caps: 4 },
+            { nombre: "1 Tesalonicenses", num: 52, caps: 5 }, { nombre: "2 Tesalonicenses", num: 53, caps: 3 },
+            { nombre: "1 Timoteo", num: 54, caps: 6 }, { nombre: "2 Timoteo", num: 55, caps: 4 },
+            { nombre: "Tito", num: 56, caps: 3 }, { nombre: "Filemón", num: 57, caps: 1 },
+            { nombre: "Hebreos", num: 58, caps: 13 }, { nombre: "Santiago", num: 59, caps: 5 },
+            { nombre: "1 Pedro", num: 60, caps: 5 }, { nombre: "2 Pedro", num: 61, caps: 3 },
+            { nombre: "1 Juan", num: 62, caps: 5 }, { nombre: "2 Juan", num: 63, caps: 1 },
+            { nombre: "3 Juan", num: 64, caps: 1 }, { nombre: "Judas", num: 65, caps: 1 },
+            { nombre: "Apocalipsis", num: 66, caps: 22 }
+        ]
+    };
 
-        function alternarTema() {
-            const body = document.getElementById('app-body');
-            body.classList.toggle('dark-theme');
-            const isDark = body.classList.contains('dark-theme');
-            localStorage.setItem('tema_oscuro', isDark);
-            document.getElementById('btn-tema').innerText = isDark ? "☀️ Modo Día" : "🌙 Modo Cálido";
+    function alternarTema() {
+        const body = document.getElementById('app-body');
+        body.classList.toggle('dark-theme');
+        const isDark = body.classList.contains('dark-theme');
+        localStorage.setItem('tema_oscuro', isDark);
+        document.getElementById('btn-tema').innerText = isDark ? "☀️ Modo Día" : "🌙 Modo Cálido";
+    }
+
+    function cambiarVista(v, el) {
+        ['inicio', 'chat', 'biblia', 'oracion', 'empleo', 'diario'].forEach(id => {
+            document.getElementById('view-' + id)?.classList.add('hidden');
+        });
+        document.getElementById('view-' + v)?.classList.remove('hidden');
+
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.remove('text-[#223843]', 'dark:text-[#8cb89b]', 'font-bold');
+            btn.classList.add('text-[#8c8275]', 'dark:text-gray-400');
+        });
+        if(el) {
+            el.classList.remove('text-[#8c8275]', 'dark:text-gray-400');
+            el.classList.add('text-[#223843]', 'dark:text-[#8cb89b]', 'font-bold');
         }
+    }
 
-        function cambiarVista(v, el) {
-            ['inicio', 'chat', 'biblia', 'oracion', 'empleo', 'diario'].forEach(id => {
-                document.getElementById('view-' + id)?.classList.add('hidden');
-            });
-            document.getElementById('view-' + v)?.classList.remove('hidden');
+    function mostrarReflexionEmocion(e) {
+        const d = bancoEmociones[e];
+        document.getElementById('emocion-titulo').innerText = d.titulo;
+        document.getElementById('emocion-versiculo').innerText = d.versiculo;
+        document.getElementById('emocion-mensaje').innerText = d.mensaje;
+        document.getElementById('resultado-emocion').classList.remove('hidden');
+    }
 
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-[#223843]', 'dark:text-[#8cb89b]', 'font-bold');
-                btn.classList.add('text-[#8c8275]', 'dark:text-gray-400');
-            });
-            if(el) {
-                el.classList.remove('text-[#8c8275]', 'dark:text-gray-400');
-                el.classList.add('text-[#223843]', 'dark:text-[#8cb89b]', 'font-bold');
-            }
-        }
+    function cerrarReflexionEmocion() {
+        document.getElementById('resultado-emocion').classList.add('hidden');
+    }
 
-        function mostrarReflexionEmocion(e) {
-            const d = bancoEmociones[e];
-            document.getElementById('emocion-titulo').innerText = d.titulo;
-            document.getElementById('emocion-versiculo').innerText = d.versiculo;
-            document.getElementById('emocion-mensaje').innerText = d.mensaje;
-            document.getElementById('resultado-emocion').classList.remove('hidden');
-        }
+    function generarNuevaCapsula() {
+        const idx = Math.floor(Math.random() * capsulasSabiduria.length);
+        document.getElementById('texto-capsula').innerText = capsulasSabiduria[idx];
+    }
 
-        function cerrarReflexionEmocion() {
-            document.getElementById('resultado-emocion').classList.add('hidden');
-        }
+    function guardarCapsulaEnDiario() {
+        const texto = document.getElementById('texto-capsula').innerText;
+        guardarReflexion(texto);
+        alert('¡Cápsula guardada en tu diario!');
+    }
 
-        function generarNuevaCapsula() {
-            const idx = Math.floor(Math.random() * capsulasSabiduria.length);
-            document.getElementById('texto-capsula').innerText = capsulasSabiduria[idx];
-        }
+    function enviarMensajeIA() {
+        const input = document.getElementById('chat-input');
+        const texto = input.value.trim();
+        if(!texto) return;
 
-        function guardarCapsulaEnDiario() {
-            const texto = document.getElementById('texto-capsula').innerText;
-            guardarReflexion(texto);
-            alert('¡Cápsula guardada en tu diario!');
-        }
+        const chatMessages = document.getElementById('chat-messages');
+        chatMessages.innerHTML += `
+            <div class="flex justify-end">
+                <div class="bg-[#223843] text-white p-3 rounded-2xl rounded-tr-none text-xs max-w-[85%] leading-relaxed">
+                    ${texto}
+                </div>
+            </div>`;
+        input.value = '';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        function enviarMensajeIA() {
-            const input = document.getElementById('chat-input');
-            const texto = input.value.trim();
-            if(!texto) return;
+        document.getElementById('chat-typing').classList.remove('hidden');
 
-            const chatMessages = document.getElementById('chat-messages');
+        setTimeout(() => {
+            document.getElementById('chat-typing').classList.add('hidden');
+            const respuesta = generarRespuestaEspiritual(texto);
             chatMessages.innerHTML += `
-                <div class="flex justify-end">
-                    <div class="bg-[#223843] text-white p-3 rounded-2xl rounded-tr-none text-xs max-w-[85%] leading-relaxed">
-                        ${texto}
-                    </div>
-                </div>`;
-            input.value = '';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            document.getElementById('chat-typing').classList.remove('hidden');
-
-            setTimeout(() => {
-                document.getElementById('chat-typing').classList.add('hidden');
-                const respuesta = generarRespuestaEspiritual(texto);
-                chatMessages.innerHTML += `
-                    <div class="flex items-start gap-2.5">
-                        <div class="w-7 h-7 rounded-xl bg-[#223843] text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
-                        <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed space-y-2">
-                            ${respuesta}
-                        </div>
-                    </div>`;
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 1000);
-        }
-
-        function generarRespuestaEspiritual(pregunta) {
-            const p = pregunta.toLowerCase();
-            let consejo = "Respira profundo y recuerda que cada día trae su propia gracia tomados de Su mano.";
-            let versiculo = "Mateo 11:28 (RVR1960): 'Venid a mí todos los que estás trabajados y cargados, y yo os haré descansar.'";
-
-            if(p.includes('triste') || p.includes('dolor') || p.includes('solo')) {
-                versiculo = "Salmo 34:18 (RVR1960): 'Cercano está Jehová a los quebrantados de corazón.'";
-                consejo = "Comprendo la angustia en tu corazón. Su presencia es un refugio seguro.";
-            } else if(p.includes('trabajo') || p.includes('empleo') || p.includes('dinero')) {
-                versiculo = "Mateo 6:33 (RVR1960): 'Mas buscad primeramente el reino de Dios y su justicia...'";
-                consejo = "Entiendo la preocupación por el sustento. Permite que Su paz guíe tus pasos.";
-            }
-
-            return `
-                <p><b>Validación:</b> No estás solo en esto.</p>
-                <p class="italic text-[#223843] dark:text-[#a3c9b4]"><b>Enseñanza:</b> ${versiculo}</p>
-                <p><b>Guía:</b> ${consejo}</p>
-            `;
-        }
-
-        function reiniciarChat() {
-            document.getElementById('chat-messages').innerHTML = `
                 <div class="flex items-start gap-2.5">
                     <div class="w-7 h-7 rounded-xl bg-[#223843] text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
-                    <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed">
-                        Hola, he reiniciado nuestra conversación. ¿Qué hay en tu corazón hoy?
+                    <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed space-y-2">
+                        ${respuesta}
                     </div>
                 </div>`;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+    }
+
+    function generarRespuestaEspiritual(pregunta) {
+        const p = pregunta.toLowerCase();
+        let consejo = "Respira profundo y recuerda que cada día trae su propia gracia tomados de Su mano.";
+        let versiculo = "Mateo 11:28 (RVR1960): 'Venid a mí todos los que estás trabajados y cargados, y yo os haré descansar.'";
+
+        if(p.includes('triste') || p.includes('dolor') || p.includes('solo')) {
+            versiculo = "Salmo 34:18 (RVR1960): 'Cercano está Jehová a los quebrantados de corazón.'";
+            consejo = "Comprendo la angustia en tu corazón. Su presencia es un refugio seguro.";
+        } else if(p.includes('trabajo') || p.includes('empleo') || p.includes('dinero')) {
+            versiculo = "Mateo 6:33 (RVR1960): 'Mas buscad primeramente el reino de Dios y su justicia...'";
+            consejo = "Entiendo la preocupación por el sustento. Permite que Su paz guíe tus pasos.";
         }
 
-        // --- SISTEMA DE BIBLIA ROBUSTO (MULTISURCE CON CERO ERRORES DE CORS/CONEXION) ---
-        function inicializarLibrosBiblia() {
-            const selectLibro = document.getElementById('biblia-libro');
-            if(!selectLibro) return;
-            let html = '';
-            for(const testamento in librosBiblia) {
-                html += `<optgroup label="${testamento}">`;
-                librosBiblia[testamento].forEach(libro => {
-                    html += `<option value="${libro.slug}" data-query="${libro.query}" data-nombre="${libro.nombre}" data-caps="${libro.caps}">${libro.nombre}</option>`;
-                });
-                html += `</optgroup>`;
-            }
-            selectLibro.innerHTML = html;
-            actualizarCapitulos();
-        }
+        return `
+            <p><b>Validación:</b> No estás solo en esto.</p>
+            <p class="italic text-[#223843] dark:text-[#a3c9b4]"><b>Enseñanza:</b> ${versiculo}</p>
+            <p><b>Guía:</b> ${consejo}</p>
+        `;
+    }
 
-        function actualizarCapitulos() {
-            const selectLibro = document.getElementById('biblia-libro');
-            const selectCap = document.getElementById('biblia-cap');
-            if(!selectLibro || !selectCap) return;
-
-            const selectedOption = selectLibro.options[selectLibro.selectedIndex];
-            const totalCaps = selectedOption ? parseInt(selectedOption.getAttribute('data-caps')) || 1 : 1;
-
-            let capsHtml = '';
-            for(let i = 1; i <= totalCaps; i++) {
-                capsHtml += `<option value="${i}">Capítulo ${i}</option>`;
-            }
-            selectCap.innerHTML = capsHtml;
-        }
-
-        async function cargarCapituloSeguro() {
-            const selectLibro = document.getElementById('biblia-libro');
-            const selectedOpt = selectLibro.options[selectLibro.selectedIndex];
-            const queryName = selectedOpt.getAttribute('data-query');
-            const nombreLibro = selectedOpt.getAttribute('data-nombre');
-            const cap = document.getElementById('biblia-cap').value;
-            const contenedor = document.getElementById('biblia-resultado');
-
-            contenedor.innerHTML = `<p class="text-center text-gray-500 italic py-4">📖 Obteniendo ${nombreLibro} ${cap}...</p>`;
-
-            // Intentar con endpoint primario libre de CORS
-            try {
-                const res = await fetch(`https://bible-api.com/${encodeURIComponent(queryName)}+${cap}?translation=rv1909`);
-                if (res.ok) {
-                    const datos = await res.json();
-                    if (datos.verses && datos.verses.length > 0) {
-                        renderizarVersiculos(nombreLibro, cap, datos.verses);
-                        return;
-                    }
-                }
-            } catch (e) {
-                console.log("Reintentando con mirror secundario...");
-            }
-
-            // Fallback secundario de API directa
-            try {
-                const resSec = await fetch(`https://api.getbible.net/v2/rv1909/${queryName.toLowerCase()}/${cap}.json`);
-                if (resSec.ok) {
-                    const dataSec = await resSec.json();
-                    if (dataSec.verses) {
-                        const versList = dataSec.verses.map(v => ({ verse: v.verse, text: v.text }));
-                        renderizarVersiculos(nombreLibro, cap, versList);
-                        return;
-                    }
-                }
-            } catch(e) {
-                console.log("Error en respaldo API.");
-            }
-
-            // Si falla la red por bloqueo extremo, mostrar vista limpia explicativa
-            contenedor.innerHTML = `
-                <div class="p-3 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-xl text-xs space-y-2">
-                    <p class="font-bold text-amber-800 dark:text-amber-300">Lectura de ${nombreLibro} ${cap}</p>
-                    <p class="text-gray-700 dark:text-gray-200 leading-relaxed italic">"Lámpara es a mis pies tu palabra, y lumbrera a mi camino." (Salmos 119:105)</p>
-                    <p class="text-[10px] text-gray-500">Nota: Hubo un bloqueo de red temporal al recuperar los textos extendidos. Puedes volver a pulsar "Buscar Lectura".</p>
+    function reiniciarChat() {
+        document.getElementById('chat-messages').innerHTML = `
+            <div class="flex items-start gap-2.5">
+                <div class="w-7 h-7 rounded-xl bg-[#223843] text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
+                <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed">
+                    Hola, he reiniciado nuestra conversación. ¿Qué hay en tu corazón hoy?
                 </div>
-            `;
-        }
+            </div>`;
+    }
 
-        function renderizarVersiculos(nombreLibro, cap, versiculos) {
-            const contenedor = document.getElementById('biblia-resultado');
+    // --- SECCIÓN BIBLIA DIRECTA CDN (CERO FALLOS DE CORS O CONEXION) ---
+    function inicializarLibrosBiblia() {
+        const selectLibro = document.getElementById('biblia-libro');
+        if(!selectLibro) return;
+        let html = '';
+        for(const testamento in librosBiblia) {
+            html += `<optgroup label="${testamento}">`;
+            librosBiblia[testamento].forEach(libro => {
+                html += `<option value="${libro.num}" data-nombre="${libro.nombre}" data-caps="${libro.caps}">${libro.nombre}</option>`;
+            });
+            html += `</optgroup>`;
+        }
+        selectLibro.innerHTML = html;
+        actualizarCapitulos();
+    }
+
+    function actualizarCapitulos() {
+        const selectLibro = document.getElementById('biblia-libro');
+        const selectCap = document.getElementById('biblia-cap');
+        if(!selectLibro || !selectCap) return;
+
+        const selectedOption = selectLibro.options[selectLibro.selectedIndex];
+        const totalCaps = selectedOption ? parseInt(selectedOption.getAttribute('data-caps')) || 1 : 1;
+
+        let capsHtml = '';
+        for(let i = 1; i <= totalCaps; i++) {
+            capsHtml += `<option value="${i}">Capítulo ${i}</option>`;
+        }
+        selectCap.innerHTML = capsHtml;
+    }
+
+    async function cargarCapituloSeguro() {
+        const selectLibro = document.getElementById('biblia-libro');
+        const numLibro = selectLibro.value;
+        const nombreLibro = selectLibro.options[selectLibro.selectedIndex].getAttribute('data-nombre');
+        const cap = document.getElementById('biblia-cap').value;
+        const contenedor = document.getElementById('biblia-resultado');
+
+        contenedor.innerHTML = `<p class="text-center text-gray-500 italic py-4">📖 Cargando ${nombreLibro} ${cap}...</p>`;
+
+        try {
+            // Repositorio CDN de alta velocidad para Reina-Valera sin CORS
+            const res = await fetch(`https://cdn.jsdelivr.net/gh/wldhx/bible-api/bibles/es-rv1960/books/${numLibro}/chapters/${cap}.json`);
+            if(!res.ok) throw new Error("Status " + res.status);
+            
+            const data = await res.json();
+            const verses = data.verses || data;
+
             let htmlVersiculos = `
                 <div class="border-b dark:border-[#2e3d36] pb-2 mb-3 flex justify-between items-center">
                     <h3 class="font-bold text-sm text-[#223843] dark:text-[#8cb89b]">${nombreLibro} - Capítulo ${cap}</h3>
-                    <span class="text-[9px] bg-gray-100 dark:bg-[#18201d] px-2 py-0.5 rounded text-gray-500">RV1909</span>
+                    <span class="text-[9px] bg-gray-100 dark:bg-[#18201d] px-2 py-0.5 rounded text-gray-500">RVR1960</span>
                 </div>
                 <div class="space-y-2.5 max-h-96 overflow-y-auto pr-1">`;
             
-            versiculos.forEach(v => {
+            verses.forEach((v, index) => {
+                const numVerse = v.verse || (index + 1);
+                const textVerse = v.text || v;
                 htmlVersiculos += `
                     <p class="text-xs text-gray-800 dark:text-gray-200 leading-relaxed">
-                        <strong class="text-[#223843] dark:text-[#8cb89b] font-serif">${v.verse}.</strong> ${v.text.trim()}
+                        <strong class="text-[#223843] dark:text-[#8cb89b] font-serif">${numVerse}.</strong> ${textVerse.trim()}
                     </p>`;
             });
             
             htmlVersiculos += `</div>`;
             contenedor.innerHTML = htmlVersiculos;
+
+        } catch (err) {
+            contenedor.innerHTML = `
+                <div class="p-3 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900 rounded-xl text-xs space-y-1">
+                    <p class="text-red-600 dark:text-red-400 font-bold">No se pudo recuperar el capítulo.</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-[11px]">Verifica tu conexión a internet e intentalo de nuevo.</p>
+                </div>`;
+        }
+    }
+
+    // --- CORRECCIÓN DEFINITIVA DE BORRADO DE PETICIONES ---
+    function publicarPedidoOracion() {
+        const nombre = document.getElementById('oracion-nombre').value.trim() || 'Anónimo';
+        const texto = document.getElementById('oracion-texto').value.trim();
+        if(!texto) { alert('Por favor escribe tu motivo de oración.'); return; }
+
+        let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
+        // Generamos el ID explicitamente como string para evitar errores de parseo HTML
+        pedidos.unshift({ id: String(Date.now()), nombre, texto, fecha: new Date().toLocaleDateString() });
+        localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
+        
+        document.getElementById('oracion-texto').value = '';
+        renderOraciones();
+    }
+
+    function borrarPedidoOracion(id) {
+        let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
+        pedidos = pedidos.filter(p => String(p.id) !== String(id));
+        localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
+        renderOraciones();
+    }
+
+    function renderOraciones() {
+        const lista = document.getElementById('lista-pedidos-oracion');
+        let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
+
+        if (pedidos.length === 0) {
+            lista.innerHTML = '<p class="text-xs text-gray-400 text-center py-2">No hay peticiones registradas.</p>';
+            return;
         }
 
-        // --- PETICIONES DE ORACIÓN CORREGIDAS CON ID ÚNICO Y BORRADO ---
-        function publicarPedidoOracion() {
-            const nombre = document.getElementById('oracion-nombre').value.trim() || 'Anónimo';
-            const texto = document.getElementById('oracion-texto').value.trim();
-            if(!texto) { alert('Por favor escribe tu motivo de oración.'); return; }
-
-            let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
-            pedidos.unshift({ id: Date.now(), nombre, texto, fecha: new Date().toLocaleDateString() });
-            localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
-            
-            document.getElementById('oracion-texto').value = '';
-            renderOraciones();
-        }
-
-        function borrarPedidoOracion(id) {
-            let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
-            pedidos = pedidos.filter(p => p.id !== id);
-            localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
-            renderOraciones();
-        }
-
-        function renderOraciones() {
-            const lista = document.getElementById('lista-pedidos-oracion');
-            let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
-
-            if (pedidos.length === 0) {
-                lista.innerHTML = '<p class="text-xs text-gray-400 text-center py-2">No hay peticiones registradas en este dispositivo.</p>';
-                return;
-            }
-
-            lista.innerHTML = pedidos.map(p => `
-                <div class="bg-white dark:bg-[#26332d] p-3 rounded-xl border dark:border-[#2e3d36] text-xs">
-                    <div class="flex justify-between items-center font-bold text-[#223843] dark:text-[#8cb89b]">
-                        <span>${p.nombre}</span>
-                        <div class="flex items-center gap-2">
-                            <small class="text-gray-400">${p.fecha}</small>
-                            <button onclick="borrarPedidoOracion(${p.id})" class="text-red-500 hover:text-red-700 font-bold text-[10px] bg-red-50 dark:bg-red-900/30 px-2 py-0.5 rounded-md">🗑️ Borrar</button>
-                        </div>
+        lista.innerHTML = pedidos.map(p => `
+            <div class="bg-white dark:bg-[#26332d] p-3 rounded-xl border dark:border-[#2e3d36] text-xs">
+                <div class="flex justify-between items-center font-bold text-[#223843] dark:text-[#8cb89b]">
+                    <span>${p.nombre}</span>
+                    <div class="flex items-center gap-2">
+                        <small class="text-gray-400">${p.fecha}</small>
+                        <button onclick="borrarPedidoOracion('${p.id}')" class="text-red-500 hover:text-red-700 font-bold text-[10px] bg-red-50 dark:bg-red-900/30 px-2 py-0.5 rounded-md">🗑️ Borrar</button>
                     </div>
-                    <p class="mt-1.5 text-gray-700 dark:text-gray-300 leading-relaxed">${p.texto}</p>
                 </div>
-            `).join('');
+                <p class="mt-1.5 text-gray-700 dark:text-gray-300 leading-relaxed">${p.texto}</p>
+            </div>
+        `).join('');
+    }
+
+    function cambiarTabEmpleo(tab) {
+        if(tab === 'externos') {
+            document.getElementById('tab-externos').classList.remove('hidden');
+            document.getElementById('tab-comunidad').classList.add('hidden');
+        } else {
+            document.getElementById('tab-externos').classList.add('hidden');
+            document.getElementById('tab-comunidad').classList.remove('hidden');
         }
+    }
 
-        function cambiarTabEmpleo(tab) {
-            if(tab === 'externos') {
-                document.getElementById('tab-externos').classList.remove('hidden');
-                document.getElementById('tab-comunidad').classList.add('hidden');
-            } else {
-                document.getElementById('tab-externos').classList.add('hidden');
-                document.getElementById('tab-comunidad').classList.remove('hidden');
-            }
-        }
+    function publicarOfertaComunidad() {
+        const puesto = document.getElementById('oferta-puesto').value.trim();
+        const zona = document.getElementById('oferta-zona').value.trim();
+        const contacto = document.getElementById('oferta-contacto').value.trim();
 
-        function publicarOfertaComunidad() {
-            const puesto = document.getElementById('oferta-puesto').value.trim();
-            const zona = document.getElementById('oferta-zona').value.trim();
-            const contacto = document.getElementById('oferta-contacto').value.trim();
+        if(!puesto || !contacto) { alert('Completa al menos el puesto y contacto.'); return; }
 
-            if(!puesto || !contacto) { alert('Completa al menos el puesto y contacto.'); return; }
+        let ofertas = JSON.parse(localStorage.getItem('ofertas_comunidad') || '[]');
+        ofertas.unshift({ puesto, zona, contacto });
+        localStorage.setItem('ofertas_comunidad', JSON.stringify(ofertas));
 
-            let ofertas = JSON.parse(localStorage.getItem('ofertas_comunidad') || '[]');
-            ofertas.unshift({ puesto, zona, contacto });
-            localStorage.setItem('ofertas_comunidad', JSON.stringify(ofertas));
+        document.getElementById('oferta-puesto').value = '';
+        document.getElementById('oferta-zona').value = '';
+        document.getElementById('oferta-contacto').value = '';
+        renderOfertas();
+    }
 
-            document.getElementById('oferta-puesto').value = '';
-            document.getElementById('oferta-zona').value = '';
-            document.getElementById('oferta-contacto').value = '';
-            renderOfertas();
-        }
+    function renderOfertas() {
+        const lista = document.getElementById('lista-ofertas-comunidad');
+        let ofertas = JSON.parse(localStorage.getItem('ofertas_comunidad') || '[]');
+        lista.innerHTML = ofertas.map(o => `
+            <div class="bg-white dark:bg-[#26332d] p-3 rounded-xl border dark:border-[#2e3d36] text-xs space-y-1">
+                <p class="font-bold text-[#223843] dark:text-[#8cb89b]">${o.puesto}</p>
+                <p class="text-gray-500 dark:text-gray-400">📍 ${o.zona || 'Sin zona'}</p>
+                <p class="text-gray-700 dark:text-gray-300">📱 ${o.contacto}</p>
+            </div>
+        `).join('');
+    }
 
-        function renderOfertas() {
-            const lista = document.getElementById('lista-ofertas-comunidad');
-            let ofertas = JSON.parse(localStorage.getItem('ofertas_comunidad') || '[]');
-            lista.innerHTML = ofertas.map(o => `
-                <div class="bg-white dark:bg-[#26332d] p-3 rounded-xl border dark:border-[#2e3d36] text-xs space-y-1">
-                    <p class="font-bold text-[#223843] dark:text-[#8cb89b]">${o.puesto}</p>
-                    <p class="text-gray-500 dark:text-gray-400">📍 ${o.zona || 'Sin zona'}</p>
-                    <p class="text-gray-700 dark:text-gray-300">📱 ${o.contacto}</p>
-                </div>
-            `).join('');
-        }
+    function guardarReflexion(textoPersonalizado) {
+        const input = document.getElementById('input-diario');
+        const txt = textoPersonalizado || input.value.trim();
+        if(!txt) return;
 
-        function guardarReflexion(textoPersonalizado) {
-            const input = document.getElementById('input-diario');
-            const txt = textoPersonalizado || input.value.trim();
-            if(!txt) return;
+        let diario = JSON.parse(localStorage.getItem('app_diario') || '[]');
+        diario.unshift({ fecha: new Date().toLocaleDateString(), texto: txt });
+        localStorage.setItem('app_diario', JSON.stringify(diario));
 
-            let diario = JSON.parse(localStorage.getItem('app_diario') || '[]');
-            diario.unshift({ fecha: new Date().toLocaleDateString(), texto: txt });
-            localStorage.setItem('app_diario', JSON.stringify(diario));
+        if(!textoPersonalizado) input.value = '';
+        renderDiario();
+    }
 
-            if(!textoPersonalizado) input.value = '';
-            renderDiario();
-        }
+    function renderDiario() {
+        const lista = document.getElementById('lista-diario');
+        let diario = JSON.parse(localStorage.getItem('app_diario') || '[]');
+        lista.innerHTML = diario.map(d => `
+            <div class="bg-white dark:bg-[#26332d] p-3.5 rounded-2xl border dark:border-[#2e3d36] text-xs space-y-1">
+                <span class="text-[10px] text-gray-400 font-bold">${d.fecha}</span>
+                <p class="text-gray-700 dark:text-gray-200">${d.texto}</p>
+            </div>
+        `).join('');
+    }
 
-        function renderDiario() {
-            const lista = document.getElementById('lista-diario');
-            let diario = JSON.parse(localStorage.getItem('app_diario') || '[]');
-            lista.innerHTML = diario.map(d => `
-                <div class="bg-white dark:bg-[#26332d] p-3.5 rounded-2xl border dark:border-[#2e3d36] text-xs space-y-1">
-                    <span class="text-[10px] text-gray-400 font-bold">${d.fecha}</span>
-                    <p class="text-gray-700 dark:text-gray-200">${d.texto}</p>
-                </div>
-            `).join('');
-        }
-
-        window.onload = function() {
-            generarNuevaCapsula();
-            inicializarLibrosBiblia();
-            renderOraciones();
-            renderOfertas();
-            renderDiario();
-        };
-    </script>
+    window.onload = function() {
+        generarNuevaCapsula();
+        inicializarLibrosBiblia();
+        renderOraciones();
+        renderOfertas();
+        renderDiario();
+    };
+</script>
 </body>
 </html>
