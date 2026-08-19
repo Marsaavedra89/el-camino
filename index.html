@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,11 +26,10 @@
 <body class="bg-[#f7f5ef] text-[#2c3531] flex flex-col h-[100dvh] max-w-md mx-auto shadow-2xl overflow-hidden border-x border-[#e6dfd1] relative font-sans">
 
     <!-- CONTENEDOR PRINCIPAL DE VISTAS -->
-    <main class="flex-1 overflow-y-auto relative pb-28 bg-[#fdfbf7] view-transition">
+    <main class="flex-1 overflow-y-auto relative pb-32 bg-[#fdfbf7] view-transition">
 
         <!-- VISTA: INICIO -->
         <section id="view-inicio" class="p-6 space-y-6">
-            <!-- Header con Logo Integrado con Respaldo -->
             <header class="text-center space-y-3 mt-2 flex flex-col items-center">
                 <div class="w-20 h-20 rounded-3xl overflow-hidden shadow-lg shadow-[#dcd5c1]/50 border-2 border-white bg-[#eef2ed] flex items-center justify-center p-1 relative">
                     <img src="Gemini_Generated_Image_anu5hpanu5hpanu5.jpg" alt="Logo El Camino" class="w-full h-full object-cover rounded-2xl" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -41,7 +41,6 @@
                 </div>
             </header>
 
-            <!-- Tarjeta Premium Bienvenida -->
             <div class="bg-gradient-to-r from-[#eef2ed] to-[#e4eae6] border border-[#d6e0db] p-4 rounded-2xl shadow-sm flex items-center justify-between">
                 <div class="space-y-0.5">
                     <span class="bg-[#5c7265] text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">Espacio Sagrado</span>
@@ -50,7 +49,7 @@
                 <button onclick="cambiarVista('apoyar')" class="bg-[#5c7265] text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow-sm hover:bg-[#4a5c51] transition">Saber más</button>
             </div>
 
-            <!-- Check-in Emocional (Tonos Armónicos de Paz) -->
+            <!-- Check-in Emocional -->
             <div class="bg-white/90 border border-[#e8e2d5] p-5 rounded-3xl shadow-sm space-y-3.5 backdrop-blur-sm">
                 <h2 class="font-bold text-[#4a5550] text-xs uppercase tracking-wider">¿Cómo se encuentra tu corazón hoy?</h2>
                 <div class="grid grid-cols-2 gap-2.5">
@@ -84,7 +83,6 @@
                 </div>
             </div>
 
-            <!-- Acceso Directo al Chat Premium -->
             <div class="bg-gradient-to-br from-[#4a5c51] to-[#344239] border border-[#3b4d42] text-white p-5 rounded-3xl shadow-xl space-y-3">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center text-lg shadow-inner">🕊️</div>
@@ -99,9 +97,8 @@
             </div>
         </section>
 
-        <!-- VISTA: CHAT IA (Nivel Único y Premium) -->
+        <!-- VISTA: CHAT IA (Línea de Usuario y Sugerencia Bíblica al Final) -->
         <section id="view-chat" class="hidden flex flex-col h-full absolute inset-0 pb-36 bg-[#fdfbf7]">
-            <!-- Cabecera de alta gama -->
             <div class="bg-white/90 backdrop-blur-md border-b border-[#e8e2d5] px-4 py-3 flex items-center justify-between shadow-xs shrink-0 z-20">
                 <div class="flex items-center gap-3">
                     <div class="w-9 h-9 rounded-2xl bg-[#5c7265] text-white flex items-center justify-center font-bold text-xs shadow-sm">🌿</div>
@@ -116,18 +113,18 @@
             </div>
 
             <!-- Contenedor de Mensajes -->
-            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4">
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 pb-24">
                 <div class="flex items-start gap-2.5">
                     <div class="w-8 h-8 rounded-2xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-sm">🌿</div>
                     <div class="bg-white border border-[#e8e2d5] p-4 rounded-3xl rounded-tl-none text-sm shadow-xs max-w-[88%] text-[#3a4440] leading-relaxed space-y-2.5">
-                        <p class="font-serif text-[#2c3531] text-[15px]">La paz sea contigo. Comprendo la carga o el silencio que pueda haber en tu corazón hoy.</p>
-                        <p class="text-xs text-[#5c7265] italic bg-[#f7f5ef] p-2.5 rounded-xl border border-[#efece4]">"Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar" (Mateo 11:28).</p>
-                        <p class="text-xs text-[#5a6460]">Tómate todo el tiempo del mundo. Cuéntame con absoluta confianza, ¿qué es lo que más te pesa en este momento o de qué te gustaría que hablemos?</p>
+                        <p class="font-serif text-[#2c3531] text-[15px]">La paz sea contigo. Estoy aquí para escucharte y conversar contigo con absoluta calma.</p>
+                        <p class="text-xs text-[#5a6460]">¿De qué te gustaría que hablemos hoy?</p>
+                        <p class="text-xs text-[#5c7265] italic bg-[#f7f5ef] p-2.5 rounded-xl border border-[#efece4]">Sugerencia espiritual: «Lámpara es a mis pies tu palabra, y lumbrera a mi camino» (Salmo 119:105).</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Caja de entrada moderna y flotante -->
+            <!-- Caja de entrada fija y cómoda -->
             <div class="absolute bottom-16 left-0 right-0 p-3 bg-white/95 backdrop-blur-md border-t border-[#e8e2d5] flex items-center gap-2 z-40 shadow-lg">
                 <input type="text" id="chat-input" placeholder="Escribe lo que hay en tu corazón..." class="flex-1 bg-[#f7f5ef] border border-[#e2dcd0] px-4 py-3 rounded-2xl text-sm text-[#2c3531] placeholder-[#9a9182] focus:outline-none focus:border-[#5c7265] transition" onkeypress="if(event.key === 'Enter') enviarMensaje()">
                 <button onclick="enviarMensaje()" class="bg-[#5c7265] text-white px-5 py-3 rounded-2xl text-sm font-bold hover:bg-[#4a5c51] transition shadow-sm shrink-0">Enviar</button>
@@ -200,7 +197,7 @@
 
     </main>
 
-    <!-- BARRA DE NAVEGACIÓN INFERIOR (Tonos de Tranquilidad) -->
+    <!-- BARRA DE NAVEGACIÓN INFERIOR -->
     <nav class="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-[#e8e2d5] flex justify-around py-2.5 z-50 shadow-lg">
         <button onclick="cambiarVista('inicio', this)" class="nav-btn flex flex-col items-center text-[#5c7265] text-[10px] font-semibold gap-0.5 px-2 transition">
             <span class="text-base">🏠</span> Inicio
@@ -305,14 +302,6 @@
             }
         }
 
-        let memoriaUsuario = {
-            historialTexto: [],
-            mencionTrabajo: false,
-            mencionSalud: false,
-            mencionTristeza: false,
-            mencionAlegria: false
-        };
-
         function enviarMensaje() {
             const input = document.getElementById('chat-input');
             const texto = input.value.trim();
@@ -330,13 +319,6 @@
             input.value = '';
             chat.scrollTop = chat.scrollHeight;
 
-            memoriaUsuario.historialTexto.push(texto.toLowerCase());
-
-            if (/(trabajo|empleo|plata|dinero|entrevista|currículum|cv|cesante)/.test(texto.toLowerCase())) memoriaUsuario.mencionTrabajo = true;
-            if (/(enfermo|enferma|dolor|salud|hospital|cáncer|fiebre)/.test(texto.toLowerCase())) memoriaUsuario.mencionSalud = true;
-            if (/(triste|solo|sola|llorar|angustia|ansiedad|miedo)/.test(texto.toLowerCase())) memoriaUsuario.mencionTristeza = true;
-            if (/(feliz|contento|bien|bendición|alegría|logré|gracias)/.test(texto.toLowerCase())) memoriaUsuario.mencionAlegria = true;
-
             const typingId = 'typing-' + Date.now();
             chat.innerHTML += `
                 <div id="${typingId}" class="flex items-start gap-2.5">
@@ -353,45 +335,40 @@
                 const typingElement = document.getElementById(typingId);
                 if (typingElement) typingElement.remove();
 
-                let respuestaHTML = "";
                 const ultimo = texto.toLowerCase();
+                let respuestaPrincipal = "";
+                let versiculoSugerido = "";
 
-                const esSaludo = /^(hola|buen día|buenas|saludos|hey|qué tal)$/.test(ultimo.trim());
+                // RESPUESTA DINÁMICA BASADA ESTRICTAMENTE EN LO QUE ESCRIBE EL USUARIO (SIN SUPOSICIONES POR DEFECTO)
+                if (/(hola|buen día|buenas|saludos)/.test(ultimo)) {
+                    respuestaPrincipal = `Hola. Qué gusto saludarte. Te leo con atención, ¿cómo sigues o de qué te gustaría conversar en este momento?`;
+                    versiculoSugerido = `«Gozaos con los que se gozan; llorad con los que lloran.» — Romanos 12:15`;
+                } else if (/(bien|tranquilo|todo bien|normal|más o menos|nada|solo bien)/.test(ultimo)) {
+                    respuestaPrincipal = `Me da mucho gusto que te encuentres en ese estado de tranquilidad. Disfrutar de la paz cotidiana es un gran regalo. ¿Hay algo más que quieras compartir o prefieres que sigamos conversando de forma relajada?`;
+                    versiculoSugerido = `«En paz me acostaré, y así mismo dormiré; porque tú solo, Jehová, me haces vivir confiado.» — Salmo 4:8`;
+                } else if (/(triste|mal|solo|sola|llorar|angustia|pesado|ansiedad|miedo)/.test(ultimo)) {
+                    respuestaPrincipal = `Comprendo perfectamente lo que me dices y acompaño tu sentir con respeto. Tómate tu tiempo para expresarte. ¿Quieres contarme un poco más de lo que pasa por tu mente?`;
+                    versiculoSugerido = `«Cercano está Jehová a los quebrantados de corazón...» — Salmo 34:18`;
+                } else if (/(trabajo|empleo|dinero|plata|entrevista|currículum)/.test(ultimo)) {
+                    respuestaPrincipal = `Abordar los temas de trabajo y sustento requiere paciencia y constancia. Mantén la confianza en tus capacidades y en el esfuerzo diario que realizas.`;
+                    versiculoSugerido = `«Todo lo puedo en Cristo que me fortalece.» — Filipenses 4:13`;
+                } else {
+                    // SEGUIMIENTO NATURAL DE LA LÍNEA DEL USUARIO
+                    respuestaPrincipal = `Te sigo el hilo de lo que mencionas sobre "${texto}". Es interesante lo que planteas; cuéntame cómo ves este asunto o qué te gustaría profundizar al respecto.`;
+                    versiculoSugerido = `«Lámpara es a mis pies tu palabra, y lumbrera a mi camino.» — Salmo 119:105`;
+                }
 
-                if (esSaludo) {
-                    respuestaHTML = `
-                        <p class="font-serif text-[#2c3531]">¡Hola! Es un gran privilegio saludarte en este 2026. ¿Cómo se encuentra tu interior hoy?</p>
-                        <p class="text-xs text-[#5c7265] italic mt-2">Estoy aquí para leerte con absoluta calma y acompañarte sin apuros.</p>
-                    `;
-                }
-                else if (/(triste|mal|solo|sola|llorar|angustia|pesado)/.test(ultimo)) {
-                    respuestaHTML = `
-                        <p class="font-serif text-[#2c3531]">Te escucho y abrazo con respeto el peso de lo que compartes. No estás solo en este momento.</p>
-                        <p class="text-xs text-[#5c7265] italic my-2 bg-[#f7f5ef] p-2.5 rounded-xl border border-[#efece4]">Recuerda: <em>«Cercano está Jehová a los quebrantados de corazón...»</em> (Salmo 34:18).</p>
-                        <p class="text-xs text-[#5a6460]">Cuéntame un poco más, ¿qué es lo que más te agota hoy? Te sigo leyendo paso a paso.</p>
-                    `;
-                }
-                else if (memoriaUsuario.mencionAlegria && /(gracias|logré|contento|feliz|bendición)/.test(ultimo)) {
-                    respuestaHTML = `
-                        <p class="font-serif text-[#2c3531]">¡Qué gran alegría leer esto y celebrarlo contigo! Es hermoso cuando la vida nos regala destellos de luz.</p>
-                        <p class="text-xs text-[#8c6d48] italic">¿Quieres que guardemos este motivo de paz y alegría en tu diario personal?</p>
-                        <button onclick="guardarAlegríaAutomatica('${texto.replace(/'/g, "")}')" class="mt-2 bg-[#8c6d48] text-white font-bold text-[11px] px-3.5 py-2 rounded-xl shadow-sm hover:bg-[#785c3c] transition">📓 Guardar en mi Diario</button>
-                    `;
-                } 
-                else {
-                    // DIÁLOGO VIVO Y ABIERTO PREMIUM (NUNCA CIERRA LA CONVERSACIÓN)
-                    respuestaHTML = `
-                        <p class="font-serif text-[#2c3531]">Te escucho con profunda atención. Cada detalle que me confías importa para seguir a tu lado este 2026.</p>
-                        <p class="text-xs text-[#5c7265] italic my-2 bg-[#f7f5ef] p-2.5 rounded-xl border border-[#efece4]">Para iluminar este momento, recuerda que cuentas con fortaleza renovada para cada día (Mateo 6:34).</p>
-                        <p class="text-xs text-[#5a6460]">¿Cómo te hace sentir esto que conversamos y qué te gustaría explorar a continuación? Guíame con confianza.</p>
-                    `;
-                }
+                // ARMAR LA RESPUESTA CON LA SUGERENCIA BÍBLICA UBICADA ABAJO
+                const contenidoHTML = `
+                    <p class="font-serif text-[#2c3531] text-[15px]">${respuestaPrincipal}</p>
+                    <p class="text-xs text-[#5c7265] italic bg-[#f7f5ef] p-2.5 rounded-xl border border-[#efece4] mt-2">Sugerencia espiritual: ${versiculoSugerido}</p>
+                `;
 
                 chat.innerHTML += `
                     <div class="flex items-start gap-2.5">
                         <div class="w-8 h-8 rounded-2xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-sm">🌿</div>
                         <div class="bg-white border border-[#e8e2d5] p-4 rounded-3xl rounded-tl-none text-sm shadow-xs max-w-[88%] space-y-2.5 text-[#3a4440] leading-relaxed">
-                            ${respuestaHTML}
+                            ${contenidoHTML}
                         </div>
                     </div>`;
                 chat.scrollTop = chat.scrollHeight;
@@ -399,22 +376,14 @@
             }, 1000);
         }
 
-        function guardarAlegríaAutomatica(textoAlegría) {
-            let diario = JSON.parse(localStorage.getItem('el_camino_diario') || '[]');
-            diario.unshift({ id: Date.now(), fecha: new Date().toLocaleDateString(), texto: "✨ [Motivo de Alegría]: " + textoAlegría });
-            localStorage.setItem('el_camino_diario', JSON.stringify(diario));
-            alert("¡Guardado con éxito en tu Diario de Gratitud!");
-            cargarReflexionesGuardadas();
-        }
-
         function reiniciarChat() {
-            memoriaUsuario = { historialTexto: [], mencionTrabajo: false, mencionSalud: false, mencionTristeza: false, mencionAlegria: false };
             document.getElementById('chat-messages').innerHTML = `
                 <div class="flex items-start gap-2.5">
                     <div class="w-8 h-8 rounded-2xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-sm">🌿</div>
                     <div class="bg-white border border-[#e8e2d5] p-4 rounded-3xl rounded-tl-none text-sm shadow-xs max-w-[88%] text-[#3a4440] leading-relaxed space-y-2.5">
-                        <p class="font-serif text-[#2c3531]">Conversación reiniciada en absoluta calma para este 2026. Estoy aquí para escucharte sin apuros ni cierres automáticos.</p>
-                        <p class="text-xs text-[#5c7265] italic">"Echa sobre Jehová tu carga, y él te sustentará" (Salmo 55:22). Cuéntame, ¿cómo se encuentra tu corazón hoy?</p>
+                        <p class="font-serif text-[#2c3531]">Conversación reiniciada en absoluta calma. Estoy aquí para seguir tu línea de diálogo sin apuros.</p>
+                        <p class="text-xs text-[#5a6460]">¿De qué te gustaría que hablemos?</p>
+                        <p class="text-xs text-[#5c7265] italic bg-[#f7f5ef] p-2.5 rounded-xl border border-[#efece4]">Sugerencia espiritual: «Echa sobre Jehová tu carga, y él te sustentará» — Salmo 55:22</p>
                     </div>
                 </div>`;
         }
