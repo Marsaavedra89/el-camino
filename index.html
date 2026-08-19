@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camino App - Refugio Espiritual & Guía Interior (2026)</title>
+    <title>El Camino - Refugio Espiritual & Guía Interior (2026)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -44,9 +44,9 @@
     <!-- BARRA SUPERIOR -->
     <header class="bg-white/90 dark:bg-[#202b26]/90 backdrop-blur-md px-4 py-2 border-b border-[#e6dfd1] dark:border-[#2e3d36] flex justify-between items-center z-40 text-xs shrink-0">
         <div class="flex items-center gap-2">
-            <!-- Referencia visual al logotipo -->
-            <div class="w-6 h-6 rounded-lg bg-gradient-to-br from-[#223843] to-[#4a6572] flex items-center justify-center text-white font-bold shadow-2xs text-[10px]">✝</div>
-            <span class="font-serif font-bold text-[#223843] dark:text-[#8cb89b] tracking-wide">CAMINO APP</span>
+            <!-- Logotipo oficial integrado -->
+            <img src="cid:input_file_0" alt="El Camino Logo" class="w-7 h-7 rounded-lg object-cover shadow-2xs">
+            <span class="font-serif font-bold text-[#223843] dark:text-[#8cb89b] tracking-wide">EL CAMINO</span>
         </div>
         <div class="flex items-center gap-2">
             <span id="badge-oracion-global" class="text-[10px] bg-[#223843]/10 dark:bg-[#8cb89b]/10 text-[#223843] dark:text-[#8cb89b] px-2 py-0.5 rounded-full font-bold">🙏 0 orando</span>
@@ -60,13 +60,13 @@
         <!-- VISTA: INICIO -->
         <section id="view-inicio" class="flex-1 overflow-y-auto p-5 space-y-6">
             
-            <!-- Encabezado con identidad de la marca -->
-            <div class="text-center space-y-2 flex flex-col items-center pt-2">
-                <div class="w-16 h-16 rounded-2xl overflow-hidden shadow-md border-2 border-white dark:border-[#2e3d36] bg-gradient-to-b from-[#f4f7f6] to-[#e4eae8] flex items-center justify-center">
-                    <span class="text-3xl">✝✨</span>
+            <!-- Encabezado con el Logotipo Oficial -->
+            <div class="text-center space-y-2.5 flex flex-col items-center pt-2">
+                <div class="w-24 h-24 rounded-3xl overflow-hidden shadow-md border-2 border-white dark:border-[#2e3d36]">
+                    <img src="cid:input_file_0" alt="El Camino Logotipo" class="w-full h-full object-cover">
                 </div>
                 <div>
-                    <h1 class="text-lg font-extrabold text-[#223843] dark:text-gray-100 font-serif tracking-widest">CAMINO APP</h1>
+                    <h1 class="text-xl font-extrabold text-[#223843] dark:text-gray-100 font-serif tracking-widest">EL CAMINO</h1>
                     <p class="text-[10px] uppercase tracking-widest text-[#506e7d] dark:text-[#8cb89b] font-bold mt-0.5">Refugio, Paz y Guía Interior • 2026</p>
                 </div>
             </div>
@@ -110,7 +110,7 @@
             
             <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3.5">
                 <div class="flex items-start gap-2.5">
-                    <div class="w-7 h-7 rounded-xl bg-[#223843] text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
+                    <img src="cid:input_file_0" class="w-7 h-7 rounded-xl object-cover shrink-0 shadow-2xs" alt="Logo">
                     <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed shadow-xs">
                         Comprendo la angustia o la carga que hay en tu corazón en este momento. Platícame, ¿qué situación estás atravesando hoy? Estoy aquí para escucharte con calidez.
                     </div>
@@ -324,7 +324,7 @@
                 const respuestaIA = generarRespuestaEspiritual(texto);
                 chatMessages.innerHTML += `
                     <div class="flex items-start gap-2.5">
-                        <div class="w-7 h-7 rounded-xl bg-[#223843] text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
+                        <img src="cid:input_file_0" class="w-7 h-7 rounded-xl object-cover shrink-0 shadow-2xs" alt="Logo">
                         <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed shadow-xs space-y-2">
                             ${respuestaIA}
                         </div>
@@ -362,7 +362,7 @@
         function reiniciarChat() {
             document.getElementById('chat-messages').innerHTML = `
                 <div class="flex items-start gap-2.5">
-                    <div class="w-7 h-7 rounded-xl bg-[#223843] text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
+                    <img src="cid:input_file_0" class="w-7 h-7 rounded-xl object-cover shrink-0 shadow-2xs" alt="Logo">
                     <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed shadow-xs">
                         Hola, he reiniciado nuestra conversación. ¿Qué hay en tu corazón hoy?
                     </div>
@@ -410,7 +410,6 @@
             `;
         }
 
-        // --- SISTEMA DE PEDIDOS DE ORACIÓN (12 HS) ---
         function limpiarOracionesExpiradas(pedidos) {
             const ahora = new Date().getTime();
             let modificado = false;
@@ -542,7 +541,6 @@
                 badge.innerText = `🙏 ${totalOrandoGlobal} orando`;
             }
         }
-        // ----------------------------------------------------
 
         function cambiarTabEmpleo(tab) {
             const ext = document.getElementById('tab-externos');
