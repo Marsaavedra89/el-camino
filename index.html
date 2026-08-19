@@ -155,20 +155,44 @@
             </div>
         </section>
 
+       
         <!-- VISTA: EMPLEO -->
-        <section id="view-empleo" class="hidden p-5 space-y-4">
-            <h2 class="font-extrabold text-xl text-[#2c3531] font-serif">Orientación Laboral & Paz en el Trabajo</h2>
-            <p class="text-sm text-[#616b67]">Herramientas y sabiduría humana para sostener tu esfuerzo y dignidad profesional este 2026.</p>
-            
-            <div class="bg-white p-4 rounded-3xl border border-[#e8e2d5] space-y-2 shadow-xs">
-                <h3 class="font-bold text-[#5c7265] text-sm font-serif">💡 Claves para tu Currículum</h3>
-                <p class="text-xs text-[#616b67] leading-relaxed">Presenta tus talentos con claridad, destaca tus experiencias reales y mantén la firmeza ante cada nueva oportunidad.</p>
-            </div>
-            <div class="bg-white p-4 rounded-3xl border border-[#e8e2d5] space-y-2 shadow-xs">
-                <h3 class="font-bold text-[#5c7265] text-sm font-serif">🤝 Preparación Serena para Entrevistas</h3>
-                <p class="text-xs text-[#616b67] leading-relaxed">Acude con la mente despejada, seguridad en tus capacidades y la certeza de que tu valor va más allá de un resultado.</p>
-            </div>
-        </section>
+<section id="view-empleo" class="hidden p-5 space-y-5">
+    <div>
+        <h2 class="font-extrabold text-xl text-[#2c3531] font-serif">Orientación & Red Laboral</h2>
+        <p class="text-xs text-[#616b67] mt-1">Tu esfuerzo es valioso. Encuentra aquí oportunidades y apóyate en nuestra comunidad.</p>
+    </div>
+
+    <!-- Pestañas -->
+    <div class="flex bg-[#efece4] p-1 rounded-2xl gap-1">
+        <button onclick="cambiarTabEmpleo('externos')" id="btn-externos" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white text-[#5c7265] shadow-xs">Portales</button>
+        <button onclick="cambiarTabEmpleo('comunidad')" id="btn-comunidad" class="flex-1 py-2 text-xs font-bold rounded-xl text-[#8c8275]">Tablón Comunitario</button>
+    </div>
+
+    <!-- Pestaña 1: Portales -->
+    <div id="tab-externos" class="space-y-3">
+        <p class="text-xs font-semibold text-[#616b67] uppercase tracking-wider">Búsqueda en portales principales:</p>
+        <div class="grid grid-cols-2 gap-3">
+            <a href="https://www.computrabajo.com.ar" target="_blank" class="p-4 bg-white rounded-2xl border border-[#e8e2d5] text-center shadow-xs hover:border-[#5c7265] transition">💼<br><span class="text-[10px] font-bold">Computrabajo</span></a>
+            <a href="https://www.bumeran.com.ar" target="_blank" class="p-4 bg-white rounded-2xl border border-[#e8e2d5] text-center shadow-xs hover:border-[#5c7265] transition">📈<br><span class="text-[10px] font-bold">Bumeran</span></a>
+            <a href="https://ar.linkedin.com" target="_blank" class="p-4 bg-white rounded-2xl border border-[#e8e2d5] text-center shadow-xs hover:border-[#5c7265] transition">🌐<br><span class="text-[10px] font-bold">LinkedIn</span></a>
+            <a href="https://www.google.com/search?q=empleos+en+mi+zona" target="_blank" class="p-4 bg-white rounded-2xl border border-[#e8e2d5] text-center shadow-xs hover:border-[#5c7265] transition">📍<br><span class="text-[10px] font-bold">Empleos Zona</span></a>
+        </div>
+    </div>
+
+    <!-- Pestaña 2: Tablón Comunitario -->
+    <div id="tab-comunidad" class="hidden space-y-4">
+        <!-- Formulario para publicar -->
+        <div class="bg-[#f7f5ef] p-4 rounded-3xl border border-[#e2dcd0] space-y-2">
+            <h3 class="font-bold text-[#5c7265] text-xs">Publicar una oportunidad:</h3>
+            <input type="text" id="oferta-puesto" placeholder="Puesto" class="w-full p-2 text-xs rounded-xl border border-[#e2dcd0]">
+            <input type="text" id="oferta-contacto" placeholder="Contacto (Email o WhatsApp)" class="w-full p-2 text-xs rounded-xl border border-[#e2dcd0]">
+            <button onclick="publicarOferta()" class="w-full py-2 bg-[#5c7265] text-white text-xs font-bold rounded-xl">Publicar en el tablón</button>
+        </div>
+        <!-- Lista -->
+        <div id="lista-ofertas" class="space-y-3"></div>
+    </div>
+</section>
 
         <!-- VISTA: DIARIO ESPIRITUAL -->
         <section id="view-diario" class="hidden p-5 space-y-4">
@@ -445,6 +469,53 @@
             });
             contenedor.innerHTML = html;
         }
+        function cambiarTabEmpleo(tab) {
+    const btnExt = document.getElementById('btn-externos');
+    const btnCom = document.getElementById('btn-comunidad');
+    const tabExt = document.getElementById('tab-externos');
+    const tabCom = document.getElementById('tab-comunidad');
+
+    if(tab === 'externos') {
+        btnExt.className = "flex-1 py-2 text-xs font-bold rounded-xl bg-white text-[#5c7265] shadow-xs";
+        btnCom.className = "flex-1 py-2 text-xs font-bold rounded-xl text-[#8c8275]";
+        tabExt.classList.remove('hidden');
+        tabCom.classList.add('hidden');
+    } else {
+        btnCom.className = "flex-1 py-2 text-xs font-bold rounded-xl bg-white text-[#5c7265] shadow-xs";
+        btnExt.className = "flex-1 py-2 text-xs font-bold rounded-xl text-[#8c8275]";
+        tabCom.classList.remove('hidden');
+        tabExt.classList.add('hidden');
+    }
+}
+
+function publicarOferta() {
+    const puesto = document.getElementById('oferta-puesto').value;
+    const contacto = document.getElementById('oferta-contacto').value;
+    if(!puesto || !contacto) return alert("Completa los campos.");
+
+    let ofertas = JSON.parse(localStorage.getItem('empleos_comunidad') || '[]');
+    ofertas.unshift({ puesto, contacto, fecha: new Date().toLocaleDateString() });
+    localStorage.setItem('empleos_comunidad', JSON.stringify(ofertas));
+    
+    document.getElementById('oferta-puesto').value = '';
+    document.getElementById('oferta-contacto').value = '';
+    cargarOfertas();
+}
+
+function cargarOfertas() {
+    const lista = document.getElementById('lista-ofertas');
+    let ofertas = JSON.parse(localStorage.getItem('empleos_comunidad') || '[]');
+    lista.innerHTML = ofertas.map(o => `
+        <div class="bg-white p-4 rounded-2xl border border-[#e8e2d5] shadow-2xs">
+            <p class="font-bold text-sm text-[#2c3531]">${o.puesto}</p>
+            <p class="text-xs text-[#5c7265] mt-1">Contacto: ${o.contacto}</p>
+            <span class="text-[9px] text-[#8c8275] block mt-2">${o.fecha}</span>
+        </div>
+    `).join('');
+}
+
+// Asegúrate de llamar a cargarOfertas() cuando la app inicie
+// (ya tienes un window.onload, agrégalo ahí).
     </script>
 </body>
 </html>
