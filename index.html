@@ -8,7 +8,6 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
-    <!-- HEADER / LOGO -->
     <header class="bg-white shadow-sm py-4 px-6 flex items-center justify-between sticky top-0 z-50">
         <div class="flex items-center space-x-3">
             <div class="w-10 h-10 bg-gradient-to-tr from-amber-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md">✝</div>
@@ -17,112 +16,60 @@
                 <p class="text-xs text-slate-500">App Oficial</p>
             </div>
         </div>
-        <span class="text-xs bg-amber-100 text-amber-800 font-medium px-2.5 py-1 rounded-full">Beta 2026</span>
     </header>
 
-    <!-- CONTENIDO PRINCIPAL (CAMBIA SEGÚN EL MENÚ) -->
     <main class="flex-1 max-w-md w-full mx-auto p-4 pb-24" id="app-content">
-        <!-- VISTA INICIAL (INICIO) -->
         <div class="space-y-6">
-            <div class="bg-gradient-to-r from-blue-900 to-indigo-800 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
-                <div class="relative z-10">
-                    <h2 class="text-2xl font-bold mb-2">Hola, damos un paso juntos</h2>
-                    <p class="text-blue-200 text-sm">"Lámpara es a mis pies tu lumbrera, y lumbrera a mi camino." - Salmos 119:105</p>
-                </div>
-                <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+            <div class="bg-gradient-to-r from-blue-900 to-indigo-800 text-white p-6 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-2">Hola, damos un paso juntos</h2>
+                <p class="text-blue-200 text-sm">"Lámpara es a mis pies tu lumbrera, y lumbrera a mi camino."</p>
             </div>
 
-            <!-- SELECCIONADOR DE ESTADO DE ÁNIMO -->
+            <!-- Módulo de Ánimo Limpio -->
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
-                    🕊️ ¿Cómo te sentís hoy?
+                <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-lg">
+                    🕊️ ¿Cómo está tu corazón hoy?
                 </h3>
-                <p class="text-xs text-slate-500 mb-4">Seleccioná tu estado para recibir una palabra de aliento personalizada (sin repetir por 48hs):</p>
-                
                 <div class="grid grid-cols-2 gap-2 mb-4">
-                    <button onclick="seleccionarEstado('ansioso')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 hover:border-amber-200 border border-slate-200 rounded-xl text-left transition font-medium">😰 Ansioso / Preocupado</button>
-                    <button onclick="seleccionarEstado('economico')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 hover:border-amber-200 border border-slate-200 rounded-xl text-left transition font-medium">📉 Problemas Económicos</button>
-                    <button onclick="seleccionarEstado('salud')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 hover:border-amber-200 border border-slate-200 rounded-xl text-left transition font-medium">❤️ Sin fuerzas / Salud</button>
-                    <button onclick="seleccionarEstado('triste')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 hover:border-amber-200 border border-slate-200 rounded-xl text-left transition font-medium">🌧️ Triste / Solo</button>
+                    <button onclick="seleccionarEstado('ansioso')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition">😰 Ansioso</button>
+                    <button onclick="seleccionarEstado('economico')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition">📉 Preocupado por dinero</button>
+                    <button onclick="seleccionarEstado('salud')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition">❤️ Problemas de salud</button>
+                    <button onclick="seleccionarEstado('triste')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition">🌧️ Triste</button>
+                    <button onclick="seleccionarEstado('enojado')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition">🔥 Enojado</button>
+                    <button onclick="seleccionarEstado('solo')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition">👤 Me siento solo</button>
                 </div>
 
-                <div id="resultado-animo" class="hidden bg-amber-50/60 border border-amber-200/60 p-4 rounded-xl mt-3">
-                    <!-- Acá se carga la respuesta bíblica -->
-                </div>
+                <div id="resultado-animo" class="hidden bg-amber-50/60 border border-amber-200/60 p-4 rounded-xl mt-3"></div>
             </div>
         </div>
     </main>
 
-    <!-- MENÚ INFERIOR (NAVEGACIÓN) -->
+    <!-- MENÚ INFERIOR -->
     <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 py-2 px-4 shadow-lg max-w-md mx-auto z-50">
         <div class="flex justify-around items-center">
-            <button onclick="alert('Estás en el Inicio')" class="flex flex-col items-center text-blue-600">
-                <span class="text-xl">🏠</span>
-                <span class="text-[10px] font-semibold mt-0.5">Inicio</span>
-            </button>
-            <button onclick="alert('Próximamente: Chat con Jesús IA sin límites')" class="flex flex-col items-center text-slate-400 hover:text-slate-600">
-                <span class="text-xl">💬</span>
-                <span class="text-[10px] font-medium mt-0.5">Chat IA</span>
-            </button>
-            <button onclick="alert('Próximamente: Biblia Reina Valera completa')" class="flex flex-col items-center text-slate-400 hover:text-slate-600">
-                <span class="text-xl">📖</span>
-                <span class="text-[10px] font-medium mt-0.5">Biblia</span>
-            </button>
-            <button onclick="alert('Próximamente: Trabajo con Valores')" class="flex flex-col items-center text-slate-400 hover:text-slate-600">
-                <span class="text-xl">💼</span>
-                <span class="text-[10px] font-medium mt-0.5">Empleo</span>
-            </button>
-            <button onclick="alert('Próximamente: Donaciones y Suscripción')" class="flex flex-col items-center text-slate-400 hover:text-slate-600">
-                <span class="text-xl">❤️</span>
-                <span class="text-[10px] font-medium mt-0.5">Apoyar</span>
-            </button>
+            <button class="flex flex-col items-center text-blue-600"><span class="text-xl">🏠</span><span class="text-[10px] font-semibold mt-0.5">Inicio</span></button>
+            <button class="flex flex-col items-center text-slate-400"><span class="text-xl">💬</span><span class="text-[10px] font-medium mt-0.5">Chat IA</span></button>
+            <button class="flex flex-col items-center text-slate-400"><span class="text-xl">📖</span><span class="text-[10px] font-medium mt-0.5">Biblia</span></button>
+            <button class="flex flex-col items-center text-slate-400"><span class="text-xl">💼</span><span class="text-[10px] font-medium mt-0.5">Empleo</span></button>
+            <button class="flex flex-col items-center text-slate-400"><span class="text-xl">❤️</span><span class="text-[10px] font-medium mt-0.5">Apoyar</span></button>
         </div>
     </nav>
 
     <script>
-        // Banco de mensajes con lógica anti-repetición de 48hs
         const mensajesBiblicos = {
-            ansioso: [
-                { id: 'ans_1', versiculo: 'Filipenses 4:6-7', texto: 'Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios...', mensaje: 'Hoy entrega esa carga que no te deja dormir. Da el paso de confiar.' },
-                { id: 'ans_2', versiculo: '1 Pedro 5:7', texto: 'Echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros.', mensaje: 'No estás solo en esta tormenta. Él cuida de cada detalle de tu vida con amor.' }
-            ],
-            economico: [
-                { id: 'eco_1', versiculo: 'Filipenses 4:19', texto: 'Mi Dios, pues, suplirá todo lo que os falta conforme a sus riquezas en gloria...', mensaje: 'Aunque hoy veas escasez, no pierdas la fe. Dios abre puertas donde no las hay.' },
-                { id: 'eco_2', versiculo: 'Salmos 37:25', texto: 'Joven fui, y he envejecido, y no he visto justo desamparado...', mensaje: 'Persevera y confía en que tus manos serán fortalecidas para salir adelante.' }
-            ],
-            salud: [
-                { id: 'sal_1', versiculo: 'Salmos 103:2-3', texto: 'Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios. Él es quien perdona todas tus iniquidades, el que sana todas tus dolencias.', mensaje: 'Poné tu salud en sus manos hoy; su paz te devuelve las fuerzas.' }
-            ],
-            triste: [
-                { id: 'tri_1', versiculo: 'Salmos 34:18', texto: 'Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu.', mensaje: 'Él abraza tu corazón en este momento de dolor. No estás desamparado.' }
-            ]
+            ansioso: [{ id: 'ans_1', versiculo: 'Filipenses 4:6-7', mensaje: 'No te afanes. Dios tiene el control, respira profundo y confía.' }],
+            economico: [{ id: 'eco_1', versiculo: 'Mateo 6:33', mensaje: 'Busca primero el Reino y todo lo demás vendrá. Él proveerá.' }],
+            salud: [{ id: 'sal_1', versiculo: 'Jeremías 30:17', mensaje: 'Él te devolverá la salud y sanará tus heridas. Ten fe.' }],
+            triste: [{ id: 'tri_1', versiculo: 'Salmos 34:18', mensaje: 'El Señor está cerca de los que tienen el corazón quebrantado.' }],
+            enojado: [{ id: 'eno_1', versiculo: 'Santiago 1:19-20', mensaje: 'Sé pronto para oír, tardo para hablar, tardo para airarte.' }],
+            solo: [{ id: 'sol_1', versiculo: 'Josué 1:9', mensaje: 'No temas ni desmayes, porque el Señor estará contigo dondequiera que vayas.' }]
         };
 
         function seleccionarEstado(estado) {
-            const historial = JSON.parse(localStorage.getItem('historial_mensajes') || '{}');
-            const ahora = Date.now();
-            const LIMITE_48H = 48 * 60 * 60 * 1000;
-
-            const lista = mensajesBiblicos[estado] || [];
-            const disponibles = lista.filter(item => {
-                const ultimoVisto = historial[item.id];
-                return !ultimoVisto || (ahora - ultimoVisto > LIMITE_48H);
-            });
-
-            const seleccion = disponibles.length > 0 ? disponibles[0] : lista[0];
-            
-            if (seleccion) {
-                historial[seleccion.id] = ahora;
-                localStorage.setItem('historial_mensajes', JSON.stringify(historial));
-
-                const contenedor = document.getElementById('resultado-animo');
-                contenedor.classList.remove('hidden');
-                contenedor.innerHTML = `
-                    <span class="text-xs font-bold text-amber-800 uppercase tracking-wide">${seleccion.versiculo}</span>
-                    <p class="text-sm italic text-slate-700 my-1">"${seleccion.texto}"</p>
-                    <p class="text-xs text-slate-600 font-medium mt-2">💡 <strong>Reflexión:</strong> ${seleccion.mensaje}</p>
-                `;
-            }
+            const seleccion = mensajesBiblicos[estado][0];
+            const contenedor = document.getElementById('resultado-animo');
+            contenedor.classList.remove('hidden');
+            contenedor.innerHTML = `<span class="text-xs font-bold text-amber-800 uppercase">${seleccion.versiculo}</span><p class="text-sm mt-1">${seleccion.mensaje}</p>`;
         }
     </script>
 </body>
