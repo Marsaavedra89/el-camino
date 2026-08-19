@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Camino - App</title>
+    <title>El Camino - Guía Espiritual</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
@@ -19,202 +19,99 @@
         </div>
     </header>
 
-    <!-- CONTENIDO PRINCIPAL -->
+    <!-- CONTENIDO -->
     <main class="flex-1 max-w-md w-full mx-auto p-4 pb-28" id="app-view">
         
-        <!-- VISTA 1: INICIO -->
+        <!-- VISTA INICIO -->
         <div id="view-inicio" class="space-y-6">
             <div class="bg-gradient-to-r from-blue-900 to-indigo-800 text-white p-6 rounded-2xl shadow-lg">
                 <h2 class="text-2xl font-bold mb-2">Hola, damos un paso juntos</h2>
-                <p class="text-blue-200 text-sm">"Lámpara es a mis pies tu lumbrera, y lumbrera a mi camino." - Salmos 119:105</p>
+                <p class="text-blue-200 text-sm">"Lámpara es a mis pies tu lumbrera, y lumbrera a mi camino."</p>
             </div>
 
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-lg">
-                    🕊️ ¿Cómo está tu corazón hoy?
-                </h3>
+                <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-lg">🕊️ ¿Cómo está tu corazón hoy?</h3>
                 <div class="grid grid-cols-2 gap-2 mb-4">
-                    <!-- Botones de dificultad -->
                     <button onclick="seleccionarEstado('ansioso')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition text-left">😰 Ansioso</button>
                     <button onclick="seleccionarEstado('triste')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition text-left">🌧️ Triste</button>
                     <button onclick="seleccionarEstado('economico')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition text-left">📉 Preocupado</button>
                     <button onclick="seleccionarEstado('solo')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition text-left">👤 Solo</button>
-                    
-                    <!-- Botones positivos -->
                     <button onclick="seleccionarEstado('bendecido')" class="p-3 text-sm bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl transition text-left font-medium text-emerald-800">✨ Bendecido</button>
                     <button onclick="seleccionarEstado('contento')" class="p-3 text-sm bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl transition text-left font-medium text-emerald-800">😊 Contento</button>
                     <button onclick="seleccionarEstado('agradecido')" class="p-3 text-sm bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl transition text-left font-medium text-emerald-800">🙏 Agradecido</button>
                     <button onclick="seleccionarEstado('motivado')" class="p-3 text-sm bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl transition text-left font-medium text-emerald-800">🚀 Motivado</button>
                 </div>
-
                 <div id="resultado-animo" class="hidden bg-amber-50/60 border border-amber-200/60 p-4 rounded-xl mt-3"></div>
             </div>
         </div>
 
-        <!-- VISTA 2: CHAT CON JESÚS -->
+        <!-- VISTA CHAT -->
         <div id="view-chat" class="hidden flex flex-col h-[75vh]">
-            <div class="bg-blue-50 border border-blue-100 p-3 rounded-xl mb-3 text-xs text-blue-900 flex items-center gap-2">
-                <span>📅</span>
-                <p>Estás en el año 2026. Jesús camina contigo hoy.</p>
-            </div>
-
-            <!-- Caja de mensajes -->
             <div id="chat-messages" class="flex-1 overflow-y-auto space-y-4 pr-2 mb-3">
                 <div class="flex items-start gap-2">
                     <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
                     <div class="bg-white border border-slate-200 p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[90%]">
-                        <p class="text-slate-800 leading-relaxed">¡Hola! Qué alegría que nos encontremos acá. Sabés que me gusta charlar con vos, sin protocolos ni apuros. Contame, ¿cómo estuvo tu día realmente? Soy todo oídos.</p>
-                        <span class="text-[10px] text-slate-400 mt-2 block italic">Jesús</span>
+                        <p class="text-slate-800 leading-relaxed">¡Hola! Qué bueno que te detuviste a charlar. Sabés que me gusta conversar con vos, sin apuros. Contame, ¿cómo estuvo tu día realmente? Soy todo oídos.</p>
                     </div>
                 </div>
             </div>
-
-            <!-- Input de texto -->
             <div class="flex gap-2 bg-white p-2 rounded-2xl border border-slate-200 shadow-sm">
-                <input type="text" id="chat-input" placeholder="Escribe como si hablaras con un amigo..." class="flex-1 px-3 py-2 text-sm focus:outline-none bg-transparent" onkeypress="if(event.key === 'Enter') enviarMensaje()">
+                <input type="text" id="chat-input" placeholder="Cuéntame, te escucho..." class="flex-1 px-3 py-2 text-sm focus:outline-none bg-transparent" onkeypress="if(event.key === 'Enter') enviarMensaje()">
                 <button onclick="enviarMensaje()" class="bg-blue-900 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-800 transition">Enviar</button>
             </div>
         </div>
-
-        <!-- VISTAS PRÓXIMAS -->
-        <div id="view-biblia" class="hidden text-center py-12">
-            <span class="text-4xl">📖</span>
-            <h3 class="font-bold text-lg mt-3 text-slate-800">Biblia Reina Valera</h3>
-            <p class="text-xs text-slate-500 mt-1">Próximamente disponible.</p>
-        </div>
-
-        <div id="view-empleo" class="hidden text-center py-12">
-            <span class="text-4xl">💼</span>
-            <h3 class="font-bold text-lg mt-3 text-slate-800">Trabajo con Valores</h3>
-            <p class="text-xs text-slate-500 mt-1">Próximamente disponible.</p>
-        </div>
-
-        <div id="view-apoyar" class="hidden text-center py-12">
-            <span class="text-4xl">❤️</span>
-            <h3 class="font-bold text-lg mt-3 text-slate-800">Apoyar el Ministerio</h3>
-            <p class="text-xs text-slate-500 mt-1">Próximamente disponible.</p>
-        </div>
-
     </main>
 
-    <!-- MENÚ INFERIOR -->
+    <!-- MENÚ -->
     <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 py-2 px-4 shadow-lg max-w-md mx-auto z-50">
         <div class="flex justify-around items-center">
-            <button onclick="cambiarVista('inicio', this)" id="btn-inicio" class="nav-btn flex flex-col items-center text-blue-600">
-                <span class="text-xl">🏠</span>
-                <span class="text-[10px] font-semibold mt-0.5">Inicio</span>
-            </button>
-            <button onclick="cambiarVista('chat', this)" id="btn-chat" class="nav-btn flex flex-col items-center text-slate-400 hover:text-slate-600">
-                <span class="text-xl">💬</span>
-                <span class="text-[10px] font-medium mt-0.5">Chat IA</span>
-            </button>
-            <button onclick="cambiarVista('biblia', this)" id="btn-biblia" class="nav-btn flex flex-col items-center text-slate-400 hover:text-slate-600">
-                <span class="text-xl">📖</span>
-                <span class="text-[10px] font-medium mt-0.5">Biblia</span>
-            </button>
-            <button onclick="cambiarVista('empleo', this)" id="btn-empleo" class="nav-btn flex flex-col items-center text-slate-400 hover:text-slate-600">
-                <span class="text-xl">💼</span>
-                <span class="text-[10px] font-medium mt-0.5">Empleo</span>
-            </button>
-            <button onclick="cambiarVista('apoyar', this)" id="btn-apoyar" class="nav-btn flex flex-col items-center text-slate-400 hover:text-slate-600">
-                <span class="text-xl">❤️</span>
-                <span class="text-[10px] font-medium mt-0.5">Apoyar</span>
-            </button>
+            <button onclick="cambiarVista('inicio', this)" class="nav-btn flex flex-col items-center text-blue-600">🏠<span class="text-[10px]">Inicio</span></button>
+            <button onclick="cambiarVista('chat', this)" class="nav-btn flex flex-col items-center text-slate-400">💬<span class="text-[10px]">Chat IA</span></button>
         </div>
     </nav>
 
     <script>
         function cambiarVista(vista, el) {
-            ['inicio', 'chat', 'biblia', 'empleo', 'apoyar'].forEach(v => {
-                document.getElementById('view-' + v).classList.add('hidden');
-            });
+            ['inicio', 'chat'].forEach(v => document.getElementById('view-' + v).classList.add('hidden'));
             document.getElementById('view-' + vista).classList.remove('hidden');
-
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-blue-600');
-                btn.classList.add('text-slate-400');
-                btn.querySelector('span:last-child').classList.remove('font-semibold');
-                btn.querySelector('span:last-child').classList.add('font-medium');
-            });
-            el.classList.remove('text-slate-400');
-            el.classList.add('text-blue-600');
-            el.querySelector('span:last-child').classList.remove('font-medium');
-            el.querySelector('span:last-child').classList.add('font-semibold');
         }
 
-        const mensajesBiblicos = {
-            ansioso: { versiculo: 'Filipenses 4:6-7', mensaje: 'No te afanes por nada. Yo tengo el control de tus tiempos; respira profundo en mi paz.' },
-            economico: { versiculo: 'Mateo 6:33', mensaje: 'Busca primero mi reino y mi justicia, y yo me encargaré de añadirte todo lo que te falta.' },
-            salud: { versiculo: 'Jeremías 30:17', mensaje: 'Yo haré venir sanidad sobre ti, y sanaré tus heridas, dice el Señor.' },
-            triste: { versiculo: 'Salmos 34:18', mensaje: 'Cercano estoy a tu corazón quebrantado; yo recojo cada una de tus lágrimas.' },
-            enojado: { versiculo: 'Santiago 1:19', mensaje: 'Ven a mí con mansedumbre. Yo calmo tu espíritu y pongo dominio propio en tus labios.' },
-            solo: { versiculo: 'Josué 1:9', mensaje: 'Nunca te dejaré ni te desampararé. Yo estoy a tu lado en este mismo instante.' },
-            bendecido: { versiculo: 'Números 6:24-26', mensaje: '¡Qué alegría ver tu corazón agradecido! El Señor te bendice y te guarda, y hace resplandecer su rostro sobre ti.' },
-            contento: { versiculo: 'Salmos 118:24', mensaje: 'Este es el día que hizo el Señor; nos gozaremos y alegraremos en él. ¡Disfruta esta paz, hijo mío!' },
-            agradecido: { versiculo: '1 Tesalonicenses 5:18', mensaje: 'Tu gratitud es un aroma agradable. Gracias por reconocer que toda buena dádiva proviene de lo alto.' },
-            motivado: { versiculo: 'Filipenses 4:13', mensaje: '¡Adelante! Todo lo puedes en mí, pues yo te fortalezco para cumplir el propósito que puse en tus manos.' }
+        const estados = {
+            ansioso: { v: 'Filipenses 4:6-7', m: 'No te afanes por nada. Yo tengo el control de tus tiempos; respira profundo en mi paz.' },
+            triste: { v: 'Salmos 34:18', m: 'Cercano estoy a tu corazón quebrantado; yo recojo cada una de tus lágrimas.' },
+            economico: { v: 'Mateo 6:33', m: 'Busca primero mi reino y yo me encargaré de añadirte lo que te falta.' },
+            solo: { v: 'Josué 1:9', m: 'Nunca te dejaré ni te desampararé. Estoy a tu lado aquí mismo.' },
+            bendecido: { v: 'Números 6:24-26', m: '¡Qué alegría ver tu corazón agradecido! El Señor te bendice y te guarda.' },
+            contento: { v: 'Salmos 118:24', m: 'Este es el día que hizo el Señor; alégrate y disfruta esta paz.' },
+            agradecido: { v: '1 Tesalonicenses 5:18', m: 'Tu gratitud es un aroma agradable. Gracias por reconocer lo bueno de la vida.' },
+            motivado: { v: 'Filipenses 4:13', m: '¡Adelante! Todo lo puedes en mí, pues yo te fortalezco.' }
         };
 
-        function seleccionarEstado(estado) {
-            const sel = mensajesBiblicos[estado];
-            const contenedor = document.getElementById('resultado-animo');
-            contenedor.classList.remove('hidden');
-            contenedor.innerHTML = `<span class="text-xs font-bold text-amber-800 uppercase">${sel.versiculo}</span><p class="text-sm mt-1">${sel.mensaje}</p>`;
+        function seleccionarEstado(e) {
+            const s = estados[e];
+            const c = document.getElementById('resultado-animo');
+            c.classList.remove('hidden');
+            c.innerHTML = `<span class="text-xs font-bold text-amber-800 uppercase">${s.v}</span><p class="text-sm mt-1">${s.m}</p>`;
         }
 
         function enviarMensaje() {
             const input = document.getElementById('chat-input');
             const texto = input.value.trim();
             if (!texto) return;
-
-            const contenedorChat = document.getElementById('chat-messages');
-
-            // Mensaje del usuario
-            contenedorChat.innerHTML += `
-                <div class="flex items-start justify-end gap-2">
-                    <div class="bg-blue-900 text-white p-3 rounded-2xl rounded-tr-none text-sm shadow-sm max-w-[85%]">${texto}</div>
-                </div>
-            `;
+            const chat = document.getElementById('chat-messages');
+            chat.innerHTML += `<div class="flex items-start justify-end"><div class="bg-blue-900 text-white p-3 rounded-2xl rounded-tr-none text-sm">${texto}</div></div>`;
             input.value = '';
-            contenedorChat.scrollTop = contenedorChat.scrollHeight;
-
-            // Respuesta conversacional, empática y de amigos
+            
             setTimeout(() => {
                 const t = texto.toLowerCase();
-                let respuesta = "";
-                let accion = "";
+                let respuesta = "Te escucho atentamente. ¿Querés contarme un poco más sobre eso que vivís? Estoy acá para acompañarte.";
+                if (t.includes('triste') || t.includes('mal')) respuesta = "Acercate, hijo. No tenés que fingir fortaleza conmigo. Estoy acá escuchándote y tu dolor me importa. ¿Qué te tiene así de bajoneado?";
+                if (t.includes('preocupado') || t.includes('ansioso')) respuesta = "Entiendo... este 2026 corre muy rápido. A veces parece que el mundo no para, pero vos necesitás parar. ¿Qué es lo que más te roba la paz hoy?";
+                if (t.includes('gracias') || t.includes('bien')) respuesta = "¡Me llena el alma verte así! Qué lindo es compartir este momento de alegría con vos. ¿Qué pasó de bueno que te tiene con esa sonrisa?";
 
-                if (t.includes('hola') || t.includes('buen día') || t.includes('buenas')) {
-                    respuesta = "¡Hola! Qué bueno que te detuviste a charlar conmigo. Estaba esperando este momento. ¿Cómo viene tu día, cómo te estás sintiendo de verdad?";
-                } else if (t.includes('cansado') || t.includes('agotado') || t.includes('estrés')) {
-                    respuesta = "Te entiendo perfectamente... es agotador correr tanto en este 2026. A veces el mundo no se detiene, pero vos sí podés hacerlo. Vení, sentate conmigo un momento. ¿Qué es lo que más te pesa hoy?";
-                    accion = "Cierra los ojos un segundo, respira profundo y entrégame ese cansancio en oración. Lee Mateo 11:28.";
-                } else if (t.includes('gracias') || t.includes('feliz') || t.includes('contento') || t.includes('bien')) {
-                    respuesta = "¡Me encanta verte así! Nada me da más alegría que verte disfrutar de los regalos que te doy. Contame, ¿qué pasó de lindo que te tiene con esa sonrisa?";
-                    accion = "Guarda este momento en tu memoria y compártelo hoy con alguien más para contagiar esa paz. (Salmos 118:24).";
-                } else if (t.includes('mal') || t.includes('triste') || t.includes('lloro') || t.includes('solo')) {
-                    respuesta = "Acercate, hijo. Estoy acá escuchándote y siento tu dolor como mío. No tenés que ser fuerte conmigo, podés ser vos mismo. ¿Querés contarme qué te lastimó?";
-                    accion = "No te guardes eso en silencio. Escribime acá todo lo que sientes y descansa en mi abrazo. (Salmos 34:18).";
-                } else {
-                    respuesta = "Te escucho atentamente. Me interesa mucho lo que pasa por tu cabeza en este día. Contame más, ¿cómo te está afectando eso que vivís?";
-                    accion = "Preséntate delante de mí tal cual sos, sin caretas, y deja que mi paz guíe tu siguiente paso.";
-                }
-
-                contenedorChat.innerHTML += `
-                    <div class="flex items-start gap-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
-                        <div class="bg-white border border-slate-200 p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[90%] space-y-2">
-                            <p class="text-slate-800 leading-relaxed">${respuesta}</p>
-                            <div class="mt-2 pt-2 border-t border-slate-100">
-                                <p class="text-[11px] font-bold text-amber-700 uppercase">Sugerencia para hoy:</p>
-                                <p class="text-slate-600 italic mt-0.5 text-xs">${accion}</p>
-                            </div>
-                            <span class="text-[10px] text-slate-400 mt-1 block italic">Jesús</span>
-                        </div>
-                    </div>
-                `;
-                contenedorChat.scrollTop = contenedorChat.scrollHeight;
-            }, 1000);
+                chat.innerHTML += `<div class="flex items-start gap-2"><div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div><div class="bg-white border border-slate-200 p-4 rounded-2xl rounded-tl-none text-sm"><p>${respuesta}</p></div></div>`;
+                chat.scrollTop = chat.scrollHeight;
+            }, 800);
         }
     </script>
 </body>
