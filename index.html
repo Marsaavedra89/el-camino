@@ -50,7 +50,7 @@
     </div>
 
     <!-- CONTENEDOR PRINCIPAL DE VISTAS -->
-    <main class="flex-1 overflow-y-auto relative pb-32 bg-[#fdfbf7] dark:bg-[#202b26] view-transition">
+    <main class="flex-1 overflow-y-auto relative pb-36 bg-[#fdfbf7] dark:bg-[#202b26] view-transition">
 
         <!-- VISTA: INICIO -->
         <section id="view-inicio" class="p-6 space-y-6">
@@ -183,20 +183,20 @@
     <script>
         // --- 1. DATOS Y REPOSITORIO DE EMOCIONES ---
         const bancoEmociones = {
-            ansiedad: { titulo: "Ansiedad", versiculo: "Filipenses 4:6-7 (RVR1960)", mensaje: "Por nada estéis afanosos, but en toda oración y ruego... la paz de Dios guardará vuestros corazones." },
+            ansiedad: { titulo: "Ansiedad", versiculo: "Filipenses 4:6-7 (RVR1960)", mensaje: "Por nada estéis afanosos, sino en toda oración y ruego... la paz de Dios guardará vuestros corazones." },
             tristeza: { titulo: "Tristeza", versiculo: "Salmo 34:18 (RVR1960)", mensaje: "Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu." },
             paz: { titulo: "Gratitud y Paz", versiculo: "Números 6:24-26 (RVR1960)", mensaje: "Jehová te bendiga, y te guarde; Jehová haga resplandecer su rostro sobre ti, y tenga de ti misericordia." },
             trabajo: { titulo: "Trabajo y Sustento", versiculo: "Mateo 6:33 (RVR1960)", mensaje: "Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas." },
             soledad: { titulo: "Soledad", versiculo: "Mateo 28:20 (RVR1960)", mensaje: "Y he aquí yo estoy con vosotros todos los días, hasta el fin del mundo. Amén." },
-            cansancio: { titulo: "Cansancio", versiculo: "Mateo 11:28 (RVR1960)", mensaje: "Venید a mí todos los que estáis trabajados y cargados, y yo os haré descansar." }
+            cansancio: { titulo: "Cansancio", versiculo: "Mateo 11:28 (RVR1960)", mensaje: "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar." }
         };
 
         const capsulasSabiduria = [
-            ""La lámpara del cuerpo es el ojo; así que, si tu ojo es bueno, todo tu cuerpo estará lleno de luz." — Mateo 6:22",
-            ""No os afanéis por el día de mañana, porque el día de mañana traerá su propio afán." — Mateo 6:34",
-            ""Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá." — Mateo 7:7",
-            ""Bienaventurados los misericordiosos, porque ellos alcanzarán misericordia." — Mateo 5:7",
-            ""La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo." — Juan 14:27"
+            "\"La lámpara del cuerpo es el ojo; así que, si tu ojo es bueno, todo tu cuerpo estará lleno de luz.\" — Mateo 6:22",
+            "\"No os afanéis por el día de mañana, porque el día de mañana traerá su propio afán.\" — Mateo 6:34",
+            "\"Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá.\" — Mateo 7:7",
+            "\"Bienaventurados los misericordiosos, porque ellos alcanzarán misericordia.\" — Mateo 5:7",
+            "\"La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo.\" — Juan 14:27"
         ];
 
         const librosBiblia = ["Génesis", "Salmos", "Isaías", "Mateo", "Juan", "Filipenses"];
@@ -223,7 +223,6 @@
             });
             document.getElementById('view-' + v)?.classList.remove('hidden');
 
-            // Actualizar estilos del nav inferior
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.classList.remove('text-[#5c7265]', 'dark:text-[#8cb89b]', 'font-bold');
                 btn.classList.add('text-[#8c8275]', 'dark:text-gray-400');
@@ -266,7 +265,6 @@
 
             const chatMessages = document.getElementById('chat-messages');
             
-            // Mensaje del usuario
             chatMessages.innerHTML += `
                 <div class="flex justify-end">
                     <div class="bg-[#5c7265] text-white p-3.5 rounded-3xl rounded-tr-none text-xs max-w-[85%] leading-relaxed shadow-xs">
@@ -276,10 +274,8 @@
             input.value = '';
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Mostrar indicador de escritura
             document.getElementById('chat-typing').classList.remove('hidden');
 
-            // Simular respuesta basada en la estructura solicitada
             setTimeout(() => {
                 document.getElementById('chat-typing').classList.add('hidden');
                 const respuestaIA = generarRespuestaEspiritual(texto);
@@ -333,7 +329,9 @@
         // --- 6. BIBLIOTECA BÍBLICA ---
         function actualizarCapitulos() {
             const cap = document.getElementById('biblia-cap');
-            cap.innerHTML = '<option>Capítulo 1</option><option>Capítulo 2</option><option>Capítulo 3</option><option>Capítulo 4</option>';
+            if(cap) {
+                cap.innerHTML = '<option>Capítulo 1</option><option>Capítulo 2</option><option>Capítulo 3</option><option>Capítulo 4</option>';
+            }
         }
 
         function cargarCapituloSeguro() {
@@ -346,7 +344,7 @@
             `;
         }
 
-        // --- 7. EMPLEO / BOLSA COMUNITARIA (PERSISTENTE) ---
+        // --- 7. EMPLEO / BOLSA COMUNITARIA ---
         function cambiarTabEmpleo(tab) {
             const ext = document.getElementById('tab-externos');
             const com = document.getElementById('tab-comunidad');
@@ -434,27 +432,6 @@
             const list = document.getElementById('lista-diario');
             const diario = JSON.parse(localStorage.getItem('diario_reflexiones') || '[]');
             if(diario.length === 0) {
-                list.innerHTML = '<p class="text-xs text-gray-400 text-center py-4">Tu diario está vacío. Guarda reflexiones o cápsulas aquí.</p>';
-                return;
-            }
-            list.innerHTML = diario.map(i => `
-                <div class="bg-white dark:bg-[#26332d] p-4 rounded-2xl border dark:border-[#2e3d36] text-xs space-y-1.5 shadow-2xs">
-                    <div class="flex justify-between text-[10px] text-gray-400 font-semibold">
-                        <span>📓 Nota guardada</span>
-                        <span>${i.fecha}</span>
-                    </div>
-                    <p class="text-gray-700 dark:text-gray-200 leading-relaxed">${i.texto}</p>
-                </div>
-            `).join('');
-        }
-
-        // --- INICIALIZACIÓN ---
-        window.onload = () => {
-            librosBiblia.forEach(l => document.getElementById('biblia-libro').innerHTML += `<option>${l}</option>`);
-            actualizarCapitulos();
-            cargarReflexionesGuardadas();
-            generarNuevaCapsula();
-if(diario.length === 0) {
                 list.innerHTML = '<p class="text-xs text-gray-400 text-center py-4">Aún no hay reflexiones guardadas en tu diario.</p>';
                 return;
             }
@@ -466,7 +443,7 @@ if(diario.length === 0) {
             `).join('');
         }
 
-        // Inicializar selectores y datos al cargar la app
+        // --- INICIALIZACIÓN GLOBAL ---
         window.onload = function() {
             const selectLibro = document.getElementById('biblia-libro');
             if(selectLibro) {
