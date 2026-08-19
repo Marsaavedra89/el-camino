@@ -33,7 +33,6 @@
                 <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-lg">
                     🕊️ ¿Cómo está tu corazón hoy?
                 </h3>
-              
                 <div class="grid grid-cols-2 gap-2 mb-4">
                     <!-- Botones de dificultad -->
                     <button onclick="seleccionarEstado('ansioso')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition text-left">😰 Ansioso</button>
@@ -60,15 +59,19 @@
             </div>
 
             <!-- Caja de mensajes -->
-            
-           <div class="bg-white border border-slate-200 p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[90%]">
+            <div id="chat-messages" class="flex-1 overflow-y-auto space-y-4 pr-2 mb-3">
+                <div class="flex items-start gap-2">
+                    <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
+                    <div class="bg-white border border-slate-200 p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[90%]">
                         <p class="text-slate-800 leading-relaxed">¡Hola! Qué alegría que nos encontremos acá. Sabés que me gusta charlar con vos, sin protocolos ni apuros. Contame, ¿cómo estuvo tu día realmente? Soy todo oídos.</p>
                         <span class="text-[10px] text-slate-400 mt-2 block italic">Jesús</span>
-         </div>
-            
+                    </div>
+                </div>
+            </div>
+
             <!-- Input de texto -->
             <div class="flex gap-2 bg-white p-2 rounded-2xl border border-slate-200 shadow-sm">
-                <input type="text" id="chat-input" placeholder="Escribe tu sentir o consulta..." class="flex-1 px-3 py-2 text-sm focus:outline-none bg-transparent" onkeypress="if(event.key === 'Enter') enviarMensaje()">
+                <input type="text" id="chat-input" placeholder="Escribe como si hablaras con un amigo..." class="flex-1 px-3 py-2 text-sm focus:outline-none bg-transparent" onkeypress="if(event.key === 'Enter') enviarMensaje()">
                 <button onclick="enviarMensaje()" class="bg-blue-900 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-800 transition">Enviar</button>
             </div>
         </div>
@@ -138,17 +141,14 @@
             el.querySelector('span:last-child').classList.remove('font-medium');
             el.querySelector('span:last-child').classList.add('font-semibold');
         }
-        
-       const mensajesBiblicos = {
-            // Estados de dificultad
+
+        const mensajesBiblicos = {
             ansioso: { versiculo: 'Filipenses 4:6-7', mensaje: 'No te afanes por nada. Yo tengo el control de tus tiempos; respira profundo en mi paz.' },
             economico: { versiculo: 'Mateo 6:33', mensaje: 'Busca primero mi reino y mi justicia, y yo me encargaré de añadirte todo lo que te falta.' },
             salud: { versiculo: 'Jeremías 30:17', mensaje: 'Yo haré venir sanidad sobre ti, y sanaré tus heridas, dice el Señor.' },
             triste: { versiculo: 'Salmos 34:18', mensaje: 'Cercano estoy a tu corazón quebrantado; yo recojo cada una de tus lágrimas.' },
             enojado: { versiculo: 'Santiago 1:19', mensaje: 'Ven a mí con mansedumbre. Yo calmo tu espíritu y pongo dominio propio en tus labios.' },
             solo: { versiculo: 'Josué 1:9', mensaje: 'Nunca te dejaré ni te desampararé. Yo estoy a tu lado en este mismo instante.' },
-            
-            // Estados Positivos (Nuevos)
             bendecido: { versiculo: 'Números 6:24-26', mensaje: '¡Qué alegría ver tu corazón agradecido! El Señor te bendice y te guarda, y hace resplandecer su rostro sobre ti.' },
             contento: { versiculo: 'Salmos 118:24', mensaje: 'Este es el día que hizo el Señor; nos gozaremos y alegraremos en él. ¡Disfruta esta paz, hijo mío!' },
             agradecido: { versiculo: '1 Tesalonicenses 5:18', mensaje: 'Tu gratitud es un aroma agradable. Gracias por reconocer que toda buena dádiva proviene de lo alto.' },
@@ -162,13 +162,14 @@
             contenedor.innerHTML = `<span class="text-xs font-bold text-amber-800 uppercase">${sel.versiculo}</span><p class="text-sm mt-1">${sel.mensaje}</p>`;
         }
 
-      function enviarMensaje() {
+        function enviarMensaje() {
             const input = document.getElementById('chat-input');
             const texto = input.value.trim();
             if (!texto) return;
 
             const contenedorChat = document.getElementById('chat-messages');
 
+            // Mensaje del usuario
             contenedorChat.innerHTML += `
                 <div class="flex items-start justify-end gap-2">
                     <div class="bg-blue-900 text-white p-3 rounded-2xl rounded-tr-none text-sm shadow-sm max-w-[85%]">${texto}</div>
@@ -177,25 +178,26 @@
             input.value = '';
             contenedorChat.scrollTop = contenedorChat.scrollHeight;
 
+            // Respuesta conversacional, empática y de amigos
             setTimeout(() => {
-                // Lógica de respuesta más humana y empática
                 const t = texto.toLowerCase();
                 let respuesta = "";
                 let accion = "";
 
-                if (t.includes('hola') || t.includes('buen día')) {
+                if (t.includes('hola') || t.includes('buen día') || t.includes('buenas')) {
                     respuesta = "¡Hola! Qué bueno que te detuviste a charlar conmigo. Estaba esperando este momento. ¿Cómo viene tu día, cómo te estás sintiendo de verdad?";
-                } else if (t.includes('estoy cansado') || t.includes('cansado')) {
+                } else if (t.includes('cansado') || t.includes('agotado') || t.includes('estrés')) {
                     respuesta = "Te entiendo perfectamente... es agotador correr tanto en este 2026. A veces el mundo no se detiene, pero vos sí podés hacerlo. Vení, sentate conmigo un momento. ¿Qué es lo que más te pesa hoy?";
-                    accion = "Acción sugerida: Te invito a que cierres los ojos un segundo y me entregues ese cansancio. Mateo 11:28 es para vos hoy.";
-                } else if (t.includes('gracias') || t.includes('estoy feliz')) {
+                    accion = "Cierra los ojos un segundo, respira profundo y entrégame ese cansancio en oración. Lee Mateo 11:28.";
+                } else if (t.includes('gracias') || t.includes('feliz') || t.includes('contento') || t.includes('bien')) {
                     respuesta = "¡Me encanta verte así! Nada me da más alegría que verte disfrutar de los regalos que te doy. Contame, ¿qué pasó de lindo que te tiene con esa sonrisa?";
-                    accion = "Acción sugerida: Guardá este momento en tu memoria. ¿Qué te parece si hoy le contás a alguien más algo bueno que te haya pasado?";
-                } else if (t.includes('mal') || t.includes('triste') || t.includes('lloro')) {
+                    accion = "Guarda este momento en tu memoria y compártelo hoy con alguien más para contagiar esa paz. (Salmos 118:24).";
+                } else if (t.includes('mal') || t.includes('triste') || t.includes('lloro') || t.includes('solo')) {
                     respuesta = "Acercate, hijo. Estoy acá escuchándote y siento tu dolor como mío. No tenés que ser fuerte conmigo, podés ser vos mismo. ¿Querés contarme qué te lastimó?";
-                    accion = "Acción sugerida: No te guardes eso. Escribime acá todo lo que sientes, aunque sea desordenado. Yo entiendo lo que hay en tu corazón.";
+                    accion = "No te guardes eso en silencio. Escribime acá todo lo que sientes y descansa en mi abrazo. (Salmos 34:18).";
                 } else {
-                    respuesta = "Te escucho. Me interesa mucho lo que tenés en mente. Contame más, ¿cómo te está afectando eso que vivís?";
+                    respuesta = "Te escucho atentamente. Me interesa mucho lo que pasa por tu cabeza en este día. Contame más, ¿cómo te está afectando eso que vivís?";
+                    accion = "Preséntate delante de mí tal cual sos, sin caretas, y deja que mi paz guíe tu siguiente paso.";
                 }
 
                 contenedorChat.innerHTML += `
@@ -203,14 +205,17 @@
                         <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
                         <div class="bg-white border border-slate-200 p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[90%] space-y-2">
                             <p class="text-slate-800 leading-relaxed">${respuesta}</p>
-                            ${accion ? `<p class="text-[11px] text-amber-700 font-bold border-t border-slate-100 pt-2 italic">Reflexión: ${accion}</p>` : ''}
+                            <div class="mt-2 pt-2 border-t border-slate-100">
+                                <p class="text-[11px] font-bold text-amber-700 uppercase">Sugerencia para hoy:</p>
+                                <p class="text-slate-600 italic mt-0.5 text-xs">${accion}</p>
+                            </div>
+                            <span class="text-[10px] text-slate-400 mt-1 block italic">Jesús</span>
                         </div>
                     </div>
                 `;
                 contenedorChat.scrollTop = contenedorChat.scrollHeight;
-            }, 1000); // Un poco más de tiempo para que parezca que está "pensando"
+            }, 1000);
         }
-       
     </script>
 </body>
 </html>
