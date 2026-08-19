@@ -50,7 +50,7 @@
                 <div class="flex items-start gap-2">
                     <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
                     <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm">
-                        <p>Hola, estoy aquí para escucharte y caminar contigo. Cuéntame, ¿qué situación o carga hay en tu corazón hoy?</p>
+                        <p>Hola, qué gusto saludarte. Estoy aquí para acompañarte y escucharte. ¿Cómo te sientes en este día o qué hay en tu corazón?</p>
                     </div>
                 </div>
             </div>
@@ -171,7 +171,6 @@
     </nav>
 
     <script>
-        // Tabla con la cantidad de capítulos de cada libro de la Biblia
         const totalCapitulos = {
             "Genesis": 50, "Exodo": 40, "Levitico": 27, "Numeros": 36, "Deuteronomio": 34,
             "Josue": 24, "Jueces": 21, "Rut": 4, "1 Samuel": 31, "2 Samuel": 24,
@@ -193,7 +192,6 @@
             const libroSelect = document.getElementById('biblia-libro');
             const capSelect = document.getElementById('biblia-cap');
             const cant = totalCapitulos[libroSelect.value] || 1;
-            
             let options = '';
             for (let i = 1; i <= cant; i++) {
                 options += `<option value="${i}">Capítulo ${i}</option>`;
@@ -212,7 +210,6 @@
             el.classList.replace('text-slate-400', 'text-blue-600');
         }
 
-        // Lógica de Estados
         function seleccionarEstado(e) {
             const estados = { 
                 ansioso: {v: 'Filipenses 4:6', m: 'No se inquieten por nada.'}, 
@@ -223,7 +220,7 @@
             c.innerHTML = `<span class="font-bold text-amber-800">${estados[e]?.v || 'Versículo'}</span><p>${estados[e]?.m || 'Dios te ama.'}</p>`;
         }
 
-        // Lógica de Chat IA con el paso a paso estructurado
+        // --- MOTOR DE CHAT INTELIGENTE Y NATURAL ---
         function enviarMensaje() {
             const input = document.getElementById('chat-input');
             const texto = input.value.trim();
@@ -242,31 +239,44 @@
             input.value = '';
             chat.scrollTop = chat.scrollHeight;
 
-            // 2. Simular respuesta de la IA aplicando la estructura solicitada
+            // 2. Analizar si es un saludo simple o si describe un problema real
             setTimeout(() => {
-                chat.innerHTML += `
-                    <div class="flex items-start gap-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
-                        <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[85%] space-y-3 text-slate-700">
-                            
-                            <!-- 1. Validación y Empatía -->
-                            <p><strong>Comprendo la angustia y la carga que hay en tu corazón en este momento...</strong> No estás solo transitando por esta situación tan difícil.</p>
-                            
-                            <!-- 2. Consejo y Enseñanza de Jesús -->
-                            <p>Jesús nos enseñó en Mateo 6:25-26 a no angustiarnos por el mañana, recordándonos que si Dios cuida con tanto detalle de las aves del cielo, cuánto más cuida de ti, que tienes un valor incalculable para Él.</p>
-                            
-                            <!-- 3. Inspiración para Accionar -->
-                            <p>Hoy te animo a poner esto en práctica: dedica un tiempo a soltar el control mediante la <em>oración sincera</em> y la paciencia activa, enfocándote en hacer tu parte con esfuerzo honrado y dejando el resto en manos del Padre.</p>
-                            
-                            <!-- 4. Cierre de Aliento -->
-                            <p class="text-blue-900 font-semibold pt-1 border-t border-slate-100">Que la paz de Cristo fortalezca tu vida hoy y siempre. Amén.</p>
-                        </div>
-                    </div>`;
+                const textoMinus = texto.toLowerCase();
+                const esSaludo = textoMinus.match(/^(hola|buenos dias|buenas tardes|buenas noches|saludos|hey|hi)$/);
+
+                let respuestaHtml = "";
+
+                if (esSaludo) {
+                    // Si es un saludo, responde con calidez y abre la conversación humanamente
+                    respuestaHtml = `
+                        <div class="flex items-start gap-2">
+                            <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
+                            <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[85%] space-y-2 text-slate-700">
+                                <p>¡Hola de nuevo! Qué alegría saludarte. 😊 ¿Cómo ha estado tu día y de qué te gustaría que hablemos o nos enfoquemos en oración hoy?</p>
+                            </div>
+                        </div>`;
+                } else {
+                    // Si el usuario comparte un problema, aplica la estructura ministerial completa que pediste
+                    respuestaHtml = `
+                        <div class="flex items-start gap-2">
+                            <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
+                            <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[85%] space-y-3 text-slate-700">
+                                <p><strong>Comprendo la angustia y la carga que hay en tu corazón en este momento...</strong> No estás solo transitando por esta situación tan difícil.</p>
+                                
+                                <p>Jesús nos enseñó en Mateo 6:25-26 a no angustiarnos por el mañana, recordándonos que si Dios cuida con tanto detalle de las aves del cielo, cuánto más cuida de ti, que tienes un valor incalculable para Él.</p>
+                                
+                                <p>Hoy te animo a poner esto en práctica: dedica un tiempo a soltar el control mediante la <em>oración sincera</em> y la paciencia activa, enfocándote en hacer tu parte con esfuerzo honrado y dejando el resto en manos del Padre.</p>
+                                
+                                <p class="text-blue-900 font-semibold pt-1 border-t border-slate-100">Que la paz de Cristo fortalezca tu vida hoy y siempre. Amén.</p>
+                            </div>
+                        </div>`;
+                }
+
+                chat.innerHTML += respuestaHtml;
                 chat.scrollTop = chat.scrollHeight;
-            }, 1000);
+            }, 800);
         }
 
-        // Lógica de Biblia con todos los versículos del capítulo
         async function cargarBibliaCompleta() {
             const libro = document.getElementById('biblia-libro').value;
             const cap = document.getElementById('biblia-cap').value;
@@ -278,7 +288,7 @@
                 const data = await response.json();
                 
                 if (data.error) {
-                    res.innerHTML = "No se pudo cargar este capítulo. Intenta nuevamente.";
+                    res.json = "No se pudo cargar este capítulo. Intenta nuevamente.";
                 } else {
                     res.innerHTML = `<h3 class="font-bold text-blue-900 mb-3 text-lg">${data.reference}</h3>
                                      <p class="text-sm italic leading-relaxed">${data.text}</p>`;
