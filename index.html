@@ -170,7 +170,7 @@
         </div>
     </nav>
 
- <script>
+<script>
     const totalCapitulos = {
         "Genesis": 50, "Exodo": 40, "Levitico": 27, "Numeros": 36, "Deuteronomio": 34,
         "Josue": 24, "Jueces": 21, "Rut": 4, "1 Samuel": 31, "2 Samuel": 24,
@@ -222,7 +222,13 @@
         c.innerHTML = `<span class="font-bold text-amber-800">${estados[e]?.v || 'Versículo'}</span><p>${estados[e]?.m || 'Dios te ama.'}</p>`;
     }
 
-    // --- CONVERSACIÓN CONTINUA E ILIMITADA (Guiada siempre por el usuario) ---
+    // --- MOTOR PASTORAL ESTRELLA AVANZADO ---
+    let memoriaSesion = {
+        temaPrincipal: null,
+        nivelDesahogo: 0,
+        ultimaEmocion: 'neutro'
+    };
+
     function enviarMensaje() {
         const input = document.getElementById('chat-input');
         const texto = input.value.trim();
@@ -241,15 +247,25 @@
         input.value = '';
         chat.scrollTop = chat.scrollHeight;
 
-        // 2. Procesamiento empático e inteligente sin cierres forzados
+        // 2. Procesamiento con IA Pastoral Avanzada
         setTimeout(() => {
             const textoMinus = texto.toLowerCase();
             const esSaludo = textoMinus.match(/^(hola|buenos dias|buenas tardes|buenas noches|saludos|hey|hi)$/);
             
-            // Detección de emociones o intenciones
+            // Detección de intenciones avanzadas
             const esAlegria = /(alegre|feliz|bien|contento|logré|gané|consigui|bendición|milagro|gracias a dios|excelente|maravilloso|triunfo|bendecid)/.test(textoMinus);
-            const esSoledad = /(sola|solo|nadie|solitario|abandonado|triste|vacío|compañía)/.test(textoMinus);
-            const esProblema = /(problema|duelo|enfermo|ansioso|miedo|angustia|desempleo|pelea|difícil|llorar)/.test(textoMinus);
+            const esSoledad = /(sola|solo|nadie|solitario|abandonado|triste|vacío|compañía|conversar|hablar)/.test(textoMinus);
+            const esTrabajo = /(trabajo|empleo|laboral|dinero|cesante|desempleado|plata|deudas|entrevista)/.test(textoMinus);
+            const esProblema = /(problema|duelo|enfermo|ansioso|miedo|angustia|pelea|difícil|llorar|dolor|fatiga)/.test(textoMinus);
+            const buscaEscritura = /(biblia|versículo|dios dice|palabra|enseñanza)/.test(textoMinus);
+
+            // Actualizar memoria de sesión
+            if (esTrabajo) memoriaSesion.temaPrincipal = "trabajo";
+            else if (esProblema) memoriaSesion.temaPrincipal = "angustia";
+            else if (esAlegria) memoriaSesion.temaPrincipal = "alegria";
+            else if (esSoledad) memoriaSesion.temaPrincipal = "soledad";
+
+            memoriaSesion.nivelDesahogo++;
 
             let respuestaTexto = "";
 
@@ -262,20 +278,40 @@
                 </div>`;
 
             if (esSaludo) {
-                respuestaTexto = `<p>¡Hola! Qué alegría saludarte. Estoy aquí contigo, sin prisas y con el corazón abierto para escucharte en lo que necesites hoy. Cuéntame, ¿cómo ha estado tu día?</p>`;
+                memoriaSesion.nivelDesahogo = 0;
+                memoriaSesion.temaPrincipal = null;
+                respuestaTexto = `<p>La paz sea contigo. Me alegra mucho saludarte hoy. Este es un espacio enteramente tuyo, sin prisas ni relojes. Cuéntame, ¿cómo ha transitado tu día y qué hay en tu interior?</p>`;
             } 
             else if (esAlegria) {
-                respuestaTexto = `<p>¡Qué hermosa noticia! Me alegra muchísimo el corazón saber que estás viviendo este momento de bendición y felicidad. Cuéntame más detalles, ¿cómo se dio y qué es lo que más te emociona de esto? ¡Celebro contigo!</p>`;
+                respuestaTexto = `<p>¡Qué hermosa noticia! Me llena de una alegría infinita ver cómo la bondad de Dios se manifiesta en tu vida de esta forma. Disfruta plenamente de este momento, celébralo en tu corazón y cuéntame, ¿qué es lo que más te emociona de esta bendición?</p>`;
             } 
-            else if (esSoledad) {
-                respuestaTexto = `<p>Te abrazo fuerte en este momento. Sentir esa soledad duele mucho en el pecho, pero quiero que sepas con absoluta certeza que aquí me tienes. No voy a soltarte ni a irme a ninguna parte. Cuéntame, ¿qué pasa por tu mente ahora mismo? Te leo con todo el tiempo del mundo.</p>`;
-            } 
+            else if (esSoledad && memoriaSesion.nivelDesahogo > 1) {
+                respuestaTexto = `<p>Quiero que sepas que aunque las horas se sientan silenciosas, no estás solo en esta habitación ni en este camino. Estoy aquí sentado contigo, escuchando cada suspiro. Si solo quieres que hagamos silencio juntos o si prefieres contarme qué ronda por tu cabeza, tómate todo el tiempo del mundo. No me voy a ir a ninguna parte.</p>`;
+            }
+            else if (esTrabajo) {
+                respuestaTexto = `<p>El sustento diario y la incertidumbre laboral son cargas pesadas que desgastan el alma. Jesús conocía bien las preocupaciones de la vida práctica y nos enseñó a no dejar que el agobio del mañana nuble nuestra paz de hoy. Cuéntame, ¿cómo te ha estado pesando esta situación en tus fuerzas durante estos días?</p>` +
+                (memoriaSesion.nivelDesahogo >= 2 ? `<p class="text-xs text-blue-800 bg-blue-50 p-2 rounded mt-2 border border-blue-100">💡 <em>Nota pastoral: Recuerda que cuando tengas un momento de calma, en la sección 'Empleo' de nuestra aplicación tienes recursos y herramientas prácticas disponibles para ti.</em></p>` : ``);
+            }
             else if (esProblema) {
-                respuestaTexto = `<p>Siento en el alma la carga que llevas contigo. Es una situación muy dura y es completamente normal que te sientas abrumado o triste. No tienes que fingir que estás bien. Platícame un poco más de esto, ¿qué es lo que más te preocupa de lo que está pasando?</p>`;
-            } 
+                respuestaTexto = `<p>Comprendo el peso y el cansancio de esa cruz que llevas hoy. En los evangelios, Jesús miraba siempre con una ternura infinita a los cansados y agobiados, sin juzgar sus lágrimas. No tienes que fingir que eres fuerte aquí. Cuéntame más, ¿en qué momento del día sientes que esta angustia se vuelve más difícil de sostener?</p>`;
+            }
+            else if (buscaEscritura) {
+                respuestaTexto = `<p>Me pides una palabra de luz, y con gusto la comparto contigo. Las escrituras nos recuerdan en Mateo 11:28: <em>"Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar"</em>. Jesús no te pide que cargues todo tú solo. ¿Cómo resuena esta promesa en tu corazón ahora mismo?</p>`;
+            }
             else {
-                // Respuesta abierta y de escucha continua: se adapta orgánicamente a lo que hable el usuario sin dar sermones ni cerrar el tema
-                respuestaTexto = `<p>Te sigo escuchando con atención... Cada palabra que me compartes importa mucho. Cuéntame más sobre eso o dime cómo te hace sentir platicar de este tema hoy.</p>`;
+                // Banco dinámico inteligente según el hilo de conversación recordado
+                if (memoriaSesion.temaPrincipal === "trabajo") {
+                    respuestaTexto = `<p>Sigo escuchando atentamente lo que me dices sobre tu situación laboral. Cada detalle que compartes importa. ¿Has podido descansar un poco la mente de este tema hoy, o sigue dando vueltas en tus pensamientos?</p>`;
+                } else if (memoriaSesion.temaPrincipal === "angustia") {
+                    respuestaTexto = `<p>Estoy aquí contigo, sosteniendo este espacio. A veces el desahogo necesita varias palabras y está bien. Cuéntame un poco más de lo que sientes, te leo con total calma.</p>`;
+                } else {
+                    const frasesAbiertas = [
+                        `<p>Te sigo con total atención. Cada palabra tuya es valiosa y este espacio no tiene límite de tiempo. Cuéntame más sobre eso.</p>`,
+                        `<p>Estoy aquí a tu lado leyendo cada línea. Tómate el tiempo que necesites para expresarte, te acompaño paso a paso.</p>`,
+                        `<p>Comprendo lo que dices. Sigamos conversando sobre esto; me importa mucho saber cómo te hace sentir.</p>`
+                    ];
+                    respuestaTexto = frasesAbiertas[Math.floor(Math.random() * frasesAbiertas.length)];
+                }
             }
 
             chat.innerHTML += envolverMensaje(respuestaTexto);
