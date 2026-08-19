@@ -50,12 +50,12 @@
                 <div class="flex items-start gap-2">
                     <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
                     <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm">
-                        <p>Hola, estoy aquí para escucharte. ¿Cómo te sientes hoy?</p>
+                        <p>Hola, estoy aquí para escucharte y caminar contigo. Cuéntame, ¿qué situación o carga hay en tu corazón hoy?</p>
                     </div>
                 </div>
             </div>
             <div class="flex gap-2 bg-white p-2 rounded-2xl border shadow-sm">
-                <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." class="flex-1 px-3 py-2 text-sm focus:outline-none">
+                <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." class="flex-1 px-3 py-2 text-sm focus:outline-none" onkeypress="if(event.key === 'Enter') enviarMensaje()">
                 <button onclick="enviarMensaje()" class="bg-blue-900 text-white px-4 py-2 rounded-xl text-sm font-bold">Enviar</button>
             </div>
         </div>
@@ -201,7 +201,6 @@
             capSelect.innerHTML = options;
         }
 
-        // Inicializar los capítulos al cargar la página por defecto con Génesis
         window.onload = function() {
             actualizarCapitulos();
         };
@@ -215,19 +214,56 @@
 
         // Lógica de Estados
         function seleccionarEstado(e) {
-            const estados = { ansioso: {v: 'Filipenses 4:6', m: 'No se inquieten por nada.'}, triste: {v: 'Salmos 34:18', m: 'Dios está cerca.' } };
+            const estados = { 
+                ansioso: {v: 'Filipenses 4:6', m: 'No se inquieten por nada.'}, 
+                triste: {v: 'Salmos 34:18', m: 'Dios está cerca.' } 
+            };
             const c = document.getElementById('resultado-animo');
             c.classList.remove('hidden');
             c.innerHTML = `<span class="font-bold text-amber-800">${estados[e]?.v || 'Versículo'}</span><p>${estados[e]?.m || 'Dios te ama.'}</p>`;
         }
 
-        // Lógica de Chat
+        // Lógica de Chat IA con el paso a paso estructurado
         function enviarMensaje() {
             const input = document.getElementById('chat-input');
-            if(!input.value.trim()) return;
+            const texto = input.value.trim();
+            if(!texto) return;
+
             const chat = document.getElementById('chat-messages');
-            chat.innerHTML += `<div class="bg-blue-900 text-white p-3 rounded-2xl rounded-tr-none self-end text-sm">${input.value}</div>`;
+
+            // 1. Mostrar mensaje del usuario
+            chat.innerHTML += `
+                <div class="flex justify-end">
+                    <div class="bg-blue-900 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-sm">
+                        ${texto}
+                    </div>
+                </div>`;
+            
             input.value = '';
+            chat.scrollTop = chat.scrollHeight;
+
+            // 2. Simular respuesta de la IA aplicando la estructura solicitada
+            setTimeout(() => {
+                chat.innerHTML += `
+                    <div class="flex items-start gap-2">
+                        <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
+                        <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[85%] space-y-3 text-slate-700">
+                            
+                            <!-- 1. Validación y Empatía -->
+                            <p><strong>Comprendo la angustia y la carga que hay en tu corazón en este momento...</strong> No estás solo transitando por esta situación tan difícil.</p>
+                            
+                            <!-- 2. Consejo y Enseñanza de Jesús -->
+                            <p>Jesús nos enseñó en Mateo 6:25-26 a no angustiarnos por el mañana, recordándonos que si Dios cuida con tanto detalle de las aves del cielo, cuánto más cuida de ti, que tienes un valor incalculable para Él.</p>
+                            
+                            <!-- 3. Inspiración para Accionar -->
+                            <p>Hoy te animo a poner esto en práctica: dedica un tiempo a soltar el control mediante la <em>oración sincera</em> y la paciencia activa, enfocándote en hacer tu parte con esfuerzo honrado y dejando el resto en manos del Padre.</p>
+                            
+                            <!-- 4. Cierre de Aliento -->
+                            <p class="text-blue-900 font-semibold pt-1 border-t border-slate-100">Que la paz de Cristo fortalezca tu vida hoy y siempre. Amén.</p>
+                        </div>
+                    </div>`;
+                chat.scrollTop = chat.scrollHeight;
+            }, 1000);
         }
 
         // Lógica de Biblia con todos los versículos del capítulo
