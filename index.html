@@ -59,7 +59,25 @@
             </div>
         </div>
 
-        <div id="view-biblia" class="hidden text-center py-10"><h2 class="text-xl font-bold">📖 Biblia</h2><p class="text-slate-500">Próximamente...</p></div>
+    <div id="view-biblia" class="hidden space-y-6">
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+        <h2 class="text-xl font-bold text-slate-900 mb-4">📖 Lecturas Bíblicas</h2>
+        <input type="text" id="search-biblia" placeholder="Buscar versículo o tema..." class="w-full p-3 border border-slate-200 rounded-xl text-sm mb-4 focus:ring-2 focus:ring-blue-500 outline-none">
+        
+        <div id="biblia-list" class="space-y-3">
+            <!-- Aquí se cargarán los pasajes mediante JS -->
+            <div class="p-4 bg-slate-50 rounded-xl cursor-pointer hover:bg-blue-50 transition border border-slate-100" onclick="leerPasaje('Juan 3:16')">
+                <h4 class="font-bold text-sm text-blue-900">Juan 3:16</h4>
+                <p class="text-xs text-slate-600 mt-1">Porque de tal manera amó Dios al mundo...</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl cursor-pointer hover:bg-blue-50 transition border border-slate-100" onclick="leerPasaje('Salmos 23:1')">
+                <h4 class="font-bold text-sm text-blue-900">Salmos 23:1</h4>
+                <p class="text-xs text-slate-600 mt-1">Jehová es mi pastor; nada me faltará.</p>
+            </div>
+        </div>
+    </div>
+</div>
+        
         <div id="view-empleo" class="hidden text-center py-10"><h2 class="text-xl font-bold">💼 Empleo</h2><p class="text-slate-500">Próximamente...</p></div>
         <div id="view-apoyar" class="hidden text-center py-10"><h2 class="text-xl font-bold">❤️ Apoyar</h2><p class="text-slate-500">Próximamente...</p></div>
     </main>
@@ -113,6 +131,31 @@
                 chat.scrollTop = chat.scrollHeight;
             }, 800);
         }
+        // Datos de ejemplo para la biblioteca
+const bibliaData = {
+    'Juan 3:16': 'Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.',
+    'Salmos 23:1': 'Jehová es mi pastor; nada me faltará.'
+};
+
+function leerPasaje(referencia) {
+    // Reutilizamos el espacio de resultado para mostrar el pasaje de forma profesional
+    const lista = document.getElementById('biblia-list');
+    lista.innerHTML = `
+        <div class="animate-in fade-in zoom-in duration-300">
+            <button onclick="location.reload()" class="text-xs text-blue-600 font-bold mb-4 underline">← Volver a la lista</button>
+            <h3 class="text-2xl font-bold text-slate-900 mb-2">${referencia}</h3>
+            <p class="text-slate-700 leading-relaxed italic border-l-4 border-blue-600 pl-4 py-2">
+                "${bibliaData[referencia] || 'Contenido en desarrollo...'}"
+            </p>
+        </div>
+    `;
+}
+
+// Búsqueda simple
+document.getElementById('search-biblia').addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase();
+    // Aquí puedes implementar una lógica de filtrado más robusta según crezca la base de datos
+});
     </script>
 </body>
 </html>
