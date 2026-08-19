@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App de Apoyo Espiritual y Emocional</title>
-    <!-- Tailwind CSS para un diseño moderno y responsivo -->
+    <title>El Camino - Apoyo Espiritual y Emocional</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 flex flex-col h-screen max-w-md mx-auto shadow-2xl overflow-hidden border-x border-slate-200">
@@ -13,31 +13,32 @@
     <main class="flex-1 overflow-y-auto relative pb-20">
 
         <!-- VISTA: INICIO -->
-        <section id="view-inicio" class="p-5 space-y-6">
-            <header class="text-center space-y-1 mt-4">
-                <span class="text-xs uppercase tracking-widest text-blue-600 font-bold">Refugio y Guía</span>
-                <h1 class="text-2xl font-extrabold text-blue-950">Bienvenido a tu Espacio</h1>
-                <p class="text-sm text-slate-500">Encuentra paz, guía y herramientas prácticas para tu día a día.</p>
+        <section id="view-inicio" class="p-5 space-y-5">
+            <!-- LOGO Y NOMBRE EL CAMINO -->
+            <header class="text-center space-y-1 mt-2">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-900 text-white text-xl font-bold shadow-md mb-1">✝</div>
+                <h1 class="text-2xl font-extrabold text-blue-950 tracking-tight">El Camino</h1>
+                <p class="text-xs uppercase tracking-widest text-blue-600 font-semibold">Refugio y Guía</p>
             </header>
 
             <!-- Tarjeta del Estado de Ánimo -->
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 space-y-3">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 space-y-3">
                 <h2 class="font-bold text-slate-700 text-sm">¿Cómo se encuentra tu corazón hoy?</h2>
                 <div class="grid grid-cols-2 gap-2">
-                    <button onclick="seleccionarEstado('ansioso')" class="p-3 text-xs font-semibold bg-amber-50 text-amber-800 rounded-xl border border-amber-100 hover:bg-amber-100 transition">Siento Ansiedad</button>
-                    <button onclick="seleccionarEstado('triste')" class="p-3 text-xs font-semibold bg-blue-50 text-blue-800 rounded-xl border border-blue-100 hover:bg-blue-100 transition">Me siento Triste</button>
-                    <button onclick="seleccionarEstado('bendecido')" class="p-3 text-xs font-semibold bg-emerald-50 text-emerald-800 rounded-xl border border-emerald-100 hover:bg-emerald-100 transition">Estoy Bendecido</button>
-                    <button onclick="seleccionarEstado('contento')" class="p-3 text-xs font-semibold bg-purple-50 text-purple-800 rounded-xl border border-purple-100 hover:bg-purple-100 transition">Tengo Alegría</button>
+                    <button onclick="seleccionarEstado('ansioso')" class="p-2.5 text-xs font-semibold bg-amber-50 text-amber-800 rounded-xl border border-amber-100 hover:bg-amber-100 transition">Siento Ansiedad</button>
+                    <button onclick="seleccionarEstado('triste')" class="p-2.5 text-xs font-semibold bg-blue-50 text-blue-800 rounded-xl border border-blue-100 hover:bg-blue-100 transition">Me siento Triste</button>
+                    <button onclick="seleccionarEstado('bendecido')" class="p-2.5 text-xs font-semibold bg-emerald-50 text-emerald-800 rounded-xl border border-emerald-100 hover:bg-emerald-100 transition">Estoy Bendecido</button>
+                    <button onclick="seleccionarEstado('contento')" class="p-2.5 text-xs font-semibold bg-purple-50 text-purple-800 rounded-xl border border-purple-100 hover:bg-purple-100 transition">Tengo Alegría</button>
                 </div>
                 <div id="resultado-animo" class="hidden p-3 bg-slate-50 rounded-xl text-xs space-y-1 border border-slate-200 mt-2"></div>
             </div>
 
-            <!-- Acceso Directo al Chat -->
+            <!-- Acceso Directo al Chat ("Estoy para charlar con vos") -->
             <div class="bg-gradient-to-r from-blue-900 to-blue-950 text-white p-5 rounded-2xl shadow-md space-y-3">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-lg">✝</div>
                     <div>
-                        <h2 class="font-bold text-base">Conversación Pastoral</h2>
+                        <h2 class="font-bold text-base">Estoy para charlar con vos</h2>
                         <p class="text-xs text-blue-200">Un espacio de escucha real y sin prisas.</p>
                     </div>
                 </div>
@@ -47,13 +48,13 @@
             </div>
         </section>
 
-        <!-- VISTA: CHAT IA (DINÁMICA AVANZADA LOCAL) -->
+        <!-- VISTA: CHAT IA -->
         <section id="view-chat" class="hidden flex flex-col h-full absolute inset-0 pb-16 bg-slate-50">
             <!-- Header del Chat -->
             <div class="bg-white border-b px-4 py-3 flex items-center gap-3 shadow-xs">
                 <div class="w-9 h-9 rounded-full bg-blue-900 text-white flex items-center justify-center font-bold text-xs">✝</div>
                 <div>
-                    <h2 class="font-bold text-sm text-blue-950">Acompañamiento Espiritual</h2>
+                    <h2 class="font-bold text-sm text-blue-950">Estoy para charlar con vos</h2>
                     <p class="text-[10px] text-emerald-600 font-medium">● En línea y escuchándote</p>
                 </div>
             </div>
@@ -63,7 +64,7 @@
                 <div class="flex items-start gap-2">
                     <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
                     <div class="bg-white border p-4 rounded-2xl rounded-tl-none text-sm shadow-sm max-w-[85%] text-slate-700">
-                        La paz sea contigo. Este es un espacio enteramente tuyo, seguro y sin relojes. Cuéntame, ¿cómo ha transitado tu día y qué hay en tu interior?
+                        La paz sea contigo. Este es un espacio enteramente tuyo, seguro y sin relojes. Cuéntame, ¿cómo ha transitado tu día y qué hay in tu interior?
                     </div>
                 </div>
             </div>
@@ -127,26 +128,26 @@
 
     </main>
 
-    <!-- BARRA DE NAVEGACIÓN INFERIOR -->
-    <nav class="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around py-3 z-50 shadow-lg">
-        <button onclick="cambiarVista('inicio', this)" class="nav-btn flex flex-col items-center text-blue-600 text-[10px] font-semibold gap-1">
-            <span class="text-lg">🏠</span> Inicio
+    <!-- BARRA DE NAVEGACIÓN INFERIOR (COMPACTA Y CENTRADA) -->
+    <nav class="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-center gap-6 py-2.5 z-50 shadow-lg">
+        <button onclick="cambiarVista('inicio', this)" class="nav-btn flex flex-col items-center text-blue-600 text-[10px] font-semibold gap-0.5 px-3">
+            <span class="text-base">🏠</span> Inicio
         </button>
-        <button onclick="cambiarVista('chat', this)" class="nav-btn flex flex-col items-center text-slate-400 text-[10px] font-semibold gap-1">
-            <span class="text-lg">💬</span> Chat IA
+        <button onclick="cambiarVista('chat', this)" class="nav-btn flex flex-col items-center text-slate-400 text-[10px] font-semibold gap-0.5 px-3">
+            <span class="text-base">💬</span> Chat IA
         </button>
-        <button onclick="cambiarVista('biblia', this)" class="nav-btn flex flex-col items-center text-slate-400 text-[10px] font-semibold gap-1">
-            <span class="text-lg">📖</span> Biblia
+        <button onclick="cambiarVista('biblia', this)" class="nav-btn flex flex-col items-center text-slate-400 text-[10px] font-semibold gap-0.5 px-3">
+            <span class="text-base">📖</span> Biblia
         </button>
-        <button onclick="cambiarVista('empleo', this)" class="nav-btn flex flex-col items-center text-slate-400 text-[10px] font-semibold gap-1">
-            <span class="text-lg">💼</span> Empleo
+        <button onclick="cambiarVista('empleo', this)" class="nav-btn flex flex-col items-center text-slate-400 text-[10px] font-semibold gap-0.5 px-3">
+            <span class="text-base">💼</span> Empleo
         </button>
-        <button onclick="cambiarVista('apoyar', this)" class="nav-btn flex flex-col items-center text-slate-400 text-[10px] font-semibold gap-1">
-            <span class="text-lg">❤️</span> Apoyar
+        <button onclick="cambiarVista('apoyar', this)" class="nav-btn flex flex-col items-center text-slate-400 text-[10px] font-semibold gap-0.5 px-3">
+            <span class="text-base">❤️</span> Apoyar
         </button>
     </nav>
 
-    <!-- SCRIPT DE MOTOR INTELIGENTE DE ALTA FLUIDEZ -->
+    <!-- SCRIPT DE LÓGICA -->
     <script>
         const totalCapitulos = {
             "Mateo": 28, "Juan": 21, "Salmos": 150, "Proverbios": 31, "Romanos": 16
@@ -186,7 +187,6 @@
             c.innerHTML = `<span class="font-bold text-amber-800">${estados[e]?.v || 'Versículo'}</span><p>${estados[e]?.m || 'Dios te ama.'}</p>`;
         }
 
-        // --- MOTOR DE CONVERSACIÓN INTELIGENTE (SIN RIESGO COMERCIAL) ---
         let historialConversacion = [];
 
         function enviarMensaje() {
@@ -196,7 +196,6 @@
 
             const chat = document.getElementById('chat-messages');
 
-            // 1. Mostrar mensaje del usuario
             chat.innerHTML += `
                 <div class="flex justify-end">
                     <div class="bg-blue-900 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-sm">
@@ -210,12 +209,10 @@
             historialConversacion.push(texto.toLowerCase());
             const turno = historialConversacion.length;
 
-            // Simular pensamiento natural de la IA
             setTimeout(() => {
                 const textoMinus = texto.toLowerCase();
                 let respuestaTexto = "";
 
-                // Análisis contextual profundo de lo escrito
                 const esTrabajo = /(trabajo|empleo|plata|dinero|edad|años|ahorros|cesante|entrevista)/.test(textoMinus);
                 const esTristeza = /(triste|solo|sola|mal|llorar|angustia|ansiedad|miedo)/.test(textoMinus);
                 const esAlegria = /(feliz|contento|bien|bendición|alegría|logré|gracias a dios)/.test(textoMinus);
@@ -224,18 +221,17 @@
                     respuestaTexto = "La paz sea contigo. Me alegra mucho saludarte hoy. Este es un espacio enteramente tuyo, sin prisa ni relojes. ¿Cómo se encuentra tu corazón en este momento?";
                 } 
                 else if (esTrabajo) {
-                    // Variaciones dinámicas según el avance de la charla para evitar repeticiones mecánicas
                     const bancoTrabajo = [
-                        "Comprendo perfectamente ese nudo en el pecho. Ver que los recursos escasean y sentir la presión de los años y las cuentas genera una angustia enorme. Jesús caminaba con personas agobiadas por el mañana y nos enseñaba que el Padre conoce cada necesidad antes de que la pidamos. ¿Cómo has hecho para sostenerte estos días?",
-                        "Es completamente válido que te sientas así de agotado ante esta incertidumbre laboral. No estás cargando esto solo. Cuéntame, ¿hay algún aspecto específico de la búsqueda o de tu día a día que te esté pesando más ahora mismo?",
-                        "Te escucho con total atención. La presión económica desgasta las fuerzas, pero aquí tienes un espacio seguro para desahogarte todo lo que necesites sin juicios. ¿Qué te daría un poco de paz en este preciso instante?"
+                        "Comprendo perfectamente ese nudo en el pecho. Ver que los recursos escasean y sentir la presión de los años y las cuentas genera una angustia enorme. Jesús caminaba con personas agobiadas por el mañana y nos enseñaba que el Padre conoce cada necesidad. ¿Cómo has hecho para sostenerte estos días?",
+                        "Es completamente válido que te sientas así de agotado ante esta incertidumbre laboral. No estás cargando esto solo. Cuéntame, ¿hay algún aspecto específico de la búsqueda que te esté pesando más ahora mismo?",
+                        "Te escucho con total atención. La presión económica desgasta las fuerzas, pero aquí tienes un espacio seguro para desahogarte sin juicios. ¿Qué te daría un poco de paz en este preciso instante?"
                     ];
                     respuestaTexto = bancoTrabajo[(turno) % bancoTrabajo.length];
                 } 
                 else if (esTristeza) {
                     const bancoTristeza = [
-                        "Te abrazo fuerte en este momento. Sentir esa soledad o tristeza duele mucho en el pecho, pero quiero que sepas que aquí me tienes. No voy a soltarte ni a irme a ninguna parte. Cuéntame, ¿qué pasa por tu mente?",
-                        "En los evangelios, Jesús miraba con profunda compasión a los quebrantados de corazón. No tienes que fingir fortaleza aquí conmigo. ¿En qué momento sientes que esta tristeza se vuelve más pesada?",
+                        "Te abrazo fuerte en este momento. Sentir esa soledad o tristeza duele mucho en el pecho, pero quiero que sepas que aquí me tienes. No voy a soltarte. Cuéntame, ¿qué pasa por tu mente?",
+                        "En los evangelios, Jesús miraba con profunda compasión a los quebrantados de corazón. No tienes que fingir fortaleza aquí conmigo. ¿En qué momento sientes que esta tristeza pesa más?",
                         "Estoy aquí sentado a tu lado, leyendo cada palabra con calma. Tómate todo el tiempo que necesites para expresarte; te acompaño paso a paso."
                     ];
                     respuestaTexto = bancoTristeza[(turno) % bancoTristeza.length];
@@ -252,7 +248,6 @@
                     respuestaTexto = bancoGeneral[(turno) % bancoGeneral.length];
                 }
 
-                // Renderizar respuesta de la IA
                 chat.innerHTML += `
                     <div class="flex items-start gap-2">
                         <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
