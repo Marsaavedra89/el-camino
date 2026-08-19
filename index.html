@@ -170,7 +170,7 @@
         </div>
     </nav>
 
-  <script>
+ <script>
     const totalCapitulos = {
         "Genesis": 50, "Exodo": 40, "Levitico": 27, "Numeros": 36, "Deuteronomio": 34,
         "Josue": 24, "Jueces": 21, "Rut": 4, "1 Samuel": 31, "2 Samuel": 24,
@@ -213,16 +213,16 @@
     function seleccionarEstado(e) {
         const estados = { 
             ansioso: {v: 'Filipenses 4:6', m: 'No se inquieten por nada.'}, 
-            triste: {v: 'Salmos 34:18', m: 'Dios está cerca.' } 
+            triste: {v: 'Salmos 34:18', m: 'Dios está cerca.' },
+            bendecido: {v: 'Salmos 118:24', m: 'Este es el día que hizo Jehová.'},
+            contento: {v: 'Proverbios 17:22', m: 'El corazón alegre es buena medicina.'}
         };
         const c = document.getElementById('resultado-animo');
         c.classList.remove('hidden');
         c.innerHTML = `<span class="font-bold text-amber-800">${estados[e]?.v || 'Versículo'}</span><p>${estados[e]?.m || 'Dios te ama.'}</p>`;
     }
 
-    // --- CICLO DE 7 PREGUNTAS DE ESCUCHA ACTIVA ---
-    let faseEscucha = 0; // Controla en cuál de las 7 preguntas vamos
-
+    // --- CONVERSACIÓN CONTINUA E ILIMITADA (Guiada siempre por el usuario) ---
     function enviarMensaje() {
         const input = document.getElementById('chat-input');
         const texto = input.value.trim();
@@ -230,7 +230,7 @@
 
         const chat = document.getElementById('chat-messages');
 
-        // 1. Mostrar lo que escribe el usuario
+        // 1. Pintar mensaje del usuario
         chat.innerHTML += `
             <div class="flex justify-end">
                 <div class="bg-blue-900 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-sm">
@@ -241,11 +241,16 @@
         input.value = '';
         chat.scrollTop = chat.scrollHeight;
 
-        // 2. Procesar respuesta adaptativa guiada por el usuario
+        // 2. Procesamiento empático e inteligente sin cierres forzados
         setTimeout(() => {
             const textoMinus = texto.toLowerCase();
             const esSaludo = textoMinus.match(/^(hola|buenos dias|buenas tardes|buenas noches|saludos|hey|hi)$/);
             
+            // Detección de emociones o intenciones
+            const esAlegria = /(alegre|feliz|bien|contento|logré|gané|consigui|bendición|milagro|gracias a dios|excelente|maravilloso|triunfo|bendecid)/.test(textoMinus);
+            const esSoledad = /(sola|solo|nadie|solitario|abandonado|triste|vacío|compañía)/.test(textoMinus);
+            const esProblema = /(problema|duelo|enfermo|ansioso|miedo|angustia|desempleo|pelea|difícil|llorar)/.test(textoMinus);
+
             let respuestaTexto = "";
 
             const envolverMensaje = (contenido) => `
@@ -256,51 +261,21 @@
                     </div>
                 </div>`;
 
-            if (esSaludo && faseEscucha === 0) {
-                respuestaTexto = `<p>¡Hola! Qué alegría saludarte. Estoy aquí enteramente para ti, sin prisas. Cuéntame, ¿qué hay en tu mente o en tu corazón en este día?</p>`;
-            } else {
-                faseEscucha++; // Avanzamos al siguiente nivel de escucha profunda
-
-                switch(faseEscucha) {
-                    case 1:
-                        respuestaTexto = `<p>Te escucho con atención y respeto. Sé que abrir el corazón no siempre es fácil. Cuéntame un poco más: ¿desde cuándo estás sintiendo o cargando con esta situación?</p>`;
-                        break;
-                    case 2:
-                        respuestaTexto = `<p>Comprendo. Es una carga bastante pesada para llevarla a solas. Cuando piensas en esto, ¿cuál dirías que es el pensamiento que más te atormenta o te quita la paz?</p>`;
-                        break;
-                    case 3:
-                        respuestaTexto = `<p>Duele escuchar que estás pasando por eso, y es completamente natural que te sientas así. ¿De qué manera dirías que esta situación está afectando tus días, tu trabajo o tus momentos de descanso?</p>`;
-                        break;
-                    case 4:
-                        respuestaTexto = `<p>Gracias por tener la confianza de compartirlo conmigo. A veces este tipo de pruebas nos hace sentir solos. ¿Has podido desahogarte con alguien de tu confianza o familia sobre lo que te pasa?</p>`;
-                        break;
-                    case 5:
-                        respuestaTexto = `<p>Entiendo perfectamente. A veces los seres queridos también tienen sus propias luchas. Si pudieras cambiar algo de esta situación ahora mismo para sentir un poco de alivio, ¿qué te gustaría que pasara?</p>`;
-                        break;
-                    case 6:
-                        respuestaTexto = `<p>Te sigo acompañando en cada palabra que me dices. Siento el esfuerzo que haces por mantenerte de pie a pesar de la incertidumbre. ¿Cómo te imaginas los próximos días si logramos dar un pasito muy pequeño hacia la tranquilidad?</p>`;
-                        break;
-                    case 7:
-                        // Última pregunta antes de dar el consejo final
-                        respuestaTexto = `<p>Has compartido cosas muy profundas conmigo hoy, y valoro enormemente tu apertura. Antes de que pensemos juntos en una palabra de aliento, dime: ¿hay algo más que sientas que deba saber de esto?</p>`;
-                        break;
-                    default:
-                        // FASE FINAL: Consejo Sagrado estructurado y completo
-                        respuestaTexto = `
-                            <div class="space-y-3">
-                                <p><strong>He recorrido cada palabra contigo y comprendo profundamente la dimensión de tu dolor y tu cansancio...</strong> Has sido muy valiente al ponerlo en palabras.</p>
-                                
-                                <p>Mirando las escrituras y trayendo este momento a la luz de la enseñanza de Jesús, Él nos recuerda en Mateo 6:34 que no nos agobiemos por el mañana, porque cada día tiene su propia carga, y nos invita a confiar en el amor providente del Padre celestial que jamás nos abandona en el valle.</p>
-                                
-                                <p>Hoy te invito a hacer una pausa, respirar hondo y descansar en Su gracia. No tienes que resolverlo todo en este instante; entrégale tu carga en una oración sincera y concéntrate únicamente en regalarte paz por el resto del día.</p>
-                                
-                                <p class="text-blue-900 font-semibold pt-1 border-t border-slate-100">Que el Señor fortalezca tus manos, guíe tus pasos y envuelva tu alma en Su paz. Amén.</p>
-                            </div>`;
-                        
-                        // Reseteamos el ciclo por si el usuario desea conversar sobre otro tema nuevo
-                        faseEscucha = 0;
-                        break;
-                }
+            if (esSaludo) {
+                respuestaTexto = `<p>¡Hola! Qué alegría saludarte. Estoy aquí contigo, sin prisas y con el corazón abierto para escucharte en lo que necesites hoy. Cuéntame, ¿cómo ha estado tu día?</p>`;
+            } 
+            else if (esAlegria) {
+                respuestaTexto = `<p>¡Qué hermosa noticia! Me alegra muchísimo el corazón saber que estás viviendo este momento de bendición y felicidad. Cuéntame más detalles, ¿cómo se dio y qué es lo que más te emociona de esto? ¡Celebro contigo!</p>`;
+            } 
+            else if (esSoledad) {
+                respuestaTexto = `<p>Te abrazo fuerte en este momento. Sentir esa soledad duele mucho en el pecho, pero quiero que sepas con absoluta certeza que aquí me tienes. No voy a soltarte ni a irme a ninguna parte. Cuéntame, ¿qué pasa por tu mente ahora mismo? Te leo con todo el tiempo del mundo.</p>`;
+            } 
+            else if (esProblema) {
+                respuestaTexto = `<p>Siento en el alma la carga que llevas contigo. Es una situación muy dura y es completamente normal que te sientas abrumado o triste. No tienes que fingir que estás bien. Platícame un poco más de esto, ¿qué es lo que más te preocupa de lo que está pasando?</p>`;
+            } 
+            else {
+                // Respuesta abierta y de escucha continua: se adapta orgánicamente a lo que hable el usuario sin dar sermones ni cerrar el tema
+                respuestaTexto = `<p>Te sigo escuchando con atención... Cada palabra que me compartes importa mucho. Cuéntame más sobre eso o dime cómo te hace sentir platicar de este tema hoy.</p>`;
             }
 
             chat.innerHTML += envolverMensaje(respuestaTexto);
