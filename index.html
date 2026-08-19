@@ -201,306 +201,330 @@
     </nav>
 
     <!-- SCRIPT LOGICO -->
-    <script>
-        const bancoEmociones = {
-            ansiedad: { titulo: "Ansiedad", versiculo: "Filipenses 4:6-7 (RVR1960)", mensaje: "Por nada estéis afanosos, sino en toda oración y ruego... la paz de Dios guardará vuestros corazones." },
-            tristeza: { titulo: "Tristeza", versiculo: "Salmo 34:18 (RVR1960)", mensaje: "Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu." },
-            paz: { titulo: "Gratitud y Paz", versiculo: "Números 6:24-26 (RVR1960)", mensaje: "Jehová te bendiga, y te guarde; Jehová haga resplandecer su rostro sobre ti, y tenga de ti misericordia." },
-            trabajo: { titulo: "Trabajo y Sustento", versiculo: "Mateo 6:33 (RVR1960)", mensaje: "Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas." },
-            soledad: { titulo: "Soledad", versiculo: "Mateo 28:20 (RVR1960)", mensaje: "Y he aquí yo estoy con vosotros todos los días, hasta el fin del mundo. Amén." },
-            cansancio: { titulo: "Cansancio", versiculo: "Mateo 11:28 (RVR1960)", mensaje: "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar." }
-        };
+  <script>
+    const bancoEmociones = {
+        ansiedad: { titulo: "Ansiedad", versiculo: "Filipenses 4:6-7 (RVR1960)", mensaje: "Por nada estéis afanosos, sino en toda oración y ruego... la paz de Dios guardará vuestros corazones." },
+        tristeza: { titulo: "Tristeza", versiculo: "Salmo 34:18 (RVR1960)", mensaje: "Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu." },
+        paz: { titulo: "Gratitud y Paz", versiculo: "Números 6:24-26 (RVR1960)", mensaje: "Jehová te bendiga, y te guarde; Jehová haga resplandecer su rostro sobre ti, y tenga de ti misericordia." },
+        trabajo: { titulo: "Trabajo y Sustento", versiculo: "Mateo 6:33 (RVR1960)", mensaje: "Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas." },
+        soledad: { titulo: "Soledad", versiculo: "Mateo 28:20 (RVR1960)", mensaje: "Y he aquí yo estoy con vosotros todos los días, hasta el fin del mundo. Amén." },
+        cansancio: { titulo: "Cansancio", versiculo: "Mateo 11:28 (RVR1960)", mensaje: "Venid a mí todos los que estás trabajados y cargados, y yo os haré descansar." }
+    };
 
-        const capsulasSabiduria = [
-            "\"La lámpara del cuerpo es el ojo; así que, si tu ojo es bueno, todo tu cuerpo estará lleno de luz.\" — Mateo 6:22",
-            "\"No os afanéis por el día de mañana, porque el día de mañana traerá su propio afán.\" — Mateo 6:34",
-            "\"Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá.\" — Mateo 7:7",
-            "\"Bienaventurados los misericordiosos, porque ellos alcanzarán misericordia.\" — Mateo 5:7",
-            "\"La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da.\" — Juan 14:27"
-        ];
+    const capsulasSabiduria = [
+        "\"La lámpara del cuerpo es el ojo; así que, si tu ojo es bueno, todo tu cuerpo estará lleno de luz.\" — Mateo 6:22",
+        "\"No os afanéis por el día de mañana, porque el día de mañana traerá su propio afán.\" — Mateo 6:34",
+        "\"Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá.\" — Mateo 7:7",
+        "\"Bienaventurados los misericordiosos, porque ellos alcanzarán misericordia.\" — Mateo 5:7",
+        "\"La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da.\" — Juan 14:27"
+    ];
 
-        const librosBiblia = {
-            "Antiguo Testamento": [
-                { nombre: "Génesis", caps: 50 }, { nombre: "Éxodo", caps: 40 }, { nombre: "Salmos", caps: 150 }, { nombre: "Proverbios", caps: 31 }
-            ],
-            "Nuevo Testamento": [
-                { nombre: "Mateo", caps: 28 }, { nombre: "Marcos", caps: 16 }, { nombre: "Lucas", caps: 24 }, { nombre: "Juan", caps: 21 }, { nombre: "Hechos", caps: 28 }
-            ]
-        };
+    // Mapeo de libros con código en inglés para consulta a API
+    const librosBiblia = {
+        "Antiguo Testamento": [
+            { nombre: "Génesis", slug: "genesis", caps: 50 },
+            { nombre: "Éxodo", slug: "exodus", caps: 40 },
+            { nombre: "Salmos", slug: "psalms", caps: 150 },
+            { nombre: "Proverbios", slug: "proverbs", caps: 31 }
+        ],
+        "Nuevo Testamento": [
+            { nombre: "Mateo", slug: "matthew", caps: 28 },
+            { nombre: "Marcos", slug: "mark", caps: 16 },
+            { nombre: "Lucas", slug: "lucas", caps: 24 },
+            { nombre: "Juan", slug: "john", caps: 21 },
+            { nombre: "Hechos", slug: "acts", caps: 28 }
+        ]
+    };
 
-        function alternarTema() {
-            const body = document.getElementById('app-body');
-            body.classList.toggle('dark-theme');
-            const isDark = body.classList.contains('dark-theme');
-            localStorage.setItem('tema_oscuro', isDark);
-            document.getElementById('btn-tema').innerText = isDark ? "☀️ Modo Día" : "🌙 Modo Cálido";
-        }
-
-        function cambiarVista(v, el) {
-            ['inicio', 'chat', 'biblia', 'oracion', 'empleo', 'diario'].forEach(id => {
-                document.getElementById('view-' + id)?.classList.add('hidden');
-            });
-            document.getElementById('view-' + v)?.classList.remove('hidden');
-
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-[#223843]', 'dark:text-[#8cb89b]', 'font-bold');
-                btn.classList.add('text-[#8c8275]', 'dark:text-gray-400');
-            });
-            if(el) {
-                el.classList.remove('text-[#8c8275]', 'dark:text-gray-400');
-                el.classList.add('text-[#223843]', 'dark:text-[#8cb89b]', 'font-bold');
-            }
-        }
-
-        function mostrarReflexionEmocion(e) {
-            const d = bancoEmociones[e];
-            document.getElementById('emocion-titulo').innerText = d.titulo;
-            document.getElementById('emocion-versiculo').innerText = d.versiculo;
-            document.getElementById('emocion-mensaje').innerText = d.mensaje;
-            document.getElementById('resultado-emocion').classList.remove('hidden');
-        }
-
-        function cerrarReflexionEmocion() {
-            document.getElementById('resultado-emocion').classList.add('hidden');
-        }
-
-        function generarNuevaCapsula() {
-            const idx = Math.floor(Math.random() * capsulasSabiduria.length);
-            document.getElementById('texto-capsula').innerText = capsulasSabiduria[idx];
-        }
-
-        function guardarCapsulaEnDiario() {
-            const texto = document.getElementById('texto-capsula').innerText;
-            guardarReflexion(texto);
-            alert('¡Cápsula guardada en tu diario!');
-        }
-
-        function enviarMensajeIA() {
-            const input = document.getElementById('chat-input');
-            const texto = input.value.trim();
-            if(!texto) return;
-
-            const chatMessages = document.getElementById('chat-messages');
-            chatMessages.innerHTML += `
-                <div class="flex justify-end">
-                    <div class="bg-[#223843] text-white p-3 rounded-2xl rounded-tr-none text-xs max-w-[85%] leading-relaxed">
-                        ${texto}
-                    </div>
-                </div>`;
-            input.value = '';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            document.getElementById('chat-typing').classList.remove('hidden');
-
-            setTimeout(() => {
-                document.getElementById('chat-typing').classList.add('hidden');
-                const respuesta = generarRespuestaEspiritual(texto);
-                chatMessages.innerHTML += `
-                    <div class="flex items-start gap-2.5">
-                        <div class="w-7 h-7 rounded-xl bg-[#223843] text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
-                        <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed space-y-2">
-                            ${respuesta}
-                        </div>
-                    </div>`;
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 1000);
-        }
-
-        function generarRespuestaEspiritual(pregunta) {
-            const p = pregunta.toLowerCase();
-            let consejo = "Respira profundo y recuerda que cada día trae su propia gracia tomados de Su mano.";
-            let versiculo = "Mateo 11:28 (RVR1960): 'Venid a mí todos los que estás trabajados y cargados, y yo os haré descansar.'";
-
-            if(p.includes('triste') || p.includes('dolor') || p.includes('solo')) {
-                versiculo = "Salmo 34:18 (RVR1960): 'Cercano está Jehová a los quebrantados de corazón.'";
-                consejo = "Comprendo la angustia en tu corazón. Su presencia es un refugio seguro.";
-            } else if(p.includes('trabajo') || p.includes('empleo') || p.includes('dinero')) {
-                versiculo = "Mateo 6:33 (RVR1960): 'Mas buscad primeramente el reino de Dios y su justicia...'";
-                consejo = "Entiendo la preocupación por el sustento. Permite que Su paz guíe tus pasos.";
-            }
-
-            return `
-                <p><b>Validación:</b> No estás solo en esto.</p>
-                <p class="italic text-[#223843] dark:text-[#a3c9b4]"><b>Enseñanza:</b> ${versiculo}</p>
-                <p><b>Guía:</b> ${consejo}</p>
-            `;
-        }
-
-        function reiniciarChat() {
-            document.getElementById('chat-messages').innerHTML = `
-                <div class="flex items-start gap-2.5">
-                    <div class="w-7 h-7 rounded-xl bg-[#223843] text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
-                    <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed">
-                        Hola, he reiniciado nuestra conversación. ¿Qué hay en tu corazón hoy?
-                    </div>
-                </div>`;
-        }
-
-        function inicializarLibrosBiblia() {
-            const selectLibro = document.getElementById('biblia-libro');
-            if(!selectLibro) return;
-            let html = '';
-            for(const testamento in librosBiblia) {
-                html += `<optgroup label="${testamento}">`;
-                librosBiblia[testamento].forEach(libro => {
-                    html += `<option value="${libro.nombre}" data-caps="${libro.caps}">${libro.nombre}</option>`;
-                });
-                html += `</optgroup>`;
-            }
-            selectLibro.innerHTML = html;
-            actualizarCapitulos();
-        }
-
-        function actualizarCapitulos() {
-            const selectLibro = document.getElementById('biblia-libro');
-            const selectCap = document.getElementById('biblia-cap');
-            if(!selectLibro || !selectCap) return;
-
-            const selectedOption = selectLibro.options[selectLibro.selectedIndex];
-            const totalCaps = selectedOption ? parseInt(selectedOption.getAttribute('data-caps')) || 1 : 1;
-
-            let capsHtml = '';
-            for(let i = 1; i <= totalCaps; i++) {
-                capsHtml += `<option value="${i}">Capítulo ${i}</option>`;
-            }
-            selectCap.innerHTML = capsHtml;
-        }
-
-        function cargarCapituloSeguro() {
-            const libro = document.getElementById('biblia-libro').value;
-            const cap = document.getElementById('biblia-cap').value;
-            document.getElementById('biblia-resultado').innerHTML = `
-                <b>Lectura seleccionada: ${libro} (${cap})</b><br><br>
-                <p class="italic">"Lámpara es a mis pies tu palabra, y lumbrera a mi camino." (Salmo 119:105)</p>
-                <p class="mt-2">Meditando en ${libro}, capítulo ${cap}.</p>
-            `;
-        }
-
-     function publicarPedidoOracion() {
-    const nombre = document.getElementById('oracion-nombre').value.trim() || 'Anónimo';
-    const texto = document.getElementById('oracion-texto').value.trim();
-    if(!texto) { alert('Por favor escribe tu motivo de oración.'); return; }
-
-    let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
-    // Agregamos un ID único usando Date.now()
-    pedidos.unshift({ id: Date.now(), nombre, texto, fecha: new Date().toLocaleDateString() });
-    localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
-    
-    document.getElementById('oracion-texto').value = '';
-    renderOraciones();
-}
-
-function borrarPedidoOracion(id) {
-    let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
-    pedidos = pedidos.filter(p => p.id !== id);
-    localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
-    renderOraciones();
-}
-
-function renderOraciones() {
-    const lista = document.getElementById('lista-pedidos-oracion');
-    let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
-    
-    if (pedidos.length === 0) {
-        lista.innerHTML = '<p class="text-xs text-gray-400 text-center">No hay peticiones registradas en este dispositivo.</p>';
-        return;
+    function alternarTema() {
+        const body = document.getElementById('app-body');
+        body.classList.toggle('dark-theme');
+        const isDark = body.classList.contains('dark-theme');
+        localStorage.setItem('tema_oscuro', isDark);
+        document.getElementById('btn-tema').innerText = isDark ? "☀️ Modo Día" : "🌙 Modo Cálido";
     }
 
-    lista.innerHTML = pedidos.map(p => `
-        <div class="bg-white dark:bg-[#26332d] p-3 rounded-xl border dark:border-[#2e3d36] text-xs">
-            <div class="flex justify-between font-bold text-[#223843] dark:text-[#8cb89b]">
-                <span>${p.nombre}</span>
-                <div class="flex items-center gap-2">
-                    <small class="text-gray-400">${p.fecha}</small>
-                    <button onclick="borrarPedidoOracion(${p.id})" class="text-red-500 font-bold hover:underline">🗑️ Borrar</button>
-                </div>
-            </div>
-            <p class="mt-1 text-gray-700 dark:text-gray-300">${p.texto}</p>
-        </div>
-    `).join('');
-}
+    function cambiarVista(v, el) {
+        ['inicio', 'chat', 'biblia', 'oracion', 'empleo', 'diario'].forEach(id => {
+            document.getElementById('view-' + id)?.classList.add('hidden');
+        });
+        document.getElementById('view-' + v)?.classList.remove('hidden');
 
-        function renderOraciones() {
-            const lista = document.getElementById('lista-pedidos-oracion');
-            let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
-            lista.innerHTML = pedidos.map(p => `
-                <div class="bg-white dark:bg-[#26332d] p-3 rounded-xl border dark:border-[#2e3d36] text-xs">
-                    <div class="flex justify-between font-bold text-[#223843] dark:text-[#8cb89b]"><span>${p.nombre}</span><small class="text-gray-400">${p.fecha}</small></div>
-                    <p class="mt-1 text-gray-700 dark:text-gray-300">${p.texto}</p>
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.remove('text-[#223843]', 'dark:text-[#8cb89b]', 'font-bold');
+            btn.classList.add('text-[#8c8275]', 'dark:text-gray-400');
+        });
+        if(el) {
+            el.classList.remove('text-[#8c8275]', 'dark:text-gray-400');
+            el.classList.add('text-[#223843]', 'dark:text-[#8cb89b]', 'font-bold');
+        }
+    }
+
+    function mostrarReflexionEmocion(e) {
+        const d = bancoEmociones[e];
+        document.getElementById('emocion-titulo').innerText = d.titulo;
+        document.getElementById('emocion-versiculo').innerText = d.versiculo;
+        document.getElementById('emocion-mensaje').innerText = d.mensaje;
+        document.getElementById('resultado-emocion').classList.remove('hidden');
+    }
+
+    function cerrarReflexionEmocion() {
+        document.getElementById('resultado-emocion').classList.add('hidden');
+    }
+
+    function generarNuevaCapsula() {
+        const idx = Math.floor(Math.random() * capsulasSabiduria.length);
+        document.getElementById('texto-capsula').innerText = capsulasSabiduria[idx];
+    }
+
+    function guardarCapsulaEnDiario() {
+        const texto = document.getElementById('texto-capsula').innerText;
+        guardarReflexion(texto);
+        alert('¡Cápsula guardada en tu diario!');
+    }
+
+    function enviarMensajeIA() {
+        const input = document.getElementById('chat-input');
+        const texto = input.value.trim();
+        if(!texto) return;
+
+        const chatMessages = document.getElementById('chat-messages');
+        chatMessages.innerHTML += `
+            <div class="flex justify-end">
+                <div class="bg-[#223843] text-white p-3 rounded-2xl rounded-tr-none text-xs max-w-[85%] leading-relaxed">
+                    ${texto}
                 </div>
-            `).join('');
+            </div>`;
+        input.value = '';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        document.getElementById('chat-typing').classList.remove('hidden');
+
+        setTimeout(() => {
+            document.getElementById('chat-typing').classList.add('hidden');
+            const respuesta = generarRespuestaEspiritual(texto);
+            chatMessages.innerHTML += `
+                <div class="flex items-start gap-2.5">
+                    <div class="w-7 h-7 rounded-xl bg-[#223843] text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
+                    <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed space-y-2">
+                        ${respuesta}
+                    </div>
+                </div>`;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+    }
+
+    function generarRespuestaEspiritual(pregunta) {
+        const p = pregunta.toLowerCase();
+        let consejo = "Respira profundo y recuerda que cada día trae su propia gracia tomados de Su mano.";
+        let versiculo = "Mateo 11:28 (RVR1960): 'Venid a mí todos los que estás trabajados y cargados, y yo os haré descansar.'";
+
+        if(p.includes('triste') || p.includes('dolor') || p.includes('solo')) {
+            versiculo = "Salmo 34:18 (RVR1960): 'Cercano está Jehová a los quebrantados de corazón.'";
+            consejo = "Comprendo la angustia en tu corazón. Su presencia es un refugio seguro.";
+        } else if(p.includes('trabajo') || p.includes('empleo') || p.includes('dinero')) {
+            versiculo = "Mateo 6:33 (RVR1960): 'Mas buscad primeramente el reino de Dios y su justicia...'";
+            consejo = "Entiendo la preocupación por el sustento. Permite que Su paz guíe tus pasos.";
         }
 
-        function cambiarTabEmpleo(tab) {
-            if(tab === 'externos') {
-                document.getElementById('tab-externos').classList.remove('hidden');
-                document.getElementById('tab-comunidad').classList.add('hidden');
-            } else {
-                document.getElementById('tab-externos').classList.add('hidden');
-                document.getElementById('tab-comunidad').classList.remove('hidden');
+        return `
+            <p><b>Validación:</b> No estás solo en esto.</p>
+            <p class="italic text-[#223843] dark:text-[#a3c9b4]"><b>Enseñanza:</b> ${versiculo}</p>
+            <p><b>Guía:</b> ${consejo}</p>
+        `;
+    }
+
+    function reiniciarChat() {
+        document.getElementById('chat-messages').innerHTML = `
+            <div class="flex items-start gap-2.5">
+                <div class="w-7 h-7 rounded-xl bg-[#223843] text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
+                <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed">
+                    Hola, he reiniciado nuestra conversación. ¿Qué hay en tu corazón hoy?
+                </div>
+            </div>`;
+    }
+
+    // --- SECCIÓN BIBLIA MEJORADA CON VERSÍCULOS REALES ---
+    function inicializarLibrosBiblia() {
+        const selectLibro = document.getElementById('biblia-libro');
+        if(!selectLibro) return;
+        let html = '';
+        for(const testamento in librosBiblia) {
+            html += `<optgroup label="${testamento}">`;
+            librosBiblia[testamento].forEach(libro => {
+                html += `<option value="${libro.slug}" data-nombre="${libro.nombre}" data-caps="${libro.caps}">${libro.nombre}</option>`;
+            });
+            html += `</optgroup>`;
+        }
+        selectLibro.innerHTML = html;
+        actualizarCapitulos();
+    }
+
+    function actualizarCapitulos() {
+        const selectLibro = document.getElementById('biblia-libro');
+        const selectCap = document.getElementById('biblia-cap');
+        if(!selectLibro || !selectCap) return;
+
+        const selectedOption = selectLibro.options[selectLibro.selectedIndex];
+        const totalCaps = selectedOption ? parseInt(selectedOption.getAttribute('data-caps')) || 1 : 1;
+
+        let capsHtml = '';
+        for(let i = 1; i <= totalCaps; i++) {
+            capsHtml += `<option value="${i}">Capítulo ${i}</option>`;
+        }
+        selectCap.innerHTML = capsHtml;
+    }
+
+    async function cargarCapituloSeguro() {
+        const selectLibro = document.getElementById('biblia-libro');
+        const slug = selectLibro.value;
+        const nombreLibro = selectLibro.options[selectLibro.selectedIndex].getAttribute('data-nombre');
+        const cap = document.getElementById('biblia-cap').value;
+        const contenedor = document.getElementById('biblia-resultado');
+
+        contenedor.innerHTML = `<p class="text-center text-gray-500 italic py-4">📖 Cargando lectura de ${nombreLibro} ${cap}...</p>`;
+
+        try {
+            const respuesta = await fetch(`https://bible-api.com/${slug}+${cap}?translation=rv1909`);
+            const datos = await respuesta.json();
+
+            if (!datos || !datos.verses) {
+                contenedor.innerHTML = `<p class="text-red-500">No se pudieron cargar los versículos. Intenta con otro capítulo.</p>`;
+                return;
             }
+
+            let htmlVersiculos = `<h3 class="font-bold text-sm text-[#223843] dark:text-[#8cb89b] mb-3">${nombreLibro} - Capítulo ${cap}</h3>`;
+            htmlVersiculos += `<div class="space-y-2 max-h-96 overflow-y-auto pr-1">`;
+            
+            datos.verses.forEach(v => {
+                htmlVersiculos += `
+                    <p class="text-xs text-gray-800 dark:text-gray-200 leading-relaxed">
+                        <strong class="text-[#223843] dark:text-[#8cb89b]">${v.verse}.</strong> ${v.text.trim()}
+                    </p>`;
+            });
+            
+            htmlVersiculos += `</div>`;
+            contenedor.innerHTML = htmlVersiculos;
+
+        } catch (error) {
+            contenedor.innerHTML = `<p class="text-red-500">Error de conexión. Asegúrate de estar conectado a internet.</p>`;
+        }
+    }
+
+    // --- SECCIÓN ORACIÓN CORREGIDA CON FUNCIÓN DE BORRADO ---
+    function publicarPedidoOracion() {
+        const nombre = document.getElementById('oracion-nombre').value.trim() || 'Anónimo';
+        const texto = document.getElementById('oracion-texto').value.trim();
+        if(!texto) { alert('Por favor escribe tu motivo de oración.'); return; }
+
+        let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
+        pedidos.unshift({ id: Date.now(), nombre, texto, fecha: new Date().toLocaleDateString() });
+        localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
+        
+        document.getElementById('oracion-texto').value = '';
+        renderOraciones();
+    }
+
+    function borrarPedidoOracion(id) {
+        let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
+        pedidos = pedidos.filter(p => p.id !== id);
+        localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
+        renderOraciones();
+    }
+
+    function renderOraciones() {
+        const lista = document.getElementById('lista-pedidos-oracion');
+        let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
+
+        if (pedidos.length === 0) {
+            lista.innerHTML = '<p class="text-xs text-gray-400 text-center py-2">No hay peticiones registradas.</p>';
+            return;
         }
 
-        function publicarOfertaComunidad() {
-            const puesto = document.getElementById('oferta-puesto').value.trim();
-            const zona = document.getElementById('oferta-zona').value.trim();
-            const contacto = document.getElementById('oferta-contacto').value.trim();
-
-            if(!puesto || !contacto) { alert('Completa al menos el puesto y contacto.'); return; }
-
-            let ofertas = JSON.parse(localStorage.getItem('ofertas_comunidad') || '[]');
-            ofertas.unshift({ puesto, zona, contacto });
-            localStorage.setItem('ofertas_comunidad', JSON.stringify(ofertas));
-
-            document.getElementById('oferta-puesto').value = '';
-            document.getElementById('oferta-zona').value = '';
-            document.getElementById('oferta-contacto').value = '';
-            renderOfertas();
-        }
-
-        function renderOfertas() {
-            const lista = document.getElementById('lista-ofertas-comunidad');
-            let ofertas = JSON.parse(localStorage.getItem('ofertas_comunidad') || '[]');
-            lista.innerHTML = ofertas.map(o => `
-                <div class="bg-white dark:bg-[#26332d] p-3 rounded-xl border dark:border-[#2e3d36] text-xs space-y-1">
-                    <p class="font-bold text-[#223843] dark:text-[#8cb89b]">${o.puesto}</p>
-                    <p class="text-gray-500 dark:text-gray-400">📍 ${o.zona || 'Sin zona'}</p>
-                    <p class="text-gray-700 dark:text-gray-300">📱 ${o.contacto}</p>
+        lista.innerHTML = pedidos.map(p => `
+            <div class="bg-white dark:bg-[#26332d] p-3 rounded-xl border dark:border-[#2e3d36] text-xs">
+                <div class="flex justify-between items-center font-bold text-[#223843] dark:text-[#8cb89b]">
+                    <span>${p.nombre}</span>
+                    <div class="flex items-center gap-2">
+                        <small class="text-gray-400">${p.fecha}</small>
+                        <button onclick="borrarPedidoOracion(${p.id})" class="text-red-500 hover:text-red-700 font-bold text-[10px] bg-red-50 dark:bg-red-900/30 px-2 py-0.5 rounded-md">🗑️ Borrar</button>
+                    </div>
                 </div>
-            `).join('');
+                <p class="mt-1.5 text-gray-700 dark:text-gray-300">${p.texto}</p>
+            </div>
+        `).join('');
+    }
+
+    function cambiarTabEmpleo(tab) {
+        if(tab === 'externos') {
+            document.getElementById('tab-externos').classList.remove('hidden');
+            document.getElementById('tab-comunidad').classList.add('hidden');
+        } else {
+            document.getElementById('tab-externos').classList.add('hidden');
+            document.getElementById('tab-comunidad').classList.remove('hidden');
         }
+    }
 
-        function guardarReflexion(textoPersonalizado) {
-            const input = document.getElementById('input-diario');
-            const txt = textoPersonalizado || input.value.trim();
-            if(!txt) return;
+    function publicarOfertaComunidad() {
+        const puesto = document.getElementById('oferta-puesto').value.trim();
+        const zona = document.getElementById('oferta-zona').value.trim();
+        const contacto = document.getElementById('oferta-contacto').value.trim();
 
-            let diario = JSON.parse(localStorage.getItem('app_diario') || '[]');
-            diario.unshift({ fecha: new Date().toLocaleDateString(), texto: txt });
-            localStorage.setItem('app_diario', JSON.stringify(diario));
+        if(!puesto || !contacto) { alert('Completa al menos el puesto y contacto.'); return; }
 
-            if(!textoPersonalizado) input.value = '';
-            renderDiario();
-        }
+        let ofertas = JSON.parse(localStorage.getItem('ofertas_comunidad') || '[]');
+        ofertas.unshift({ puesto, zona, contacto });
+        localStorage.setItem('ofertas_comunidad', JSON.stringify(ofertas));
 
-        function renderDiario() {
-            const lista = document.getElementById('lista-diario');
-            let diario = JSON.parse(localStorage.getItem('app_diario') || '[]');
-            lista.innerHTML = diario.map(d => `
-                <div class="bg-white dark:bg-[#26332d] p-3.5 rounded-2xl border dark:border-[#2e3d36] text-xs space-y-1">
-                    <span class="text-[10px] text-gray-400 font-bold">${d.fecha}</span>
-                    <p class="text-gray-700 dark:text-gray-200">${d.texto}</p>
-                </div>
-            `).join('');
-        }
+        document.getElementById('oferta-puesto').value = '';
+        document.getElementById('oferta-zona').value = '';
+        document.getElementById('oferta-contacto').value = '';
+        renderOfertas();
+    }
 
-        window.onload = function() {
-            generarNuevaCapsula();
-            inicializarLibrosBiblia();
-            renderOraciones();
-            renderOfertas();
-            renderDiario();
-        };
-    </script>
+    function renderOfertas() {
+        const lista = document.getElementById('lista-ofertas-comunidad');
+        let ofertas = JSON.parse(localStorage.getItem('ofertas_comunidad') || '[]');
+        lista.innerHTML = ofertas.map(o => `
+            <div class="bg-white dark:bg-[#26332d] p-3 rounded-xl border dark:border-[#2e3d36] text-xs space-y-1">
+                <p class="font-bold text-[#223843] dark:text-[#8cb89b]">${o.puesto}</p>
+                <p class="text-gray-500 dark:text-gray-400">📍 ${o.zona || 'Sin zona'}</p>
+                <p class="text-gray-700 dark:text-gray-300">📱 ${o.contacto}</p>
+            </div>
+        `).join('');
+    }
+
+    function guardarReflexion(textoPersonalizado) {
+        const input = document.getElementById('input-diario');
+        const txt = textoPersonalizado || input.value.trim();
+        if(!txt) return;
+
+        let diario = JSON.parse(localStorage.getItem('app_diario') || '[]');
+        diario.unshift({ fecha: new Date().toLocaleDateString(), texto: txt });
+        localStorage.setItem('app_diario', JSON.stringify(diario));
+
+        if(!textoPersonalizado) input.value = '';
+        renderDiario();
+    }
+
+    function renderDiario() {
+        const lista = document.getElementById('lista-diario');
+        let diario = JSON.parse(localStorage.getItem('app_diario') || '[]');
+        lista.innerHTML = diario.map(d => `
+            <div class="bg-white dark:bg-[#26332d] p-3.5 rounded-2xl border dark:border-[#2e3d36] text-xs space-y-1">
+                <span class="text-[10px] text-gray-400 font-bold">${d.fecha}</span>
+                <p class="text-gray-700 dark:text-gray-200">${d.texto}</p>
+            </div>
+        `).join('');
+    }
+
+    window.onload = function() {
+        generarNuevaCapsula();
+        inicializarLibrosBiblia();
+        renderOraciones();
+        renderOfertas();
+        renderDiario();
+    };
+</script>
 </body>
 </html>
