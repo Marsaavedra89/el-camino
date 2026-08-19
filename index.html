@@ -376,18 +376,49 @@
             `;
         }
 
-        function publicarPedidoOracion() {
-            const nombre = document.getElementById('oracion-nombre').value.trim() || 'Anónimo';
-            const texto = document.getElementById('oracion-texto').value.trim();
-            if(!texto) { alert('Por favor escribe tu motivo de oración.'); return; }
+     function publicarPedidoOracion() {
+    const nombre = document.getElementById('oracion-nombre').value.trim() || 'Anónimo';
+    const texto = document.getElementById('oracion-texto').value.trim();
+    if(!texto) { alert('Por favor escribe tu motivo de oración.'); return; }
 
-            let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
-            pedidos.unshift({ nombre, texto, fecha: new Date().toLocaleDateString() });
-            localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
-            
-            document.getElementById('oracion-texto').value = '';
-            renderOraciones();
-        }
+    let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
+    // Agregamos un ID único usando Date.now()
+    pedidos.unshift({ id: Date.now(), nombre, texto, fecha: new Date().toLocaleDateString() });
+    localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
+    
+    document.getElementById('oracion-texto').value = '';
+    renderOraciones();
+}
+
+function borrarPedidoOracion(id) {
+    let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
+    pedidos = pedidos.filter(p => p.id !== id);
+    localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
+    renderOraciones();
+}
+
+function renderOraciones() {
+    const lista = document.getElementById('lista-pedidos-oracion');
+    let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
+    
+    if (pedidos.length === 0) {
+        lista.innerHTML = '<p class="text-xs text-gray-400 text-center">No hay peticiones registradas en este dispositivo.</p>';
+        return;
+    }
+
+    lista.innerHTML = pedidos.map(p => `
+        <div class="bg-white dark:bg-[#26332d] p-3 rounded-xl border dark:border-[#2e3d36] text-xs">
+            <div class="flex justify-between font-bold text-[#223843] dark:text-[#8cb89b]">
+                <span>${p.nombre}</span>
+                <div class="flex items-center gap-2">
+                    <small class="text-gray-400">${p.fecha}</small>
+                    <button onclick="borrarPedidoOracion(${p.id})" class="text-red-500 font-bold hover:underline">🗑️ Borrar</button>
+                </div>
+            </div>
+            <p class="mt-1 text-gray-700 dark:text-gray-300">${p.texto}</p>
+        </div>
+    `).join('');
+}
 
         function renderOraciones() {
             const lista = document.getElementById('lista-pedidos-oracion');
