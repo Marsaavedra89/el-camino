@@ -454,6 +454,27 @@
             actualizarCapitulos();
             cargarReflexionesGuardadas();
             generarNuevaCapsula();
+if(diario.length === 0) {
+                list.innerHTML = '<p class="text-xs text-gray-400 text-center py-4">Aún no hay reflexiones guardadas en tu diario.</p>';
+                return;
+            }
+            list.innerHTML = diario.map(d => `
+                <div class="bg-white dark:bg-[#26332d] p-4 rounded-2xl border dark:border-[#2e3d36] text-xs space-y-1.5 shadow-2xs">
+                    <span class="text-[10px] text-gray-400 font-semibold">${d.fecha}</span>
+                    <p class="text-gray-700 dark:text-gray-200 leading-relaxed">${d.texto}</p>
+                </div>
+            `).join('');
+        }
+
+        // Inicializar selectores y datos al cargar la app
+        window.onload = function() {
+            const selectLibro = document.getElementById('biblia-libro');
+            if(selectLibro) {
+                selectLibro.innerHTML = librosBiblia.map(l => `<option>${l}</option>`).join('');
+                actualizarCapitulos();
+            }
+            generarNuevaCapsula();
+            cargarReflexionesGuardadas();
         };
     </script>
 </body>
