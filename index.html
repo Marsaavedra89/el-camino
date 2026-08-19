@@ -28,6 +28,15 @@
     <main class="flex-1 overflow-y-auto relative pb-32 bg-[#fdfbf7] view-transition">
 
         <!-- VISTA: INICIO -->
+        <!-- Cápsula Diaria -->
+<div id="capsula-diaria" class="bg-[#5c7265] text-white p-5 rounded-3xl shadow-lg relative overflow-hidden">
+    <h3 class="font-bold text-sm opacity-80 uppercase tracking-widest mb-2 font-serif">Cápsula de Sabiduría</h3>
+    <p id="texto-capsula" class="text-sm italic leading-relaxed mb-4">"Cargando un mensaje de paz para tu corazón..."</p>
+    <div class="flex gap-2">
+        <button onclick="generarNuevaCapsula()" class="text-[10px] bg-white/20 px-3 py-1.5 rounded-full font-bold hover:bg-white/30 transition">Otra</button>
+        <button onclick="guardarCapsulaEnDiario()" class="text-[10px] bg-white text-[#5c7265] px-3 py-1.5 rounded-full font-bold">Guardar en Diario</button>
+    </div>
+</div>
         <section id="view-inicio" class="p-6 space-y-6">
             <header class="text-center space-y-3 mt-2 flex flex-col items-center">
                 <div class="w-20 h-20 rounded-3xl overflow-hidden shadow-lg shadow-[#dcd5c1]/50 border-2 border-white bg-[#eef2ed] flex items-center justify-center p-1 relative">
@@ -516,6 +525,33 @@ function cargarOfertas() {
 
 // Asegúrate de llamar a cargarOfertas() cuando la app inicie
 // (ya tienes un window.onload, agrégalo ahí).
+
+        const bancoCapsulas = [
+    "Tu valor no depende de tus resultados de hoy, sino de la paz que decides cultivar en tu interior.",
+    "A veces, el mayor acto de fe es simplemente soltar aquello que no puedes controlar.",
+    "El descanso también es parte del camino; no te castigues por necesitar un momento de pausa.",
+    "Cada pequeña acción de bondad que haces hoy, construye un refugio para tu mañana.",
+    "No permitas que la incertidumbre de este 2026 opaque la luz que ya habita en ti.",
+    "La gratitud abre puertas que la queja mantiene cerradas. Encuentra hoy un motivo para agradecer."
+];
+
+function generarNuevaCapsula() {
+    const texto = bancoCapsulas[Math.floor(Math.random() * bancoCapsulas.length)];
+    document.getElementById('texto-capsula').innerText = `"${texto}"`;
+}
+
+function guardarCapsulaEnDiario() {
+    const texto = document.getElementById('texto-capsula').innerText;
+    let diario = JSON.parse(localStorage.getItem('el_camino_diario') || '[]');
+    diario.unshift({ id: Date.now(), fecha: new Date().toLocaleDateString() + ' (Cápsula)', texto });
+    localStorage.setItem('el_camino_diario', JSON.stringify(diario));
+    alert("¡Guardado en tu Diario con éxito!");
+}
+
+// Ejecutar al iniciar
+window.addEventListener('load', () => {
+    generarNuevaCapsula();
+});
     </script>
 </body>
 </html>
