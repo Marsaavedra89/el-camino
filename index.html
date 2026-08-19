@@ -19,8 +19,8 @@
 </head>
 <body class="bg-slate-900 text-slate-100 flex flex-col h-screen max-w-md mx-auto shadow-2xl overflow-hidden border-x border-slate-800">
 
-    <!-- CONTENEDOR PRINCIPAL DE VISTAS -->
-    <main class="flex-1 overflow-y-auto relative pb-24 bg-slate-950 view-transition">
+    <!-- CONTENEDOR PRINCIPAL DE VISTAS (Con espacio suficiente abajo para que no lo tape la barra de navegación) -->
+    <main class="flex-1 overflow-y-auto relative pb-32 bg-slate-950 view-transition">
 
         <!-- VISTA: INICIO -->
         <section id="view-inicio" class="p-5 space-y-6">
@@ -99,7 +99,7 @@
         </section>
 
         <!-- VISTA: CHAT IA HIPER-HUMANO E INTEGRADO -->
-        <section id="view-chat" class="hidden flex flex-col h-full absolute inset-0 pb-16 bg-slate-950">
+        <section id="view-chat" class="hidden flex flex-col h-full absolute inset-0 pb-20 bg-slate-950">
             <div class="bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center justify-between shadow-sm z-10">
                 <div class="flex items-center gap-3">
                     <div class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow">✝</div>
@@ -123,7 +123,7 @@
                 </div>
             </div>
 
-            <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center gap-2">
+            <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center gap-2 mb-14">
                 <input type="text" id="chat-input" placeholder="Escribe lo que hay en tu corazón..." class="flex-1 bg-slate-950 border border-slate-800 px-4 py-3 rounded-xl text-sm text-white focus:outline-none focus:border-blue-500 transition" onkeypress="if(event.key === 'Enter') enviarMensaje()">
                 <button onclick="enviarMensaje()" class="bg-blue-600 text-white px-4 py-3 rounded-xl text-sm font-bold hover:bg-blue-500 transition shadow">Enviar</button>
             </div>
@@ -195,8 +195,8 @@
 
     </main>
 
-    <!-- BARRA DE NAVEGACIÓN INFERIOR -->
-    <nav class="absolute bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 flex justify-around py-3 z-50 shadow-2xl">
+    <!-- BARRA DE NAVEGACIÓN INFERIOR (Flotante y segura por encima de la barra del navegador) -->
+    <nav class="absolute bottom-4 left-4 right-4 bg-slate-900/95 backdrop-blur-md border border-slate-800 flex justify-around py-3 z-50 shadow-2xl rounded-2xl">
         <button onclick="cambiarVista('inicio', this)" class="nav-btn flex flex-col items-center text-blue-500 text-[10px] font-semibold gap-1 px-2 transition">
             <span class="text-base">🏠</span> Inicio
         </button>
@@ -306,7 +306,6 @@
             }
         }
 
-        // MOTOR DE MEMORIA Y CONTEXTO PROFUNDO CORREGIDO
         let memoriaUsuario = {
             historialTexto: [],
             mencionTrabajo: false,
@@ -332,10 +331,8 @@
             input.value = '';
             chat.scrollTop = chat.scrollHeight;
 
-            // Registrar en memoria interna
             memoriaUsuario.historialTexto.push(texto.toLowerCase());
 
-            // Detección de estados clave para la memoria contextual
             if (/(trabajo|empleo|plata|dinero|entrevista|currículum|cv|cesante)/.test(texto.toLowerCase())) memoriaUsuario.mencionTrabajo = true;
             if (/(enfermo|enferma|dolor|salud|hospital|cáncer|fiebre)/.test(texto.toLowerCase())) memoriaUsuario.mencionSalud = true;
             if (/(triste|solo|sola|llorar|angustia|ansiedad|miedo)/.test(texto.toLowerCase())) memoriaUsuario.mencionTristeza = true;
@@ -360,10 +357,7 @@
                 let respuestaHTML = "";
                 const ultimo = texto.toLowerCase();
 
-                // 1. FILTRAR SALUDOS COMUNES (Evita activar silencio por decir "hola")
                 const esSaludo = /^(hola|buen día|buenas|saludos|hey|qué tal)$/.test(ultimo.trim());
-
-                // 3. MODO SILENCIO ACOMPAÑADO (Solo si expresa verdadero pesar breve/melancólico y no es un saludo)
                 const esSilencioMelancolico = !esSaludo && (ultimo.length < 12 && /(gris|no sé|nada|mmm|silencio|cansado|cansada)/.test(ultimo));
 
                 if (esSaludo) {
@@ -377,7 +371,6 @@
                         <p class="text-xs text-slate-400 italic">Te acompaño en paz.</p>
                     `;
                 } 
-                // 4. DIARIO DE GRATITUD / CELEBRACIÓN INTERACTIVA
                 else if (memoriaUsuario.mencionAlegria && /(gracias|logré|contento|feliz|bendición)/.test(ultimo)) {
                     respuestaHTML = `
                         <p>¡Qué gran bendición leer esto y sentir tu alegría! Es hermoso cuando la vida nos regala destellos de luz.</p>
@@ -385,7 +378,6 @@
                         <button onclick="guardarAlegríaAutomatica('${texto.replace(/'/g, "")}')" class="mt-2 bg-amber-500 text-slate-950 font-bold text-[11px] px-3 py-1.5 rounded-xl shadow hover:bg-amber-400 transition">📓 Guardar en mi Diario</button>
                     `;
                 } 
-                // 2. VERSÍCULOS A MEDIDA CON BOTÓN OPCIONAL (Sin forzar)
                 else {
                     let referenciaContextual = "";
                     if (memoriaUsuario.mencionTrabajo) {
@@ -402,7 +394,6 @@
                         </div>
                     `;
 
-                    // 5. TRANSICIÓN FLUIDA A EMPLEO SI APLICA
                     if (memoriaUsuario.mencionTrabajo) {
                         respuestaHTML += `
                             <p class="text-[11px] text-slate-400 mt-2 border-t border-slate-800 pt-2">💡 <em>Nota al margen:</em> Conversando sobre esto, recuerda que en la pestaña de <strong>"Empleo"</strong> de nuestra app hay recursos y herramientas prácticas que te pueden servir cuando te sientas con fuerzas para revisarlos, pero tómate todo el tiempo que necesites.</p>
