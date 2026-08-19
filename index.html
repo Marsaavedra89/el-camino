@@ -399,50 +399,72 @@
         selectCap.innerHTML = capsHtml;
     }
 
-    async function cargarCapituloSeguro() {
-        const selectLibro = document.getElementById('biblia-libro');
-        const numLibro = selectLibro.value;
-        const nombreLibro = selectLibro.options[selectLibro.selectedIndex].getAttribute('data-nombre');
-        const cap = document.getElementById('biblia-cap').value;
-        const contenedor = document.getElementById('biblia-resultado');
+   async function cargarCapituloSeguro() {
+    const selectLibro = document.getElementById('biblia-libro');
+    const nombreLibro = selectLibro.options[selectLibro.selectedIndex].getAttribute('data-nombre');
+    const cap = document.getElementById('biblia-cap').value;
+    const contenedor = document.getElementById('biblia-resultado');
 
-        contenedor.innerHTML = `<p class="text-center text-gray-500 italic py-4">📖 Cargando ${nombreLibro} ${cap}...</p>`;
+    contenedor.innerHTML = `<p class="text-center text-gray-500 italic py-4">📖 Cargando ${nombreLibro} ${cap}...</p>`;
 
-        try {
-            // Repositorio CDN de alta velocidad para Reina-Valera sin CORS
-            const res = await fetch(`https://cdn.jsdelivr.net/gh/wldhx/bible-api/bibles/es-rv1960/books/${numLibro}/chapters/${cap}.json`);
-            if(!res.ok) throw new Error("Status " + res.status);
-            
+    // Formatear el nombre del libro para la API (ej: "Levítico" -> "levitico", "1 Samuel" -> "1-samuel")
+    const libroSlug = nombreLibro.toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, '-');
+
+    try {
+        // Intento 1: API primaria RVR1960
+        const res = await fetch(`https://bible-api.com/${encodeURIComponent(nombreLibro)}+${cap}?translation=rvr1960`);
+        
+        if (res.ok) {
             const data = await res.json();
-            const verses = data.verses || data;
-
-            let htmlVersiculos = `
-                <div class="border-b dark:border-[#2e3d36] pb-2 mb-3 flex justify-between items-center">
-                    <h3 class="font-bold text-sm text-[#223843] dark:text-[#8cb89b]">${nombreLibro} - Capítulo ${cap}</h3>
-                    <span class="text-[9px] bg-gray-100 dark:bg-[#18201d] px-2 py-0.5 rounded text-gray-500">RVR1960</span>
-                </div>
-                <div class="space-y-2.5 max-h-96 overflow-y-auto pr-1">`;
-            
-            verses.forEach((v, index) => {
-                const numVerse = v.verse || (index + 1);
-                const textVerse = v.text || v;
-                htmlVersiculos += `
-                    <p class="text-xs text-gray-800 dark:text-gray-200 leading-relaxed">
-                        <strong class="text-[#223843] dark:text-[#8cb89b] font-serif">${numVerse}.</strong> ${textVerse.trim()}
-                    </p>`;
-            });
-            
-            htmlVersiculos += `</div>`;
-            contenedor.innerHTML = htmlVersiculos;
-
-        } catch (err) {
+            if (data.verses && data.verses.length > 0) {
+                renderizarVersiculos(contenedor, nombreLibro, cap, data.verses);
+                return;
+            }
+        }
+        throw new Error("API primaria no disponible");
+    } catch (e1) {
+        try {
+            // Intento 2: API secundaria por Slug
+            const res2 = await fetch(`https://cdn.jsdelivr.net/gh/wldhx/bible-api/bibles/es-rv1960/books/${libroSlug}/chapters/${cap}.json`);
+            if (res2.ok) {
+                const data2 = await res2.json();
+                const verses2 = data2.verses || data2;
+                renderizarVersiculos(contenedor, nombreLibro, cap, verses2);
+                return;
+            }
+            throw new Error("API secundaria no disponible");
+        } catch (e2) {
             contenedor.innerHTML = `
                 <div class="p-3 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900 rounded-xl text-xs space-y-1">
-                    <p class="text-red-600 dark:text-red-400 font-bold">No se pudo recuperar el capítulo.</p>
-                    <p class="text-gray-500 dark:text-gray-400 text-[11px]">Verifica tu conexión a internet e intentalo de nuevo.</p>
+                    <p class="text-red-600 dark:text-red-400 font-bold">Error de conexión al recuperar ${nombreLibro} ${cap}.</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-[11px]">Por favor verifica tu conexión a internet o reintenta en unos instantes.</p>
                 </div>`;
         }
     }
+}
+
+function renderizarVersiculos(contenedor, libro, cap, versiculos) {
+    let html = `
+        <div class="border-b dark:border-[#2e3d36] pb-2 mb-3 flex justify-between items-center">
+            <h3 class="font-bold text-sm text-[#223843] dark:text-[#8cb89b]">${libro} - Capítulo ${cap}</h3>
+            <span class="text-[9px] bg-gray-100 dark:bg-[#18201d] px-2 py-0.5 rounded text-gray-500">RVR1960</span>
+        </div>
+        <div class="space-y-2.5 max-h-96 overflow-y-auto pr-1">`;
+    
+    versiculos.forEach((v, index) => {
+        const numVerse = v.verse || (index + 1);
+        const textVerse = v.text || v;
+        html += `
+            <p class="text-xs text-gray-800 dark:text-gray-200 leading-relaxed">
+                <strong class="text-[#223843] dark:text-[#8cb89b] font-serif">${numVerse}.</strong> ${textVerse.trim()}
+            </p>`;
+    });
+    
+    html += `</div>`;
+    contenedor.innerHTML = html;
+}
 
     // --- CORRECCIÓN DEFINITIVA DE BORRADO DE PETICIONES ---
     function publicarPedidoOracion() {
