@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Camino - Refugio Espiritual & Guía Interior (2026)</title>
+    <title>Camino App - Refugio Espiritual & Guía Interior (2026)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -23,8 +23,8 @@
             --bg-main: #f7f5ef;
             --bg-card: #fdfbf7;
             --text-main: #2c3531;
-            --primary: #5c7265;
-            --primary-hover: #4a5c51;
+            --primary: #223843;
+            --primary-hover: #192a32;
             --accent: #8c6d48;
             --border-col: #e6dfd1;
         }
@@ -32,8 +32,8 @@
             --bg-main: #18201d;
             --bg-card: #202b26;
             --text-main: #e2e8f0;
-            --primary: #6b8a78;
-            --primary-hover: #556f60;
+            --primary: #4a6572;
+            --primary-hover: #3b515c;
             --accent: #a3825c;
             --border-col: #2e3d36;
         }
@@ -42,9 +42,16 @@
 <body class="bg-[#f7f5ef] text-[#2c3531] flex flex-col h-[100dvh] max-w-md mx-auto shadow-2xl overflow-hidden border-x border-[#e6dfd1] font-sans transition-colors duration-300" id="app-body">
 
     <!-- BARRA SUPERIOR -->
-    <header class="bg-white/90 dark:bg-[#202b26]/90 backdrop-blur-md px-4 py-2.5 border-b border-[#e6dfd1] dark:border-[#2e3d36] flex justify-between items-center z-40 text-xs shrink-0">
-        <span class="font-serif font-bold text-[#5c7265] dark:text-[#8cb89b]">🌱 El Camino</span>
-        <button onclick="alternarTema()" id="btn-tema" class="px-3 py-1 rounded-full bg-[#f4f1ea] dark:bg-[#2e3d36] text-[#5c7265] dark:text-[#a3c9b4] font-bold text-[10px] transition shadow-2xs">🌙 Modo Cálido</button>
+    <header class="bg-white/90 dark:bg-[#202b26]/90 backdrop-blur-md px-4 py-2 border-b border-[#e6dfd1] dark:border-[#2e3d36] flex justify-between items-center z-40 text-xs shrink-0">
+        <div class="flex items-center gap-2">
+            <!-- Referencia visual al logotipo -->
+            <div class="w-6 h-6 rounded-lg bg-gradient-to-br from-[#223843] to-[#4a6572] flex items-center justify-center text-white font-bold shadow-2xs text-[10px]">✝</div>
+            <span class="font-serif font-bold text-[#223843] dark:text-[#8cb89b] tracking-wide">CAMINO APP</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <span id="badge-oracion-global" class="text-[10px] bg-[#223843]/10 dark:bg-[#8cb89b]/10 text-[#223843] dark:text-[#8cb89b] px-2 py-0.5 rounded-full font-bold">🙏 0 orando</span>
+            <button onclick="alternarTema()" id="btn-tema" class="px-2.5 py-1 rounded-full bg-[#f4f1ea] dark:bg-[#2e3d36] text-[#223843] dark:text-[#a3c9b4] font-bold text-[10px] transition shadow-2xs">🌙 Modo Cálido</button>
+        </div>
     </header>
 
     <!-- CONTENEDOR PRINCIPAL DE VISTAS -->
@@ -52,22 +59,24 @@
 
         <!-- VISTA: INICIO -->
         <section id="view-inicio" class="flex-1 overflow-y-auto p-5 space-y-6">
-            <div id="capsula-diaria" class="bg-[#5c7265] dark:bg-[#43574c] text-white p-5 rounded-3xl shadow-lg relative overflow-hidden transition-colors">
+            
+            <!-- Encabezado con identidad de la marca -->
+            <div class="text-center space-y-2 flex flex-col items-center pt-2">
+                <div class="w-16 h-16 rounded-2xl overflow-hidden shadow-md border-2 border-white dark:border-[#2e3d36] bg-gradient-to-b from-[#f4f7f6] to-[#e4eae8] flex items-center justify-center">
+                    <span class="text-3xl">✝✨</span>
+                </div>
+                <div>
+                    <h1 class="text-lg font-extrabold text-[#223843] dark:text-gray-100 font-serif tracking-widest">CAMINO APP</h1>
+                    <p class="text-[10px] uppercase tracking-widest text-[#506e7d] dark:text-[#8cb89b] font-bold mt-0.5">Refugio, Paz y Guía Interior • 2026</p>
+                </div>
+            </div>
+
+            <div id="capsula-diaria" class="bg-[#223843] dark:bg-[#324953] text-white p-5 rounded-3xl shadow-lg relative overflow-hidden transition-colors">
                 <h3 class="font-bold text-sm opacity-85 uppercase tracking-widest mb-2 font-serif">Cápsula de Sabiduría</h3>
                 <p id="texto-capsula" class="text-sm italic leading-relaxed mb-4">"Cargando un mensaje de paz..."</p>
                 <div class="flex gap-2">
                     <button onclick="generarNuevaCapsula()" class="text-[10px] bg-white/20 px-3 py-1.5 rounded-full font-bold hover:bg-white/30 transition">Otra</button>
-                    <button onclick="guardarCapsulaEnDiario()" class="text-[10px] bg-white text-[#5c7265] px-3 py-1.5 rounded-full font-bold shadow-2xs">Guardar en Diario</button>
-                </div>
-            </div>
-
-            <div class="text-center space-y-3 flex flex-col items-center">
-                <div class="w-16 h-16 rounded-3xl overflow-hidden shadow-lg border-2 border-white dark:border-[#2e3d36] bg-[#eef2ed] dark:bg-[#2c3b34] flex items-center justify-center">
-                    <span class="text-2xl">🌿</span>
-                </div>
-                <div>
-                    <h1 class="text-xl font-bold text-[#2c3531] dark:text-gray-100 font-serif">El Camino</h1>
-                    <p class="text-[10px] uppercase tracking-widest text-[#5c7265] dark:text-[#8cb89b] font-bold mt-0.5">Refugio, Paz y Guía Interior • 2026</p>
+                    <button onclick="guardarCapsulaEnDiario()" class="text-[10px] bg-white text-[#223843] px-3 py-1.5 rounded-full font-bold shadow-2xs">Guardar en Diario</button>
                 </div>
             </div>
 
@@ -82,7 +91,7 @@
                     <button onclick="mostrarReflexionEmocion('cansancio')" class="p-3 text-xs font-medium bg-[#f4f4f2] dark:bg-[#1f2824] text-[#6b665c] dark:text-[#c4bcaf] rounded-2xl border border-[#e5e4df] dark:border-[#2f3b35] text-left flex flex-col gap-1"><span>🔋</span> Cansancio</button>
                 </div>
                 <div id="resultado-emocion" class="hidden mt-3 p-4 bg-[#fcfaf7] dark:bg-[#1b2420] border border-[#d6e0db] dark:border-[#2e3d36] rounded-2xl space-y-2">
-                    <div class="flex justify-between items-center"><span id="emocion-titulo" class="text-xs font-bold text-[#5c7265] dark:text-[#8cb89b] uppercase tracking-wider"></span><button onclick="cerrarReflexionEmocion()" class="text-[#8c8275] text-xs font-bold">✕</button></div>
+                    <div class="flex justify-between items-center"><span id="emocion-titulo" class="text-xs font-bold text-[#223843] dark:text-[#8cb89b] uppercase tracking-wider"></span><button onclick="cerrarReflexionEmocion()" class="text-[#8c8275] text-xs font-bold">✕</button></div>
                     <p id="emocion-versiculo" class="text-xs italic text-[#3b4d42] dark:text-[#a3c9b4] font-serif"></p>
                     <p id="emocion-mensaje" class="text-xs text-[#616b67] dark:text-gray-300"></p>
                 </div>
@@ -94,30 +103,30 @@
             <div class="bg-white/90 dark:bg-[#202b26]/90 backdrop-blur-md border-b border-[#e8e2d5] dark:border-[#2e3d36] px-4 py-2.5 flex items-center justify-between shrink-0">
                 <div>
                     <h2 class="font-bold text-xs font-serif text-[#2c3531] dark:text-gray-100">Guía Interior & Escucha</h2>
-                    <p class="text-[9px] text-[#5c7265] dark:text-[#8cb89b]">Inspirado en la enseñanza de Jesús</p>
+                    <p class="text-[9px] text-[#506e7d] dark:text-[#8cb89b]">Inspirado en la enseñanza de Jesús</p>
                 </div>
                 <button onclick="reiniciarChat()" class="text-[10px] text-[#787165] dark:text-gray-400 bg-[#f4f1ea] dark:bg-[#2e3d36] px-2.5 py-1 rounded-lg">Reiniciar</button>
             </div>
             
             <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3.5">
                 <div class="flex items-start gap-2.5">
-                    <div class="w-7 h-7 rounded-xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shrink-0">🌿</div>
+                    <div class="w-7 h-7 rounded-xl bg-[#223843] text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
                     <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed shadow-xs">
                         Comprendo la angustia o la carga que hay en tu corazón en este momento. Platícame, ¿qué situación estás atravesando hoy? Estoy aquí para escucharte con calidez.
                     </div>
                 </div>
             </div>
 
-            <div id="chat-typing" class="hidden px-4 py-1.5 flex items-center gap-1.5 text-xs text-[#5c7265] dark:text-[#8cb89b] italic shrink-0">
-                <div class="w-1.5 h-1.5 rounded-full bg-[#5c7265] typing-dot"></div>
-                <div class="w-1.5 h-1.5 rounded-full bg-[#5c7265] typing-dot"></div>
-                <div class="w-1.5 h-1.5 rounded-full bg-[#5c7265] typing-dot"></div>
+            <div id="chat-typing" class="hidden px-4 py-1.5 flex items-center gap-1.5 text-xs text-[#506e7d] dark:text-[#8cb89b] italic shrink-0">
+                <div class="w-1.5 h-1.5 rounded-full bg-[#223843] typing-dot"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-[#223843] typing-dot"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-[#223843] typing-dot"></div>
                 <span class="ml-1 text-[10px]">Buscando guía y consuelo...</span>
             </div>
 
             <div class="p-3 bg-white/95 dark:bg-[#202b26]/95 border-t border-[#e8e2d5] dark:border-[#2e3d36] flex items-center gap-2 shrink-0">
-                <input type="text" id="chat-input" placeholder="Cuéntame tu carga o situación..." class="flex-1 bg-[#f7f5ef] dark:bg-[#18201d] text-[#2c3531] dark:text-gray-200 p-2.5 rounded-xl text-xs focus:outline-none border border-transparent focus:border-[#5c7265]" onkeypress="if(event.key === 'Enter') enviarMensajeIA()">
-                <button onclick="enviarMensajeIA()" class="bg-[#5c7265] hover:bg-[#4a5c51] text-white px-3.5 py-2.5 rounded-xl text-xs font-bold transition">Enviar</button>
+                <input type="text" id="chat-input" placeholder="Cuéntame tu carga o situación..." class="flex-1 bg-[#f7f5ef] dark:bg-[#18201d] text-[#2c3531] dark:text-gray-200 p-2.5 rounded-xl text-xs focus:outline-none border border-transparent focus:border-[#223843]" onkeypress="if(event.key === 'Enter') enviarMensajeIA()">
+                <button onclick="enviarMensajeIA()" class="bg-[#223843] hover:bg-[#192a32] text-white px-3.5 py-2.5 rounded-xl text-xs font-bold transition">Enviar</button>
             </div>
         </section>
 
@@ -132,15 +141,30 @@
                 <label class="text-[10px] uppercase font-bold text-gray-400">Capítulo</label>
                 <select id="biblia-cap" class="w-full p-3 rounded-2xl border border-[#e2dcd0] dark:border-[#2e3d36] bg-white dark:bg-[#26332d] text-xs dark:text-gray-200"></select>
             </div>
-            <button onclick="cargarCapituloSeguro()" class="w-full py-3 bg-[#5c7265] text-white font-bold text-xs rounded-2xl shadow-sm">Buscar Lectura</button>
+            <button onclick="cargarCapituloSeguro()" class="w-full py-3 bg-[#223843] text-white font-bold text-xs rounded-2xl shadow-sm">Buscar Lectura</button>
             <div id="biblia-resultado" class="bg-white dark:bg-[#26332d] dark:text-gray-200 p-5 rounded-3xl border border-[#e8e2d5] dark:border-[#2e3d36] text-xs leading-relaxed">Selecciona un libro y capítulo para meditar.</div>
+        </section>
+
+        <!-- VISTA: ORACIÓN -->
+        <section id="view-oracion" class="hidden flex-1 overflow-y-auto p-5 space-y-4">
+            <h2 class="font-extrabold text-lg font-serif dark:text-gray-100">Cadenas de Oración</h2>
+            <p class="text-xs text-gray-600 dark:text-gray-300">Comparte tu petición con la comunidad. Al presionar "Estoy orando", mantendrás tu intercesión activa por 12 horas.</p>
+            
+            <div class="bg-white dark:bg-[#26332d] p-4 rounded-2xl border dark:border-[#2e3d36] space-y-2.5 shadow-2xs">
+                <h3 class="font-bold text-xs text-[#223843] dark:text-[#8cb89b]">Escribe tu pedido de oración</h3>
+                <input type="text" id="oracion-nombre" placeholder="Tu nombre o anónimo" class="w-full p-2.5 text-xs bg-[#f7f5ef] dark:bg-[#18201d] dark:text-gray-200 border dark:border-[#2e3d36] rounded-xl">
+                <textarea id="oracion-texto" placeholder="Escribe aquí por qué necesitas que oremos..." class="w-full h-20 p-2.5 text-xs bg-[#f7f5ef] dark:bg-[#18201d] dark:text-gray-200 border dark:border-[#2e3d36] rounded-xl focus:outline-none"></textarea>
+                <button onclick="publicarPedidoOracion()" class="w-full py-2.5 bg-[#223843] text-white text-xs font-bold rounded-xl shadow-sm">Compartir Petición</button>
+            </div>
+
+            <div id="lista-pedidos-oracion" class="space-y-3 pt-2"></div>
         </section>
 
         <!-- VISTA: EMPLEO -->
         <section id="view-empleo" class="hidden flex-1 overflow-y-auto p-5 space-y-4">
             <h2 class="font-extrabold text-lg font-serif dark:text-gray-100">Orientación & Red Laboral</h2>
             <div class="flex bg-[#efece4] dark:bg-[#18201d] p-1 rounded-2xl border border-[#e6dfd1] dark:border-[#2e3d36]">
-                <button onclick="cambiarTabEmpleo('externos')" id="tab-btn-externos" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white dark:bg-[#26332d] text-[#5c7265] dark:text-[#8cb89b] shadow-2xs transition">Portales</button>
+                <button onclick="cambiarTabEmpleo('externos')" id="tab-btn-externos" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white dark:bg-[#26332d] text-[#223843] dark:text-[#8cb89b] shadow-2xs transition">Portales</button>
                 <button onclick="cambiarTabEmpleo('comunidad')" id="tab-btn-comunidad" class="flex-1 py-2 text-xs font-bold rounded-xl text-[#8c8275] dark:text-gray-400 transition">Comunidad</button>
             </div>
             <div id="tab-externos" class="grid grid-cols-2 gap-3">
@@ -149,11 +173,11 @@
             </div>
             <div id="tab-comunidad" class="hidden space-y-3">
                 <div class="bg-white dark:bg-[#26332d] p-4 rounded-2xl border dark:border-[#2e3d36] space-y-2.5">
-                    <h3 class="font-bold text-xs text-[#5c7265] dark:text-[#8cb89b]">Publicar oportunidad solidaria</h3>
+                    <h3 class="font-bold text-xs text-[#223843] dark:text-[#8cb89b]">Publicar oportunidad solidaria</h3>
                     <input type="text" id="oferta-puesto" placeholder="Puesto o tarea" class="w-full p-2.5 text-xs bg-[#f7f5ef] dark:bg-[#18201d] dark:text-gray-200 border dark:border-[#2e3d36] rounded-xl">
                     <input type="text" id="oferta-zona" placeholder="Zona o localidad" class="w-full p-2.5 text-xs bg-[#f7f5ef] dark:bg-[#18201d] dark:text-gray-200 border dark:border-[#2e3d36] rounded-xl">
                     <input type="text" id="oferta-contacto" placeholder="Contacto (WhatsApp/Email)" class="w-full p-2.5 text-xs bg-[#f7f5ef] dark:bg-[#18201d] dark:text-gray-200 border dark:border-[#2e3d36] rounded-xl">
-                    <button onclick="publicarOfertaComunidad()" class="w-full py-2.5 bg-[#5c7265] text-white text-xs font-bold rounded-xl">Publicar</button>
+                    <button onclick="publicarOfertaComunidad()" class="w-full py-2.5 bg-[#223843] text-white text-xs font-bold rounded-xl">Publicar</button>
                 </div>
                 <div id="lista-ofertas-comunidad" class="space-y-2.5"></div>
             </div>
@@ -162,17 +186,18 @@
         <!-- VISTA: DIARIO -->
         <section id="view-diario" class="hidden flex-1 overflow-y-auto p-5 space-y-4">
             <h2 class="font-extrabold text-lg font-serif dark:text-gray-100">Mi Diario Espiritual</h2>
-            <textarea id="input-diario" placeholder="Escribe aquí tu oración, reflexión o gratitud..." class="w-full h-24 bg-[#f7f5ef] dark:bg-[#18201d] text-xs text-[#2c3531] dark:text-gray-200 p-3 rounded-2xl border border-[#e2dcd0] dark:border-[#2e3d36] focus:outline-none focus:border-[#5c7265]"></textarea>
-            <button onclick="guardarReflexion()" class="w-full py-3 bg-[#5c7265] text-white font-bold text-xs rounded-2xl shadow-sm">Guardar en el Diario</button>
+            <textarea id="input-diario" placeholder="Escribe aquí tu oración, reflexión o gratitud..." class="w-full h-24 bg-[#f7f5ef] dark:bg-[#18201d] text-xs text-[#2c3531] dark:text-gray-200 p-3 rounded-2xl border border-[#e2dcd0] dark:border-[#2e3d36] focus:outline-none focus:border-[#223843]"></textarea>
+            <button onclick="guardarReflexion()" class="w-full py-3 bg-[#223843] text-white font-bold text-xs rounded-2xl shadow-sm">Guardar en el Diario</button>
             <div id="lista-diario" class="space-y-3 pt-2"></div>
         </section>
     </main>
 
     <!-- NAV INFERIOR -->
     <nav class="bg-white/95 dark:bg-[#202b26]/95 border-t border-[#e8e2d5] dark:border-[#2e3d36] flex justify-around py-2.5 z-50 shrink-0">
-        <button onclick="cambiarVista('inicio', this)" class="nav-btn flex flex-col items-center text-[#5c7265] dark:text-[#8cb89b] text-[10px] font-semibold transition">🏠 Inicio</button>
+        <button onclick="cambiarVista('inicio', this)" class="nav-btn flex flex-col items-center text-[#223843] dark:text-[#8cb89b] text-[10px] font-semibold transition">🏠 Inicio</button>
         <button onclick="cambiarVista('chat', this)" class="nav-btn flex flex-col items-center text-[#8c8275] dark:text-gray-400 text-[10px] font-semibold transition">💬 Chat</button>
         <button onclick="cambiarVista('biblia', this)" class="nav-btn flex flex-col items-center text-[#8c8275] dark:text-gray-400 text-[10px] font-semibold transition">📖 Biblia</button>
+        <button onclick="cambiarVista('oracion', this)" class="nav-btn flex flex-col items-center text-[#8c8275] dark:text-gray-400 text-[10px] font-semibold transition">🙏 Oración</button>
         <button onclick="cambiarVista('empleo', this)" class="nav-btn flex flex-col items-center text-[#8c8275] dark:text-gray-400 text-[10px] font-semibold transition">💼 Empleo</button>
         <button onclick="cambiarVista('diario', this)" class="nav-btn flex flex-col items-center text-[#8c8275] dark:text-gray-400 text-[10px] font-semibold transition">📓 Diario</button>
     </nav>
@@ -238,18 +263,18 @@
         }
 
         function cambiarVista(v, el) {
-            ['inicio', 'chat', 'biblia', 'empleo', 'diario'].forEach(id => {
+            ['inicio', 'chat', 'biblia', 'oracion', 'empleo', 'diario'].forEach(id => {
                 document.getElementById('view-' + id)?.classList.add('hidden');
             });
             document.getElementById('view-' + v)?.classList.remove('hidden');
 
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-[#5c7265]', 'dark:text-[#8cb89b]', 'font-bold');
+                btn.classList.remove('text-[#223843]', 'dark:text-[#8cb89b]', 'font-bold');
                 btn.classList.add('text-[#8c8275]', 'dark:text-gray-400');
             });
             if(el) {
                 el.classList.remove('text-[#8c8275]', 'dark:text-gray-400');
-                el.classList.add('text-[#5c7265]', 'dark:text-[#8cb89b]', 'font-bold');
+                el.classList.add('text-[#223843]', 'dark:text-[#8cb89b]', 'font-bold');
             }
         }
 
@@ -285,7 +310,7 @@
             
             chatMessages.innerHTML += `
                 <div class="flex justify-end">
-                    <div class="bg-[#5c7265] text-white p-3 rounded-2xl rounded-tr-none text-xs max-w-[85%] leading-relaxed shadow-xs">
+                    <div class="bg-[#223843] text-white p-3 rounded-2xl rounded-tr-none text-xs max-w-[85%] leading-relaxed shadow-xs">
                         ${texto}
                     </div>
                 </div>`;
@@ -299,7 +324,7 @@
                 const respuestaIA = generarRespuestaEspiritual(texto);
                 chatMessages.innerHTML += `
                     <div class="flex items-start gap-2.5">
-                        <div class="w-7 h-7 rounded-xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shrink-0">🌿</div>
+                        <div class="w-7 h-7 rounded-xl bg-[#223843] text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
                         <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed shadow-xs space-y-2">
                             ${respuestaIA}
                         </div>
@@ -315,21 +340,21 @@
 
             if(p.includes('triste') || p.includes('llorar') || p.includes('dolor') || p.includes('solo') || p.includes('soledad')) {
                 versiculo = "Salmo 34:18 (RVR1960): 'Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu.'";
-                consejo = "Comprendo la angustia y el peso que hay en tu corazón en este momento. Jesús mismo experimentó el dolor humano y nos enseñó que en medio del llanto, Su presencia es un refugio seguro. Hoy te invita a depositar esa carga: Él no te deja solo en tu travesía.";
+                consejo = "Comprendo la angustia y el peso que hay tu corazón. En medio del llanto, Su presencia es un refugio seguro.";
             } else if(p.includes('trabajo') || p.includes('empleo') || p.includes('dinero') || p.includes('deuda') || p.includes('falta')) {
                 versiculo = "Mateo 6:33 (RVR1960): 'Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas.'";
-                consejo = "Entiendo perfectamente la preocupación por el sustento diario y la incertidumbre laboral. Jesús nos recordó con la parábola de las aves del cielo que nuestro Padre celestial cuida de nosotros con amor inagotable. Confía en tu esfuerzo diario, mantén la fe en movimiento y permite que Su paz ordene tus pasos.";
+                consejo = "Entiendo la preocupación por el sustento diario. Confía en tu esfuerzo y permite que Su paz guíe tus pasos.";
             } else if(p.includes('ansiedad') || p.includes('miedo') || p.includes('preocup') || p.includes('futuro')) {
-                versiculo = "Filipenses 4:6-7 (RVR1960): 'Por nada estéis afanosos, sino sean notorias vuestras peticiones delante de Dios en toda oración... y la paz de Dios guardará vuestros corazones.'";
-                consejo = "Reconozco la tormenta mental y la ansiedad que intentan robarte la calma hoy. Jesús calmó la tempestad con una palabra; de igual forma, te invita hoy a soltar el control excesivo del mañana y descansar en Su gracia infinita.";
+                versiculo = "Filipenses 4:6-7 (RVR1960): 'Por nada estéis afanosos, sino sean notorias vuestras peticiones... y la paz de Dios guardará vuestros corazones.'";
+                consejo = "Reconozco la tormenta mental. Suelta el control del mañana y descansa en Su gracia infinita.";
             } else {
                 versiculo = "Mateo 11:28 (RVR1960): 'Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.'";
-                consejo = "Comprendo la fatiga y el anhelo de encontrar dirección en tu camino. Jesús nos enseña que Su yugo es fácil y Su carga ligera cuando decidimos caminar tomados de Su mano. Respira profundo y recuerda que cada día trae su propia gracia.";
+                consejo = "Respira profundo y recuerda que cada día trae su propia gracia tomados de Su mano.";
             }
 
             return `
-                <p><b>Validación:</b> Comprendo la carga y la emoción que hay en tu corazón hoy. No estás solo en esto.</p>
-                <p class="italic text-[#5c7265] dark:text-[#a3c9b4]"><b>Palabra y Enseñanza:</b> ${versiculo}</p>
+                <p><b>Validación:</b> No estás solo en esto.</p>
+                <p class="italic text-[#223843] dark:text-[#a3c9b4]"><b>Palabra y Enseñanza:</b> ${versiculo}</p>
                 <p><b>Guía para hoy:</b> ${consejo}</p>
             `;
         }
@@ -337,9 +362,9 @@
         function reiniciarChat() {
             document.getElementById('chat-messages').innerHTML = `
                 <div class="flex items-start gap-2.5">
-                    <div class="w-7 h-7 rounded-xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shrink-0">🌿</div>
+                    <div class="w-7 h-7 rounded-xl bg-[#223843] text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
                     <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed shadow-xs">
-                        Hola, he reiniciado nuestra conversación. Estoy aquí contigo para escucharte y reflexionar juntos. ¿Qué hay en tu corazón?
+                        Hola, he reiniciado nuestra conversación. ¿Qué hay en tu corazón hoy?
                     </div>
                 </div>`;
         }
@@ -381,9 +406,143 @@
             document.getElementById('biblia-resultado').innerHTML = `
                 <b>Lectura seleccionada: ${libro} (${cap})</b><br><br>
                 <p class="italic">"Lámpara es a mis pies tu palabra, y lumbrera a mi camino." (Salmo 119:105)</p>
-                <p class="mt-2">Meditando en el libro de ${libro}, capítulo ${cap}, recordando que cada texto sagrado de la versión Reina Valera ofrece consuelo y dirección para tu espíritu en este día.</p>
+                <p class="mt-2">Meditando en el libro de ${libro}, capítulo ${cap}, recordando que cada texto sagrado ofrece consuelo y dirección.</p>
             `;
         }
+
+        // --- SISTEMA DE PEDIDOS DE ORACIÓN (12 HS) ---
+        function limpiarOracionesExpiradas(pedidos) {
+            const ahora = new Date().getTime();
+            let modificado = false;
+            pedidos.forEach(p => {
+                if(p.orantes && Array.isArray(p.orantes)) {
+                    const filtrados = p.orantes.filter(o => (ahora - o.timestamp) < (12 * 60 * 60 * 1000));
+                    if(filtrados.length !== p.orantes.length) {
+                        p.orantes = filtrados;
+                        modificado = true;
+                    }
+                }
+            });
+            if(modificado) {
+                localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
+            }
+        }
+
+        function publicarPedidoOracion() {
+            const nombre = document.getElementById('oracion-nombre').value.trim() || 'Anónimo';
+            const texto = document.getElementById('oracion-texto').value.trim();
+
+            if(!texto) {
+                alert('Por favor escribe tu motivo de oración.');
+                return;
+            }
+
+            let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
+            limpiarOracionesExpiradas(pedidos);
+
+            pedidos.unshift({
+                id: 'oracion_' + Date.now(),
+                fecha: new Date().toLocaleDateString(),
+                nombre: nombre,
+                texto: texto,
+                orantes: []
+            });
+
+            localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
+            document.getElementById('oracion-nombre').value = '';
+            document.getElementById('oracion-texto').value = '';
+
+            cargarPedidosOracion();
+            actualizarContadorGlobalOracion();
+            alert('¡Tu pedido de oración ha sido compartido con la comunidad!');
+        }
+
+        function alternarOrarPorPedido(idPedido) {
+            let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
+            limpiarOracionesExpiradas(pedidos);
+
+            const pedido = pedidos.find(p => p.id === idPedido);
+            if(!pedido) return;
+            if(!pedido.orantes) pedido.orantes = [];
+
+            let miIdUsuario = localStorage.getItem('uuid_usuario');
+            if(!miIdUsuario) {
+                miIdUsuario = 'user_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('uuid_usuario', miIdUsuario);
+            }
+
+            const ahora = new Date().getTime();
+            const indiceExistente = pedido.orantes.findIndex(o => o.userId === miIdUsuario);
+
+            if(indiceExistente >= 0) {
+                pedido.orantes.splice(indiceExistente, 1);
+            } else {
+                pedido.orantes.push({ userId: miIdUsuario, timestamp: ahora });
+            }
+
+            localStorage.setItem('pedidos_oracion', JSON.stringify(pedidos));
+            cargarPedidosOracion();
+            actualizarContadorGlobalOracion();
+        }
+
+        function cargarPedidosOracion() {
+            const lista = document.getElementById('lista-pedidos-oracion');
+            if(!lista) return;
+
+            let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
+            limpiarOracionesExpiradas(pedidos);
+
+            let miIdUsuario = localStorage.getItem('uuid_usuario');
+
+            if(pedidos.length === 0) {
+                lista.innerHTML = '<p class="text-xs text-gray-400 text-center py-4">No hay pedidos de oración activos. ¡Sé el primero en compartir uno!</p>';
+                return;
+            }
+
+            const ahora = new Date().getTime();
+
+            lista.innerHTML = pedidos.map(p => {
+                if(!p.orantes) p.orantes = [];
+                const orantesVigentes = p.orantes.filter(o => (ahora - o.timestamp) < (12 * 60 * 60 * 1000));
+                const yaEstoyOrando = orantesVigentes.some(o => o.userId === miIdUsuario);
+
+                return `
+                    <div class="bg-white dark:bg-[#26332d] p-4 rounded-2xl border dark:border-[#2e3d36] text-xs space-y-2.5 shadow-2xs">
+                        <div class="flex justify-between items-center text-[10px] text-gray-400 font-semibold">
+                            <span>🕯️ ${p.nombre}</span>
+                            <span>${p.fecha}</span>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-200 leading-relaxed">${p.texto}</p>
+                        <div class="flex justify-between items-center pt-1 border-t border-[#f4f1ea] dark:border-[#2e3d36]">
+                            <span class="text-[10px] font-bold text-[#223843] dark:text-[#8cb89b]">🙏 ${orantesVigentes.length} ${orantesVigentes.length === 1 ? 'persona orando' : 'personas orando'}</span>
+                            <button onclick="alternarOrarPorPedido('${p.id}')" class="px-3 py-1.5 rounded-xl text-[10px] font-bold transition ${yaEstoyOrando ? 'bg-[#223843] text-white' : 'bg-[#f4f1ea] dark:bg-[#18201d] text-[#223843] dark:text-[#8cb89b] border border-[#e6dfd1] dark:border-[#2e3d36]'}" >
+                                ${yaEstoyOrando ? '✓ Orando (Activo)' : '🙏 Estoy orando'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function actualizarContadorGlobalOracion() {
+            let pedidos = JSON.parse(localStorage.getItem('pedidos_oracion') || '[]');
+            limpiarOracionesExpiradas(pedidos);
+            const ahora = new Date().getTime();
+
+            let totalOrandoGlobal = 0;
+            pedidos.forEach(p => {
+                if(p.orantes) {
+                    const vigentes = p.orantes.filter(o => (ahora - o.timestamp) < (12 * 60 * 60 * 1000));
+                    totalOrandoGlobal += vigentes.length;
+                }
+            });
+
+            const badge = document.getElementById('badge-oracion-global');
+            if(badge) {
+                badge.innerText = `🙏 ${totalOrandoGlobal} orando`;
+            }
+        }
+        // ----------------------------------------------------
 
         function cambiarTabEmpleo(tab) {
             const ext = document.getElementById('tab-externos');
@@ -394,16 +553,16 @@
             if(tab === 'externos') {
                 ext.classList.remove('hidden');
                 com.classList.add('hidden');
-                btnExt.classList.add('bg-white', 'dark:bg-[#26332d]', 'text-[#5c7265]', 'dark:text-[#8cb89b]', 'shadow-2xs');
+                btnExt.classList.add('bg-white', 'dark:bg-[#26332d]', 'text-[#223843]', 'dark:text-[#8cb89b]', 'shadow-2xs');
                 btnExt.classList.remove('text-[#8c8275]', 'dark:text-gray-400');
-                btnCom.classList.remove('bg-white', 'dark:bg-[#26332d]', 'text-[#5c7265]', 'dark:text-[#8cb89b]', 'shadow-2xs');
+                btnCom.classList.remove('bg-white', 'dark:bg-[#26332d]', 'text-[#223843]', 'dark:text-[#8cb89b]', 'shadow-2xs');
                 btnCom.classList.add('text-[#8c8275]', 'dark:text-gray-400');
             } else {
                 ext.classList.add('hidden');
                 com.classList.remove('hidden');
-                btnCom.classList.add('bg-white', 'dark:bg-[#26332d]', 'text-[#5c7265]', 'dark:text-[#8cb89b]', 'shadow-2xs');
+                btnCom.classList.add('bg-white', 'dark:bg-[#26332d]', 'text-[#223843]', 'dark:text-[#8cb89b]', 'shadow-2xs');
                 btnCom.classList.remove('text-[#8c8275]', 'dark:text-gray-400');
-                btnExt.classList.remove('bg-white', 'dark:bg-[#26332d]', 'text-[#5c7265]', 'dark:text-[#8cb89b]', 'shadow-2xs');
+                btnExt.classList.remove('bg-white', 'dark:bg-[#26332d]', 'text-[#223843]', 'dark:text-[#8cb89b]', 'shadow-2xs');
                 btnExt.classList.add('text-[#8c8275]', 'dark:text-gray-400');
                 cargarOfertasComunidad();
             }
@@ -451,7 +610,7 @@
                         <span>📍 ${o.zona}</span>
                         <span>${o.fecha}</span>
                     </div>
-                    <h4 class="font-bold text-[#5c7265] dark:text-[#8cb89b] text-sm">${o.puesto}</h4>
+                    <h4 class="font-bold text-[#223843] dark:text-[#8cb89b] text-sm">${o.puesto}</h4>
                     <p class="text-gray-600 dark:text-gray-300"><b>Contacto:</b> ${o.contacto}</p>
                 </div>
             `).join('');
@@ -487,6 +646,8 @@
             inicializarLibrosBiblia();
             generarNuevaCapsula();
             cargarReflexionesGuardadas();
+            cargarPedidosOracion();
+            actualizarContadorGlobalOracion();
         };
     </script>
 </body>
