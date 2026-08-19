@@ -306,14 +306,13 @@
             }
         }
 
-        // MOTOR DE MEMORIA Y CONTEXTO PROFUNDO
+        // MOTOR DE MEMORIA Y CONTEXTO PROFUNDO CORREGIDO
         let memoriaUsuario = {
             historialTexto: [],
             mencionTrabajo: false,
             mencionSalud: false,
             mencionTristeza: false,
-            mencionAlegria: false,
-            ultimaEmocion: ""
+            mencionAlegria: false
         };
 
         function enviarMensaje() {
@@ -335,7 +334,6 @@
 
             // Registrar en memoria interna
             memoriaUsuario.historialTexto.push(texto.toLowerCase());
-            const textoCompleto = memoriaUsuario.historialTexto.join(" ");
 
             // Detección de estados clave para la memoria contextual
             if (/(trabajo|empleo|plata|dinero|entrevista|currículum|cv|cesante)/.test(texto.toLowerCase())) memoriaUsuario.mencionTrabajo = true;
@@ -362,10 +360,18 @@
                 let respuestaHTML = "";
                 const ultimo = texto.toLowerCase();
 
-                // 3. MODO SILENCIO ACOMPAÑADO (Si el texto es muy breve o melancólico)
-                const esBreveOMetancolico = ultimo.length < 15 || /(gris|no sé|nada|mmm|silencio|cansado|cansada)/.test(ultimo);
+                // 1. FILTRAR SALUDOS COMUNES (Evita activar silencio por decir "hola")
+                const esSaludo = /^(hola|buen día|buenas|saludos|hey|qué tal)$/.test(ultimo.trim());
 
-                if (esBreveOMetancolico && !memoriaUsuario.mencionAlegria) {
+                // 3. MODO SILENCIO ACOMPAÑADO (Solo si expresa verdadero pesar breve/melancólico y no es un saludo)
+                const esSilencioMelancolico = !esSaludo && (ultimo.length < 12 && /(gris|no sé|nada|mmm|silencio|cansado|cansada)/.test(ultimo));
+
+                if (esSaludo) {
+                    respuestaHTML = `
+                        <p>¡Hola! Qué alegría saludarte. ¿Cómo se encuentra tu corazón en este día? Estoy aquí para escucharte sin prisa.</p>
+                    `;
+                }
+                else if (esSilencioMelancolico) {
                     respuestaHTML = `
                         <p>Aquí me quedo contigo, en este mismo silencio. No tienes que decir nada más si no quieres, a veces las palabras sobran cuando el alma solo pide descanso.</p>
                         <p class="text-xs text-slate-400 italic">Te acompaño en paz.</p>
@@ -383,13 +389,13 @@
                 else {
                     let referenciaContextual = "";
                     if (memoriaUsuario.mencionTrabajo) {
-                        referenciaContextual = "Tengo presente que me contaste sobre tu situación laboral y la tensión que eso genera.";
+                        referenciaContextual = "Tengo presente que me comentaste sobre tu situación laboral y la tensión que eso genera.";
                     } else if (memoriaUsuario.mencionSalud) {
                         referenciaContextual = "Llevo en el pensamiento lo que me compartiste sobre tu salud y el desgaste físico.";
                     }
 
                     respuestaHTML = `
-                        <p>Comprendo profundamente lo que me expresas. ${referenciaContextual} Cada detalle que me compartes importa y resuena aquí.</p>
+                        <p>Te escucho con atención y respeto. ${referenciaContextual} Cada detalle que me compartes importa profundamente.</p>
                         <p class="text-xs text-slate-300">Tengo un pasaje de los Evangelios que me recuerda mucho a lo que conversamos, ¿te gustaría que lo leamos juntos?</p>
                         <div class="mt-2 flex gap-2">
                             <button onclick="mostrarVersiculoOpcional(this)" class="bg-blue-600/30 text-blue-300 border border-blue-500/40 text-[11px] font-bold px-3 py-1.5 rounded-xl hover:bg-blue-600/50 transition">📖 Leer pasaje juntos</button>
@@ -397,7 +403,7 @@
                     `;
 
                     // 5. TRANSICIÓN FLUIDA A EMPLEO SI APLICA
-                    if (memoriaUsuario.mencionTrabajo && Math.random() > 0.5) {
+                    if (memoriaUsuario.mencionTrabajo) {
                         respuestaHTML += `
                             <p class="text-[11px] text-slate-400 mt-2 border-t border-slate-800 pt-2">💡 <em>Nota al margen:</em> Conversando sobre esto, recuerda que en la pestaña de <strong>"Empleo"</strong> de nuestra app hay recursos y herramientas prácticas que te pueden servir cuando te sientas con fuerzas para revisarlos, pero tómate todo el tiempo que necesites.</p>
                         `;
@@ -419,7 +425,7 @@
         function mostrarVersiculoOpcional(btn) {
             btn.parentElement.innerHTML = `
                 <p class="text-xs text-amber-200 italic mt-2 p-2 bg-slate-950 rounded-xl border border-amber-500/20">
-                    «Por lo os digo: No os afanéis por vuestra vida... Mirad las aves del cielo, que no siembran, ni siegan, ni recogen en graneros; y vuestro Padre celestial las alimenta. ¿No valéis vosotros mucho más que ellas?» — Mateo 6:25-26
+                    «Por lo cual os digo: No os afanéis por vuestra vida... Mirad las aves del cielo, que no siembran, ni siegan, ni recogen en graneros; y vuestro Padre celestial las alimenta. ¿No valéis vosotros mucho más que ellas?» — Mateo 6:25-26
                 </p>
             `;
         }
@@ -433,7 +439,7 @@
         }
 
         function reiniciarChat() {
-            memoriaUsuario = { historialTexto: [], mencionTrabajo: false, mencionSalud: false, mencionTristeza: false, mencionAlegria: false, ultimaEmocion: "" };
+            memoriaUsuario = { historialTexto: [], mencionTrabajo: false, mencionSalud: false, mencionTristeza: false, mencionAlegria: false };
             document.getElementById('chat-messages').innerHTML = `
                 <div class="flex items-start gap-2.5">
                     <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0 shadow">✝</div>
