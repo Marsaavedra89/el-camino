@@ -6,9 +6,9 @@
     <title>El Camino - Guía Espiritual</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
 
-    <!-- HEADER -->
+    <!-- HEADER ORIGINAL -->
     <header class="bg-white shadow-sm py-4 px-6 flex items-center justify-between sticky top-0 z-50">
         <div class="flex items-center space-x-3">
             <div class="w-10 h-10 bg-gradient-to-tr from-amber-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md">✝</div>
@@ -20,7 +20,7 @@
     </header>
 
     <!-- CONTENIDO -->
-    <main class="flex-1 max-w-md w-full mx-auto p-4 pb-28" id="app-view">
+    <main class="flex-1 max-w-md w-full mx-auto p-4 pb-28">
         
         <!-- VISTA INICIO -->
         <div id="view-inicio" class="space-y-6">
@@ -46,7 +46,7 @@
         </div>
 
         <!-- VISTA CHAT -->
-        <div id="view-chat" class="hidden flex flex-col h-[75vh]">
+        <div id="view-chat" class="hidden flex flex-col h-[70vh]">
             <div id="chat-messages" class="flex-1 overflow-y-auto space-y-4 pr-2 mb-3">
                 <div class="flex items-start gap-2">
                     <div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div>
@@ -55,24 +55,25 @@
                     </div>
                 </div>
             </div>
-            <div class="flex gap-2 bg-white p-2 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="flex gap-2 bg-white p-2 rounded-2xl border border-slate-200 shadow-sm mt-auto">
                 <input type="text" id="chat-input" placeholder="Cuéntame, te escucho..." class="flex-1 px-3 py-2 text-sm focus:outline-none bg-transparent" onkeypress="if(event.key === 'Enter') enviarMensaje()">
                 <button onclick="enviarMensaje()" class="bg-blue-900 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-800 transition">Enviar</button>
             </div>
         </div>
     </main>
 
-    <!-- MENÚ -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 py-2 px-4 shadow-lg max-w-md mx-auto z-50">
-        <div class="flex justify-around items-center">
-            <button onclick="cambiarVista('inicio', this)" class="nav-btn flex flex-col items-center text-blue-600">🏠<span class="text-[10px]">Inicio</span></button>
-            <button onclick="cambiarVista('chat', this)" class="nav-btn flex flex-col items-center text-slate-400">💬<span class="text-[10px]">Chat IA</span></button>
+    <!-- MENÚ INFERIOR -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 py-3 px-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-50">
+        <div class="flex justify-around items-center max-w-md mx-auto">
+            <button onclick="cambiarVista('inicio')" class="flex flex-col items-center text-blue-600 transition">🏠<span class="text-[10px] font-semibold">Inicio</span></button>
+            <button onclick="cambiarVista('chat')" class="flex flex-col items-center text-slate-400 hover:text-blue-600 transition">💬<span class="text-[10px] font-semibold">Chat IA</span></button>
         </div>
     </nav>
 
     <script>
-        function cambiarVista(vista, el) {
-            ['inicio', 'chat'].forEach(v => document.getElementById('view-' + v).classList.add('hidden'));
+        function cambiarVista(vista) {
+            document.getElementById('view-inicio').classList.add('hidden');
+            document.getElementById('view-chat').classList.add('hidden');
             document.getElementById('view-' + vista).classList.remove('hidden');
         }
 
@@ -104,12 +105,12 @@
             
             setTimeout(() => {
                 const t = texto.toLowerCase();
-                let respuesta = "Te escucho atentamente. ¿Querés contarme un poco más sobre eso que vivís? Estoy acá para acompañarte.";
-                if (t.includes('triste') || t.includes('mal')) respuesta = "Acercate, hijo. No tenés que fingir fortaleza conmigo. Estoy acá escuchándote y tu dolor me importa. ¿Qué te tiene así de bajoneado?";
-                if (t.includes('preocupado') || t.includes('ansioso')) respuesta = "Entiendo... este 2026 corre muy rápido. A veces parece que el mundo no para, pero vos necesitás parar. ¿Qué es lo que más te roba la paz hoy?";
-                if (t.includes('gracias') || t.includes('bien')) respuesta = "¡Me llena el alma verte así! Qué lindo es compartir este momento de alegría con vos. ¿Qué pasó de bueno que te tiene con esa sonrisa?";
+                let r = "Te escucho atentamente. ¿Querés contarme un poco más sobre eso que vivís? Estoy acá para acompañarte.";
+                if (t.includes('triste') || t.includes('mal')) r = "Acercate, hijo. No tenés que fingir fortaleza conmigo. Estoy acá escuchándote y tu dolor me importa. ¿Qué te tiene así de bajoneado?";
+                if (t.includes('preocupado') || t.includes('ansioso')) r = "Entiendo... este 2026 corre muy rápido. A veces el mundo no para, pero vos necesitás parar. ¿Qué es lo que más te roba la paz hoy?";
+                if (t.includes('gracias') || t.includes('bien')) r = "¡Me llena el alma verte así! Qué lindo es compartir este momento de alegría con vos. ¿Qué pasó de bueno que te tiene con esa sonrisa?";
 
-                chat.innerHTML += `<div class="flex items-start gap-2"><div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div><div class="bg-white border border-slate-200 p-4 rounded-2xl rounded-tl-none text-sm"><p>${respuesta}</p></div></div>`;
+                chat.innerHTML += `<div class="flex items-start gap-2"><div class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">✝</div><div class="bg-white border border-slate-200 p-4 rounded-2xl rounded-tl-none text-sm"><p>${r}</p></div></div>`;
                 chat.scrollTop = chat.scrollHeight;
             }, 800);
         }
