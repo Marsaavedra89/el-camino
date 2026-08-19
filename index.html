@@ -14,13 +14,11 @@
         .typing-dot { animation: pulse-slow 1.4s infinite ease-in-out both; }
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
         .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-        .view-transition { transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
         
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--scrollbar-track, #f4f1ea); }
-        ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb, #d3c9b6); border-radius: 10px; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d3c9b6; border-radius: 10px; }
 
-        /* Temas de Color (Naturaleza / Modo Claro y Calmo) */
         :root {
             --bg-main: #f7f5ef;
             --bg-card: #fdfbf7;
@@ -41,20 +39,19 @@
         }
     </style>
 </head>
-<body class="bg-[#f7f5ef] text-[#2c3531] flex flex-col h-[100dvh] max-w-md mx-auto shadow-2xl overflow-hidden border-x border-[#e6dfd1] relative font-sans transition-colors duration-300" id="app-body">
+<body class="bg-[#f7f5ef] text-[#2c3531] flex flex-col h-[100dvh] max-w-md mx-auto shadow-2xl overflow-hidden border-x border-[#e6dfd1] font-sans transition-colors duration-300" id="app-body">
 
-    <!-- BARRA SUPERIOR CON TOGGLE DE TEMA -->
-    <div class="bg-white/80 dark:bg-[#202b26]/80 backdrop-blur-md px-4 py-2 border-b border-[#e6dfd1] dark:border-[#2e3d36] flex justify-between items-center z-40 text-xs">
+    <!-- BARRA SUPERIOR -->
+    <header class="bg-white/90 dark:bg-[#202b26]/90 backdrop-blur-md px-4 py-2.5 border-b border-[#e6dfd1] dark:border-[#2e3d36] flex justify-between items-center z-40 text-xs shrink-0">
         <span class="font-serif font-bold text-[#5c7265] dark:text-[#8cb89b]">🌱 El Camino</span>
         <button onclick="alternarTema()" id="btn-tema" class="px-3 py-1 rounded-full bg-[#f4f1ea] dark:bg-[#2e3d36] text-[#5c7265] dark:text-[#a3c9b4] font-bold text-[10px] transition shadow-2xs">🌙 Modo Cálido</button>
-    </div>
+    </header>
 
     <!-- CONTENEDOR PRINCIPAL DE VISTAS -->
-    <main class="flex-1 overflow-y-auto relative pb-36 bg-[#fdfbf7] dark:bg-[#202b26] view-transition">
+    <main class="flex-1 overflow-hidden relative bg-[#fdfbf7] dark:bg-[#202b26] flex flex-col">
 
         <!-- VISTA: INICIO -->
-        <section id="view-inicio" class="p-6 space-y-6">
-            <!-- Cápsula Diaria -->
+        <section id="view-inicio" class="flex-1 overflow-y-auto p-5 space-y-6">
             <div id="capsula-diaria" class="bg-[#5c7265] dark:bg-[#43574c] text-white p-5 rounded-3xl shadow-lg relative overflow-hidden transition-colors">
                 <h3 class="font-bold text-sm opacity-85 uppercase tracking-widest mb-2 font-serif">Cápsula de Sabiduría</h3>
                 <p id="texto-capsula" class="text-sm italic leading-relaxed mb-4">"Cargando un mensaje de paz..."</p>
@@ -64,26 +61,25 @@
                 </div>
             </div>
 
-            <header class="text-center space-y-3 mt-2 flex flex-col items-center">
-                <div class="w-20 h-20 rounded-3xl overflow-hidden shadow-lg border-2 border-white dark:border-[#2e3d36] bg-[#eef2ed] dark:bg-[#2c3b34] flex items-center justify-center p-1 relative">
-                    <div class="flex items-center justify-center bg-[#5c7265] text-white font-bold text-2xl rounded-2xl w-full h-full">🌿</div>
+            <div class="text-center space-y-3 flex flex-col items-center">
+                <div class="w-16 h-16 rounded-3xl overflow-hidden shadow-lg border-2 border-white dark:border-[#2e3d36] bg-[#eef2ed] dark:bg-[#2c3b34] flex items-center justify-center">
+                    <span class="text-2xl">🌿</span>
                 </div>
                 <div>
-                    <h1 class="text-2xl font-bold text-[#2c3531] dark:text-gray-100 tracking-tight font-serif">El Camino</h1>
+                    <h1 class="text-xl font-bold text-[#2c3531] dark:text-gray-100 font-serif">El Camino</h1>
                     <p class="text-[10px] uppercase tracking-widest text-[#5c7265] dark:text-[#8cb89b] font-bold mt-0.5">Refugio, Paz y Guía Interior • 2026</p>
                 </div>
-            </header>
+            </div>
 
-            <!-- Check-in Emocional -->
-            <div class="bg-white/90 dark:bg-[#26332d]/90 border border-[#e8e2d5] dark:border-[#2e3d36] p-5 rounded-3xl shadow-sm space-y-3.5 backdrop-blur-sm">
+            <div class="bg-white/90 dark:bg-[#26332d]/90 border border-[#e8e2d5] dark:border-[#2e3d36] p-5 rounded-3xl shadow-sm space-y-3.5">
                 <h2 class="font-bold text-[#4a5550] dark:text-gray-300 text-xs uppercase tracking-wider">¿Cómo se encuentra tu corazón hoy?</h2>
                 <div class="grid grid-cols-2 gap-2.5">
-                    <button onclick="mostrarReflexionEmocion('ansiedad')" class="p-3 text-xs font-medium bg-[#fcf8f2] dark:bg-[#1f2824] text-[#8c6d48] dark:text-[#d4b58f] rounded-2xl border border-[#efe6db] dark:border-[#2f3b35] hover:opacity-80 transition text-left flex flex-col gap-1"><span>⚡</span> Ansiedad</button>
-                    <button onclick="mostrarReflexionEmocion('tristeza')" class="p-3 text-xs font-medium bg-[#f2f6f8] dark:bg-[#1f2824] text-[#486b8c] dark:text-[#90b1d0] rounded-2xl border border-[#dfe6eb] dark:border-[#2f3b35] hover:opacity-80 transition text-left flex flex-col gap-1"><span>🌧️</span> Tristeza</button>
-                    <button onclick="mostrarReflexionEmocion('paz')" class="p-3 text-xs font-medium bg-[#f1f6f2] dark:bg-[#1f2824] text-[#436b52] dark:text-[#8cb89b] rounded-2xl border border-[#dcebe1] dark:border-[#2f3b35] hover:opacity-80 transition text-left flex flex-col gap-1"><span>🌱</span> Paz</button>
-                    <button onclick="mostrarReflexionEmocion('trabajo')" class="p-3 text-xs font-medium bg-[#f5f3f8] dark:bg-[#1f2824] text-[#63528c] dark:text-[#b4a5d8] rounded-2xl border border-[#e6e2ee] dark:border-[#2f3b35] hover:opacity-80 transition text-left flex flex-col gap-1"><span>💼</span> Trabajo</button>
-                    <button onclick="mostrarReflexionEmocion('soledad')" class="p-3 text-xs font-medium bg-[#f9f2f5] dark:bg-[#1f2824] text-[#8c486e] dark:text-[#d890b7] rounded-2xl border border-[#eee0e7] dark:border-[#2f3b35] hover:opacity-80 transition text-left flex flex-col gap-1"><span>🕊️</span> Soledad</button>
-                    <button onclick="mostrarReflexionEmocion('cansancio')" class="p-3 text-xs font-medium bg-[#f4f4f2] dark:bg-[#1f2824] text-[#6b665c] dark:text-[#c4bcaf] rounded-2xl border border-[#e5e4df] dark:border-[#2f3b35] hover:opacity-80 transition text-left flex flex-col gap-1"><span>🔋</span> Cansancio</button>
+                    <button onclick="mostrarReflexionEmocion('ansiedad')" class="p-3 text-xs font-medium bg-[#fcf8f2] dark:bg-[#1f2824] text-[#8c6d48] dark:text-[#d4b58f] rounded-2xl border border-[#efe6db] dark:border-[#2f3b35] text-left flex flex-col gap-1"><span>⚡</span> Ansiedad</button>
+                    <button onclick="mostrarReflexionEmocion('tristeza')" class="p-3 text-xs font-medium bg-[#f2f6f8] dark:bg-[#1f2824] text-[#486b8c] dark:text-[#90b1d0] rounded-2xl border border-[#dfe6eb] dark:border-[#2f3b35] text-left flex flex-col gap-1"><span>🌧️</span> Tristeza</button>
+                    <button onclick="mostrarReflexionEmocion('paz')" class="p-3 text-xs font-medium bg-[#f1f6f2] dark:bg-[#1f2824] text-[#436b52] dark:text-[#8cb89b] rounded-2xl border border-[#dcebe1] dark:border-[#2f3b35] text-left flex flex-col gap-1"><span>🌱</span> Paz</button>
+                    <button onclick="mostrarReflexionEmocion('trabajo')" class="p-3 text-xs font-medium bg-[#f5f3f8] dark:bg-[#1f2824] text-[#63528c] dark:text-[#b4a5d8] rounded-2xl border border-[#e6e2ee] dark:border-[#2f3b35] text-left flex flex-col gap-1"><span>💼</span> Trabajo</button>
+                    <button onclick="mostrarReflexionEmocion('soledad')" class="p-3 text-xs font-medium bg-[#f9f2f5] dark:bg-[#1f2824] text-[#8c486e] dark:text-[#d890b7] rounded-2xl border border-[#eee0e7] dark:border-[#2f3b35] text-left flex flex-col gap-1"><span>🕊️</span> Soledad</button>
+                    <button onclick="mostrarReflexionEmocion('cansancio')" class="p-3 text-xs font-medium bg-[#f4f4f2] dark:bg-[#1f2824] text-[#6b665c] dark:text-[#c4bcaf] rounded-2xl border border-[#e5e4df] dark:border-[#2f3b35] text-left flex flex-col gap-1"><span>🔋</span> Cansancio</button>
                 </div>
                 <div id="resultado-emocion" class="hidden mt-3 p-4 bg-[#fcfaf7] dark:bg-[#1b2420] border border-[#d6e0db] dark:border-[#2e3d36] rounded-2xl space-y-2">
                     <div class="flex justify-between items-center"><span id="emocion-titulo" class="text-xs font-bold text-[#5c7265] dark:text-[#8cb89b] uppercase tracking-wider"></span><button onclick="cerrarReflexionEmocion()" class="text-[#8c8275] text-xs font-bold">✕</button></div>
@@ -94,85 +90,86 @@
         </section>
 
         <!-- VISTA: CHAT IA -->
-        <section id="view-chat" class="hidden flex flex-col h-full absolute inset-0 pb-36 bg-[#fdfbf7] dark:bg-[#202b26]">
-            <div class="bg-white/90 dark:bg-[#202b26]/90 backdrop-blur-md border-b border-[#e8e2d5] dark:border-[#2e3d36] px-4 py-3 flex items-center justify-between shadow-xs">
+        <section id="view-chat" class="hidden flex-1 flex flex-col h-full bg-[#fdfbf7] dark:bg-[#202b26] overflow-hidden">
+            <div class="bg-white/90 dark:bg-[#202b26]/90 backdrop-blur-md border-b border-[#e8e2d5] dark:border-[#2e3d36] px-4 py-2.5 flex items-center justify-between shrink-0">
                 <div>
-                    <h2 class="font-bold text-sm font-serif text-[#2c3531] dark:text-gray-100">Guía Interior & Escucha</h2>
-                    <p class="text-[10px] text-[#5c7265] dark:text-[#8cb89b]">Inspirado en la enseñanza de Jesús</p>
+                    <h2 class="font-bold text-xs font-serif text-[#2c3531] dark:text-gray-100">Guía Interior & Escucha</h2>
+                    <p class="text-[9px] text-[#5c7265] dark:text-[#8cb89b]">Inspirado en la enseñanza de Jesús</p>
                 </div>
                 <button onclick="reiniciarChat()" class="text-[10px] text-[#787165] dark:text-gray-400 bg-[#f4f1ea] dark:bg-[#2e3d36] px-2.5 py-1 rounded-lg">Reiniciar</button>
             </div>
-            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4">
+            
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3.5">
                 <div class="flex items-start gap-2.5">
-                    <div class="w-8 h-8 rounded-2xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shadow-sm">🌿</div>
-                    <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-4 rounded-3xl rounded-tl-none text-xs leading-relaxed shadow-xs">
+                    <div class="w-7 h-7 rounded-xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shrink-0">🌿</div>
+                    <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed shadow-xs">
                         Comprendo la angustia o la carga que hay en tu corazón en este momento. Platícame, ¿qué situación estás atravesando hoy? Estoy aquí para escucharte con calidez.
                     </div>
                 </div>
             </div>
-            <!-- Indicador de escritura IA -->
-            <div id="chat-typing" class="hidden px-6 py-2 flex items-center gap-1.5 text-xs text-[#5c7265] dark:text-[#8cb89b] italic">
-                <div class="w-2 h-2 rounded-full bg-[#5c7265] typing-dot"></div>
-                <div class="w-2 h-2 rounded-full bg-[#5c7265] typing-dot"></div>
-                <div class="w-2 h-2 rounded-full bg-[#5c7265] typing-dot"></div>
+
+            <div id="chat-typing" class="hidden px-4 py-1.5 flex items-center gap-1.5 text-xs text-[#5c7265] dark:text-[#8cb89b] italic shrink-0">
+                <div class="w-1.5 h-1.5 rounded-full bg-[#5c7265] typing-dot"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-[#5c7265] typing-dot"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-[#5c7265] typing-dot"></div>
                 <span class="ml-1 text-[10px]">Buscando guía y consuelo...</span>
             </div>
-            <div class="absolute bottom-16 left-0 right-0 p-3 bg-white/95 dark:bg-[#202b26]/95 border-t border-[#e8e2d5] dark:border-[#2e3d36] flex items-center gap-2">
-                <input type="text" id="chat-input" placeholder="Cuéntame tu carga o situación..." class="flex-1 bg-[#f7f5ef] dark:bg-[#18201d] text-[#2c3531] dark:text-gray-200 p-3 rounded-2xl text-xs focus:outline-none border border-transparent focus:border-[#5c7265]">
-                <button onclick="enviarMensajeIA()" class="bg-[#5c7265] hover:bg-[#4a5c51] text-white px-4 py-3 rounded-2xl text-xs font-bold transition shadow-sm">Enviar</button>
+
+            <div class="p-3 bg-white/95 dark:bg-[#202b26]/95 border-t border-[#e8e2d5] dark:border-[#2e3d36] flex items-center gap-2 shrink-0">
+                <input type="text" id="chat-input" placeholder="Cuéntame tu carga o situación..." class="flex-1 bg-[#f7f5ef] dark:bg-[#18201d] text-[#2c3531] dark:text-gray-200 p-2.5 rounded-xl text-xs focus:outline-none border border-transparent focus:border-[#5c7265]" onkeypress="if(event.key === 'Enter') enviarMensajeIA()">
+                <button onclick="enviarMensajeIA()" class="bg-[#5c7265] hover:bg-[#4a5c51] text-white px-3.5 py-2.5 rounded-xl text-xs font-bold transition">Enviar</button>
             </div>
         </section>
 
         <!-- VISTA: BIBLIA -->
-        <section id="view-biblia" class="hidden p-5 space-y-4">
-            <h2 class="font-extrabold text-xl font-serif dark:text-gray-100">Lectura Bíblica</h2>
-            <select id="biblia-libro" onchange="actualizarCapitulos()" class="w-full p-3 rounded-2xl border border-[#e2dcd0] dark:border-[#2e3d36] bg-white dark:bg-[#26332d] text-xs dark:text-gray-200"></select>
-            <select id="biblia-cap" class="w-full p-3 rounded-2xl border border-[#e2dcd0] dark:border-[#2e3d36] bg-white dark:bg-[#26332d] text-xs dark:text-gray-200"></select>
+        <section id="view-biblia" class="hidden flex-1 overflow-y-auto p-5 space-y-4">
+            <h2 class="font-extrabold text-lg font-serif dark:text-gray-100">Lectura Bíblica</h2>
+            <div class="space-y-1">
+                <label class="text-[10px] uppercase font-bold text-gray-400">Seleccionar Libro</label>
+                <select id="biblia-libro" onchange="actualizarCapitulos()" class="w-full p-3 rounded-2xl border border-[#e2dcd0] dark:border-[#2e3d36] bg-white dark:bg-[#26332d] text-xs dark:text-gray-200"></select>
+            </div>
+            <div class="space-y-1">
+                <label class="text-[10px] uppercase font-bold text-gray-400">Capítulo</label>
+                <select id="biblia-cap" class="w-full p-3 rounded-2xl border border-[#e2dcd0] dark:border-[#2e3d36] bg-white dark:bg-[#26332d] text-xs dark:text-gray-200"></select>
+            </div>
             <button onclick="cargarCapituloSeguro()" class="w-full py-3 bg-[#5c7265] text-white font-bold text-xs rounded-2xl shadow-sm">Buscar Lectura</button>
             <div id="biblia-resultado" class="bg-white dark:bg-[#26332d] dark:text-gray-200 p-5 rounded-3xl border border-[#e8e2d5] dark:border-[#2e3d36] text-xs leading-relaxed">Selecciona un libro y capítulo para meditar.</div>
         </section>
 
         <!-- VISTA: EMPLEO -->
-        <section id="view-empleo" class="hidden p-5 space-y-5">
-            <h2 class="font-extrabold text-xl font-serif dark:text-gray-100">Orientación & Red Laboral</h2>
+        <section id="view-empleo" class="hidden flex-1 overflow-y-auto p-5 space-y-4">
+            <h2 class="font-extrabold text-lg font-serif dark:text-gray-100">Orientación & Red Laboral</h2>
             <div class="flex bg-[#efece4] dark:bg-[#18201d] p-1 rounded-2xl border border-[#e6dfd1] dark:border-[#2e3d36]">
-                <button onclick="cambiarTabEmpleo('externos')" id="tab-btn-externos" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white dark:bg-[#26332d] text-[#5c7265] dark:text-[#8cb89b] shadow-2xs transition">Portales Oficiales</button>
-                <button onclick="cambiarTabEmpleo('comunidad')" id="tab-btn-comunidad" class="flex-1 py-2 text-xs font-bold rounded-xl text-[#8c8275] dark:text-gray-400 transition">Bolsa Comunidad</button>
+                <button onclick="cambiarTabEmpleo('externos')" id="tab-btn-externos" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white dark:bg-[#26332d] text-[#5c7265] dark:text-[#8cb89b] shadow-2xs transition">Portales</button>
+                <button onclick="cambiarTabEmpleo('comunidad')" id="tab-btn-comunidad" class="flex-1 py-2 text-xs font-bold rounded-xl text-[#8c8275] dark:text-gray-400 transition">Comunidad</button>
             </div>
             <div id="tab-externos" class="grid grid-cols-2 gap-3">
-                <a href="https://www.computrabajo.com.ar" target="_blank" class="p-4 bg-white dark:bg-[#26332d] dark:text-gray-200 rounded-2xl border dark:border-[#2e3d36] text-center text-[10px] font-bold shadow-2xs hover:border-[#5c7265] transition">💼<br><span class="mt-1 block">Computrabajo</span></a>
-                <a href="https://ar.linkedin.com" target="_blank" class="p-4 bg-white dark:bg-[#26332d] dark:text-gray-200 rounded-2xl border dark:border-[#2e3d36] text-center text-[10px] font-bold shadow-2xs hover:border-[#5c7265] transition">🌐<br><span class="mt-1 block">LinkedIn</span></a>
+                <a href="https://www.computrabajo.com.ar" target="_blank" class="p-4 bg-white dark:bg-[#26332d] dark:text-gray-200 rounded-2xl border dark:border-[#2e3d36] text-center text-[10px] font-bold shadow-2xs">💼<br><span class="mt-1 block">Computrabajo</span></a>
+                <a href="https://ar.linkedin.com" target="_blank" class="p-4 bg-white dark:bg-[#26332d] dark:text-gray-200 rounded-2xl border dark:border-[#2e3d36] text-center text-[10px] font-bold shadow-2xs">🌐<br><span class="mt-1 block">LinkedIn</span></a>
             </div>
             <div id="tab-comunidad" class="hidden space-y-3">
-                <div class="bg-white dark:bg-[#26332d] p-4 rounded-2xl border dark:border-[#2e3d36] space-y-2.5 shadow-2xs">
-                    <h3 class="font-bold text-xs text-[#5c7265] dark:text-[#8cb89b]">Publicar oportunidad u oferta solidaria</h3>
-                    <input type="text" id="oferta-puesto" placeholder="Puesto o tarea (ej. Maestro/a, Administrativo)" class="w-full p-2.5 text-xs bg-[#f7f5ef] dark:bg-[#18201d] dark:text-gray-200 border dark:border-[#2e3d36] rounded-xl">
-                    <input type="text" id="oferta-zona" placeholder="Zona o localidad (ej. Zona Sur, CABA)" class="w-full p-2.5 text-xs bg-[#f7f5ef] dark:bg-[#18201d] dark:text-gray-200 border dark:border-[#2e3d36] rounded-xl">
-                    <input type="text" id="oferta-contacto" placeholder="Contacto (WhatsApp o Email)" class="w-full p-2.5 text-xs bg-[#f7f5ef] dark:bg-[#18201d] dark:text-gray-200 border dark:border-[#2e3d36] rounded-xl">
-                    <button onclick="publicarOfertaComunidad()" class="w-full py-2.5 bg-[#5c7265] hover:bg-[#4a5c51] text-white text-xs font-bold rounded-xl shadow-sm transition">Publicar en Comunidad</button>
+                <div class="bg-white dark:bg-[#26332d] p-4 rounded-2xl border dark:border-[#2e3d36] space-y-2.5">
+                    <h3 class="font-bold text-xs text-[#5c7265] dark:text-[#8cb89b]">Publicar oportunidad solidaria</h3>
+                    <input type="text" id="oferta-puesto" placeholder="Puesto o tarea" class="w-full p-2.5 text-xs bg-[#f7f5ef] dark:bg-[#18201d] dark:text-gray-200 border dark:border-[#2e3d36] rounded-xl">
+                    <input type="text" id="oferta-zona" placeholder="Zona o localidad" class="w-full p-2.5 text-xs bg-[#f7f5ef] dark:bg-[#18201d] dark:text-gray-200 border dark:border-[#2e3d36] rounded-xl">
+                    <input type="text" id="oferta-contacto" placeholder="Contacto (WhatsApp/Email)" class="w-full p-2.5 text-xs bg-[#f7f5ef] dark:bg-[#18201d] dark:text-gray-200 border dark:border-[#2e3d36] rounded-xl">
+                    <button onclick="publicarOfertaComunidad()" class="w-full py-2.5 bg-[#5c7265] text-white text-xs font-bold rounded-xl">Publicar</button>
                 </div>
                 <div id="lista-ofertas-comunidad" class="space-y-2.5"></div>
             </div>
         </section>
 
         <!-- VISTA: DIARIO -->
-        <section id="view-diario" class="hidden p-5 space-y-4">
-            <h2 class="font-extrabold text-xl font-serif dark:text-gray-100">Mi Diario Espiritual</h2>
-            <textarea id="input-diario" placeholder="Escribe aquí tu oración, reflexión o gratitud del día..." class="w-full h-28 bg-[#f7f5ef] dark:bg-[#18201d] text-xs text-[#2c3531] dark:text-gray-200 p-3 rounded-2xl border border-[#e2dcd0] dark:border-[#2e3d36] focus:outline-none focus:border-[#5c7265]"></textarea>
-            <button onclick="guardarReflexion()" class="w-full py-3 bg-[#5c7265] hover:bg-[#4a5c51] text-white font-bold text-xs rounded-2xl shadow-sm transition">Guardar en el Diario</button>
+        <section id="view-diario" class="hidden flex-1 overflow-y-auto p-5 space-y-4">
+            <h2 class="font-extrabold text-lg font-serif dark:text-gray-100">Mi Diario Espiritual</h2>
+            <textarea id="input-diario" placeholder="Escribe aquí tu oración, reflexión o gratitud..." class="w-full h-24 bg-[#f7f5ef] dark:bg-[#18201d] text-xs text-[#2c3531] dark:text-gray-200 p-3 rounded-2xl border border-[#e2dcd0] dark:border-[#2e3d36] focus:outline-none focus:border-[#5c7265]"></textarea>
+            <button onclick="guardarReflexion()" class="w-full py-3 bg-[#5c7265] text-white font-bold text-xs rounded-2xl shadow-sm">Guardar en el Diario</button>
             <div id="lista-diario" class="space-y-3 pt-2"></div>
-        </section>
-
-        <!-- VISTA: APOYAR -->
-        <section id="view-apoyar" class="hidden p-5 text-center space-y-4">
-            <h2 class="font-extrabold text-xl font-serif dark:text-gray-100">Apoya este Ministerio</h2>
-            <p class="text-xs text-[#616b67] dark:text-gray-300 leading-relaxed">Tu colaboración permite mantener este refugio espiritual y red de ayuda abierto para todos los que lo necesitan.</p>
-            <button onclick="alert('¡Gracias por tu generosidad y apoyo al ministerio!')" class="w-full py-3 bg-[#8c6d48] hover:bg-[#785b3b] text-white font-bold text-xs rounded-2xl shadow-sm transition">Colaborar con el Refugio</button>
         </section>
     </main>
 
     <!-- NAV INFERIOR -->
-    <nav class="absolute bottom-0 left-0 right-0 bg-white/95 dark:bg-[#202b26]/95 border-t border-[#e8e2d5] dark:border-[#2e3d36] flex justify-around py-2.5 z-50">
+    <nav class="bg-white/95 dark:bg-[#202b26]/95 border-t border-[#e8e2d5] dark:border-[#2e3d36] flex justify-around py-2.5 z-50 shrink-0">
         <button onclick="cambiarVista('inicio', this)" class="nav-btn flex flex-col items-center text-[#5c7265] dark:text-[#8cb89b] text-[10px] font-semibold transition">🏠 Inicio</button>
         <button onclick="cambiarVista('chat', this)" class="nav-btn flex flex-col items-center text-[#8c8275] dark:text-gray-400 text-[10px] font-semibold transition">💬 Chat</button>
         <button onclick="cambiarVista('biblia', this)" class="nav-btn flex flex-col items-center text-[#8c8275] dark:text-gray-400 text-[10px] font-semibold transition">📖 Biblia</button>
@@ -181,7 +178,6 @@
     </nav>
 
     <script>
-        // --- 1. DATOS Y REPOSITORIO DE EMOCIONES ---
         const bancoEmociones = {
             ansiedad: { titulo: "Ansiedad", versiculo: "Filipenses 4:6-7 (RVR1960)", mensaje: "Por nada estéis afanosos, sino en toda oración y ruego... la paz de Dios guardará vuestros corazones." },
             tristeza: { titulo: "Tristeza", versiculo: "Salmo 34:18 (RVR1960)", mensaje: "Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu." },
@@ -199,9 +195,35 @@
             "\"La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo.\" — Juan 14:27"
         ];
 
-        const librosBiblia = ["Génesis", "Salmos", "Isaías", "Mateo", "Juan", "Filipenses"];
+        const librosBiblia = {
+            "Antiguo Testamento": [
+                { nombre: "Génesis", caps: 50 }, { nombre: "Éxodo", caps: 40 }, { nombre: "Levítico", caps: 27 },
+                { nombre: "Números", caps: 36 }, { nombre: "Deuteronomio", caps: 34 }, { nombre: "Josué", caps: 24 },
+                { nombre: "Jueces", caps: 21 }, { nombre: "Rut", caps: 4 }, { nombre: "1 Samuel", caps: 31 },
+                { nombre: "2 Samuel", caps: 24 }, { nombre: "1 Reyes", caps: 22 }, { nombre: "2 Reyes", caps: 25 },
+                { nombre: "1 Crónicas", caps: 29 }, { nombre: "2 Crónicas", caps: 36 }, { nombre: "Esdras", caps: 10 },
+                { nombre: "Nehemías", caps: 13 }, { nombre: "Ester", caps: 10 }, { nombre: "Job", caps: 42 },
+                { nombre: "Salmos", caps: 150 }, { nombre: "Proverbios", caps: 31 }, { nombre: "Eclesiastés", caps: 12 },
+                { nombre: "Cantares", caps: 8 }, { nombre: "Isaías", caps: 66 }, { nombre: "Jeremías", caps: 52 },
+                { nombre: "Lamentaciones", caps: 5 }, { nombre: "Ezequiel", caps: 48 }, { nombre: "Daniel", caps: 12 },
+                { nombre: "Oseas", caps: 14 }, { nombre: "Joel", caps: 3 }, { nombre: "Amós", caps: 9 },
+                { nombre: "Abdías", caps: 1 }, { nombre: "Jonás", caps: 4 }, { nombre: "Miqueas", caps: 7 },
+                { nombre: "Nahúm", caps: 3 }, { nombre: "Habacuc", caps: 3 }, { nombre: "Sofonías", caps: 3 },
+                { nombre: "Hageo", caps: 2 }, { nombre: "Zacarías", caps: 14 }, { nombre: "Malaquías", caps: 4 }
+            ],
+            "Nuevo Testamento": [
+                { nombre: "Mateo", caps: 28 }, { nombre: "Marcos", caps: 16 }, { nombre: "Lucas", caps: 24 },
+                { nombre: "Juan", caps: 21 }, { nombre: "Hechos", caps: 28 }, { nombre: "Romanos", caps: 16 },
+                { nombre: "1 Corintios", caps: 16 }, { nombre: "2 Corintios", caps: 13 }, { nombre: "Gálatas", caps: 6 },
+                { nombre: "Efesios", caps: 6 }, { nombre: "Filipenses", caps: 4 }, { nombre: "Colosenses", caps: 4 },
+                { nombre: "1 Tesalonicenses", caps: 5 }, { nombre: "2 Tesalonicenses", caps: 3 }, { nombre: "1 Timoteo", caps: 6 },
+                { nombre: "2 Timoteo", caps: 4 }, { nombre: "Tito", caps: 3 }, { nombre: "Filemón", caps: 1 },
+                { nombre: "Hebreos", caps: 13 }, { nombre: "Santiago", caps: 5 }, { nombre: "1 Pedro", caps: 5 },
+                { nombre: "2 Pedro", caps: 3 }, { nombre: "1 Juan", caps: 5 }, { nombre: "2 Juan", caps: 1 },
+                { nombre: "3 Juan", caps: 1 }, { nombre: "Judas", caps: 1 }, { nombre: "Apocalipsis", caps: 22 }
+            ]
+        };
 
-        // --- 2. SISTEMA DE TEMA (CLARO / CÁLIDO NOCTURNO) ---
         function alternarTema() {
             const body = document.getElementById('app-body');
             body.classList.toggle('dark-theme');
@@ -210,15 +232,13 @@
             document.getElementById('btn-tema').innerText = isDark ? "☀️ Modo Día" : "🌙 Modo Cálido";
         }
 
-        // Cargar tema guardado
         if(localStorage.getItem('tema_oscuro') === 'true') {
             document.getElementById('app-body').classList.add('dark-theme');
             document.getElementById('btn-tema').innerText = "☀️ Modo Día";
         }
 
-        // --- 3. NAVEGACIÓN ENTRE VISTAS ---
         function cambiarVista(v, el) {
-            ['inicio', 'chat', 'biblia', 'empleo', 'diario', 'apoyar'].forEach(id => {
+            ['inicio', 'chat', 'biblia', 'empleo', 'diario'].forEach(id => {
                 document.getElementById('view-' + id)?.classList.add('hidden');
             });
             document.getElementById('view-' + v)?.classList.remove('hidden');
@@ -233,7 +253,6 @@
             }
         }
 
-        // --- 4. EMOCIONES Y CÁPSULAS ---
         function mostrarReflexionEmocion(e) {
             const d = bancoEmociones[e];
             document.getElementById('emocion-titulo').innerText = d.titulo;
@@ -257,7 +276,6 @@
             alert('¡Cápsula guardada en tu diario con éxito!');
         }
 
-        // --- 5. CHAT IA CON ENFOQUE ESPIRITUAL Y BÍBLICO ---
         function enviarMensajeIA() {
             const input = document.getElementById('chat-input');
             const texto = input.value.trim();
@@ -267,7 +285,7 @@
             
             chatMessages.innerHTML += `
                 <div class="flex justify-end">
-                    <div class="bg-[#5c7265] text-white p-3.5 rounded-3xl rounded-tr-none text-xs max-w-[85%] leading-relaxed shadow-xs">
+                    <div class="bg-[#5c7265] text-white p-3 rounded-2xl rounded-tr-none text-xs max-w-[85%] leading-relaxed shadow-xs">
                         ${texto}
                     </div>
                 </div>`;
@@ -281,8 +299,8 @@
                 const respuestaIA = generarRespuestaEspiritual(texto);
                 chatMessages.innerHTML += `
                     <div class="flex items-start gap-2.5">
-                        <div class="w-8 h-8 rounded-2xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shadow-sm shrink-0">🌿</div>
-                        <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-4 rounded-3xl rounded-tl-none text-xs leading-relaxed shadow-xs space-y-2">
+                        <div class="w-7 h-7 rounded-xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shrink-0">🌿</div>
+                        <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed shadow-xs space-y-2">
                             ${respuestaIA}
                         </div>
                     </div>`;
@@ -319,19 +337,42 @@
         function reiniciarChat() {
             document.getElementById('chat-messages').innerHTML = `
                 <div class="flex items-start gap-2.5">
-                    <div class="w-8 h-8 rounded-2xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shadow-sm">🌿</div>
-                    <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-4 rounded-3xl rounded-tl-none text-xs leading-relaxed shadow-xs">
+                    <div class="w-7 h-7 rounded-xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shrink-0">🌿</div>
+                    <div class="bg-white dark:bg-[#26332d] text-[#2c3531] dark:text-gray-200 border border-[#e8e2d5] dark:border-[#2e3d36] p-3.5 rounded-2xl rounded-tl-none text-xs leading-relaxed shadow-xs">
                         Hola, he reiniciado nuestra conversación. Estoy aquí contigo para escucharte y reflexionar juntos. ¿Qué hay en tu corazón?
                     </div>
                 </div>`;
         }
 
-        // --- 6. BIBLIOTECA BÍBLICA ---
-        function actualizarCapitulos() {
-            const cap = document.getElementById('biblia-cap');
-            if(cap) {
-                cap.innerHTML = '<option>Capítulo 1</option><option>Capítulo 2</option><option>Capítulo 3</option><option>Capítulo 4</option>';
+        function inicializarLibrosBiblia() {
+            const selectLibro = document.getElementById('biblia-libro');
+            if(!selectLibro) return;
+            
+            let html = '';
+            for(const testamento in librosBiblia) {
+                html += `<optgroup label="${testamento}">`;
+                librosBiblia[testamento].forEach(libro => {
+                    html += `<option value="${libro.nombre}" data-caps="${libro.caps}">${libro.nombre}</option>`;
+                });
+                html += `</optgroup>`;
             }
+            selectLibro.innerHTML = html;
+            actualizarCapitulos();
+        }
+
+        function actualizarCapitulos() {
+            const selectLibro = document.getElementById('biblia-libro');
+            const selectCap = document.getElementById('biblia-cap');
+            if(!selectLibro || !selectCap) return;
+
+            const selectedOption = selectLibro.options[selectLibro.selectedIndex];
+            const totalCaps = selectedOption ? parseInt(selectedOption.getAttribute('data-caps')) || 1 : 1;
+
+            let capsHtml = '';
+            for(let i = 1; i <= totalCaps; i++) {
+                capsHtml += `<option value="${i}">Capítulo ${i}</option>`;
+            }
+            selectCap.innerHTML = capsHtml;
         }
 
         function cargarCapituloSeguro() {
@@ -340,11 +381,10 @@
             document.getElementById('biblia-resultado').innerHTML = `
                 <b>Lectura seleccionada: ${libro} (${cap})</b><br><br>
                 <p class="italic">"Lámpara es a mis pies tu palabra, y lumbrera a mi camino." (Salmo 119:105)</p>
-                <p class="mt-2">Aquí meditas en los textos sagrados de la versión Reina Valera con la guía de paz que fortalece tu espíritu para el día de hoy.</p>
+                <p class="mt-2">Meditando en el libro de ${libro}, capítulo ${cap}, recordando que cada texto sagrado de la versión Reina Valera ofrece consuelo y dirección para tu espíritu en este día.</p>
             `;
         }
 
-        // --- 7. EMPLEO / BOLSA COMUNITARIA ---
         function cambiarTabEmpleo(tab) {
             const ext = document.getElementById('tab-externos');
             const com = document.getElementById('tab-comunidad');
@@ -417,7 +457,6 @@
             `).join('');
         }
 
-        // --- 8. DIARIO ESPIRITUAL ---
         function guardarReflexion(t = null) {
             const txt = t || document.getElementById('input-diario').value;
             if(!txt.trim()) return;
@@ -430,6 +469,7 @@
 
         function cargarReflexionesGuardadas() {
             const list = document.getElementById('lista-diario');
+            if(!list) return;
             const diario = JSON.parse(localStorage.getItem('diario_reflexiones') || '[]');
             if(diario.length === 0) {
                 list.innerHTML = '<p class="text-xs text-gray-400 text-center py-4">Aún no hay reflexiones guardadas en tu diario.</p>';
@@ -443,13 +483,8 @@
             `).join('');
         }
 
-        // --- INICIALIZACIÓN GLOBAL ---
         window.onload = function() {
-            const selectLibro = document.getElementById('biblia-libro');
-            if(selectLibro) {
-                selectLibro.innerHTML = librosBiblia.map(l => `<option>${l}</option>`).join('');
-                actualizarCapitulos();
-            }
+            inicializarLibrosBiblia();
             generarNuevaCapsula();
             cargarReflexionesGuardadas();
         };
