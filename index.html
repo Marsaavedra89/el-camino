@@ -33,13 +33,19 @@
                 <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-lg">
                     🕊️ ¿Cómo está tu corazón hoy?
                 </h3>
+              
                 <div class="grid grid-cols-2 gap-2 mb-4">
+                    <!-- Botones de dificultad -->
                     <button onclick="seleccionarEstado('ansioso')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition text-left">😰 Ansioso</button>
-                    <button onclick="seleccionarEstado('economico')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition text-left">📉 Preocupado por dinero</button>
-                    <button onclick="seleccionarEstado('salud')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition text-left">❤️ Problemas de salud</button>
                     <button onclick="seleccionarEstado('triste')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition text-left">🌧️ Triste</button>
-                    <button onclick="seleccionarEstado('enojado')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition text-left">🔥 Enojado</button>
-                    <button onclick="seleccionarEstado('solo')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition text-left">👤 Me siento solo</button>
+                    <button onclick="seleccionarEstado('economico')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition text-left">📉 Preocupado</button>
+                    <button onclick="seleccionarEstado('solo')" class="p-3 text-sm bg-slate-50 hover:bg-amber-50 border border-slate-200 rounded-xl transition text-left">👤 Solo</button>
+                    
+                    <!-- Botones positivos -->
+                    <button onclick="seleccionarEstado('bendecido')" class="p-3 text-sm bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl transition text-left font-medium text-emerald-800">✨ Bendecido</button>
+                    <button onclick="seleccionarEstado('contento')" class="p-3 text-sm bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl transition text-left font-medium text-emerald-800">😊 Contento</button>
+                    <button onclick="seleccionarEstado('agradecido')" class="p-3 text-sm bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl transition text-left font-medium text-emerald-800">🙏 Agradecido</button>
+                    <button onclick="seleccionarEstado('motivado')" class="p-3 text-sm bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl transition text-left font-medium text-emerald-800">🚀 Motivado</button>
                 </div>
 
                 <div id="resultado-animo" class="hidden bg-amber-50/60 border border-amber-200/60 p-4 rounded-xl mt-3"></div>
@@ -136,14 +142,21 @@
             el.querySelector('span:last-child').classList.remove('font-medium');
             el.querySelector('span:last-child').classList.add('font-semibold');
         }
-
-        const mensajesBiblicos = {
+        
+       const mensajesBiblicos = {
+            // Estados de dificultad
             ansioso: { versiculo: 'Filipenses 4:6-7', mensaje: 'No te afanes por nada. Yo tengo el control de tus tiempos; respira profundo en mi paz.' },
             economico: { versiculo: 'Mateo 6:33', mensaje: 'Busca primero mi reino y mi justicia, y yo me encargaré de añadirte todo lo que te falta.' },
             salud: { versiculo: 'Jeremías 30:17', mensaje: 'Yo haré venir sanidad sobre ti, y sanaré tus heridas, dice el Señor.' },
             triste: { versiculo: 'Salmos 34:18', mensaje: 'Cercano estoy a tu corazón quebrantado; yo recojo cada una de tus lágrimas.' },
             enojado: { versiculo: 'Santiago 1:19', mensaje: 'Ven a mí con mansedumbre. Yo calmo tu espíritu y pongo dominio propio en tus labios.' },
-            solo: { versiculo: 'Josué 1:9', mensaje: 'Nunca te dejaré ni te desampararé. Yo estoy a tu lado en este mismo instante.' }
+            solo: { versiculo: 'Josué 1:9', mensaje: 'Nunca te dejaré ni te desampararé. Yo estoy a tu lado en este mismo instante.' },
+            
+            // Estados Positivos (Nuevos)
+            bendecido: { versiculo: 'Números 6:24-26', mensaje: '¡Qué alegría ver tu corazón agradecido! El Señor te bendice y te guarda, y hace resplandecer su rostro sobre ti.' },
+            contento: { versiculo: 'Salmos 118:24', mensaje: 'Este es el día que hizo el Señor; nos gozaremos y alegraremos en él. ¡Disfruta esta paz, hijo mío!' },
+            agradecido: { versiculo: '1 Tesalonicenses 5:18', mensaje: 'Tu gratitud es un aroma agradable. Gracias por reconocer que toda buena dádiva proviene de lo alto.' },
+            motivado: { versiculo: 'Filipenses 4:13', mensaje: '¡Adelante! Todo lo puedes en mí, pues yo te fortalezco para cumplir el propósito que puse en tus manos.' }
         };
 
         function seleccionarEstado(estado) {
