@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -97,7 +96,7 @@
             </div>
         </section>
 
-        <!-- VISTA: CHAT IA (Línea de Usuario y Sugerencia Bíblica al Final) -->
+        <!-- VISTA: CHAT IA (Cerebro Humano, Empático y Resolución de Empleo) -->
         <section id="view-chat" class="hidden flex flex-col h-full absolute inset-0 pb-36 bg-[#fdfbf7]">
             <div class="bg-white/90 backdrop-blur-md border-b border-[#e8e2d5] px-4 py-3 flex items-center justify-between shadow-xs shrink-0 z-20">
                 <div class="flex items-center gap-3">
@@ -117,9 +116,8 @@
                 <div class="flex items-start gap-2.5">
                     <div class="w-8 h-8 rounded-2xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-sm">🌿</div>
                     <div class="bg-white border border-[#e8e2d5] p-4 rounded-3xl rounded-tl-none text-sm shadow-xs max-w-[88%] text-[#3a4440] leading-relaxed space-y-2.5">
-                        <p class="font-serif text-[#2c3531] text-[15px]">La paz sea contigo. Estoy aquí para escucharte y conversar contigo con absoluta calma.</p>
-                        <p class="text-xs text-[#5a6460]">¿De qué te gustaría que hablemos hoy?</p>
-                        <p class="text-xs text-[#5c7265] italic bg-[#f7f5ef] p-2.5 rounded-xl border border-[#efece4]">Sugerencia espiritual: «Lámpara es a mis pies tu palabra, y lumbrera a mi camino» (Salmo 119:105).</p>
+                        <p class="font-serif text-[#2c3531] text-[15px]">Hola. Estoy aquí contigo, con el corazón abierto y sin prisa. Cuéntame qué pasa por tu mente.</p>
+                        <p class="text-xs text-[#5c7265] italic bg-[#f7f5ef] p-2.5 rounded-xl border border-[#efece4]">Sugerencia espiritual: «Cercano está Jehová a los quebrantados de corazón...» — Salmo 34:18</p>
                     </div>
                 </div>
             </div>
@@ -335,39 +333,46 @@
                 const typingElement = document.getElementById(typingId);
                 if (typingElement) typingElement.remove();
 
-                const ultimo = texto.toLowerCase();
+                const t = texto.toLowerCase();
                 let respuestaPrincipal = "";
                 let versiculoSugerido = "";
 
-                // RESPUESTA DINÁMICA BASADA ESTRICTAMENTE EN LO QUE ESCRIBE EL USUARIO (SIN SUPOSICIONES POR DEFECTO)
-                if (/(hola|buen día|buenas|saludos)/.test(ultimo)) {
-                    respuestaPrincipal = `Hola. Qué gusto saludarte. Te leo con atención, ¿cómo sigues o de qué te gustaría conversar en este momento?`;
-                    versiculoSugerido = `«Gozaos con los que se gozan; llorad con los que lloran.» — Romanos 12:15`;
-                } else if (/(bien|tranquilo|todo bien|normal|más o menos|nada|solo bien)/.test(ultimo)) {
-                    respuestaPrincipal = `Me da mucho gusto que te encuentres en ese estado de tranquilidad. Disfrutar de la paz cotidiana es un gran regalo. ¿Hay algo más que quieras compartir o prefieres que sigamos conversando de forma relajada?`;
-                    versiculoSugerido = `«En paz me acostaré, y así mismo dormiré; porque tú solo, Jehová, me haces vivir confiado.» — Salmo 4:8`;
-                } else if (/(triste|mal|solo|sola|llorar|angustia|pesado|ansiedad|miedo)/.test(ultimo)) {
-                    respuestaPrincipal = `Comprendo perfectamente lo que me dices y acompaño tu sentir con respeto. Tómate tu tiempo para expresarte. ¿Quieres contarme un poco más de lo que pasa por tu mente?`;
-                    versiculoSugerido = `«Cercano está Jehová a los quebrantados de corazón...» — Salmo 34:18`;
-                } else if (/(trabajo|empleo|dinero|plata|entrevista|currículum)/.test(ultimo)) {
-                    respuestaPrincipal = `Abordar los temas de trabajo y sustento requiere paciencia y constancia. Mantén la confianza en tus capacidades y en el esfuerzo diario que realizas.`;
+                // MOTOR EMPÁTICO Y RESOLUTIVO (Cerebro Humano)
+                const mencionaTristeza = /(triste|mal|llorar|angustia|depre|abatid)/.test(t);
+                const mencionaTrabajo = /(trabajo|empleo|sin trabajo|desemplead|plata|dinero|entrevista|currículum)/.test(t);
+                const mencionaAnsiedad = /(ansiedad|miedo|preocupad|nervios)/.test(t);
+
+                if (mencionaTristeza && mencionaTrabajo) {
+                    respuestaPrincipal = `Siento en el alma el peso con el que cargas hoy. Estar atravesando una tristeza tan profunda y al mismo tiempo lidiar con la falta de empleo es una prueba muy dura para el espíritu. Pero quiero recordarte que tu dignidad vale oro y esto no es el final de tu historia. Vamos a dar pasos firmes: revisa con calma las pautas de nuestra sección de <strong>Empleo</strong>, pule tu currículum y recuerda que cada puerta cerrada te acerca a la correcta. ¿Qué tipo de labor es en la que tienes experiencia? Quiero ayudarte a enfocar tus talentos.`;
+                    versiculoSugerido = `«Echa sobre Jehová tu carga, y él te sustentará; no dejará para siempre caído al justo.» — Salmo 55:22`;
+                } 
+                else if (mencionaTrabajo) {
+                    respuestaPrincipal = `Comprendo la gran preocupación que genera no tener trabajo en estos tiempos. La incertidumbre económica asfixia, pero quiero invitarte a no bajar los brazos. Organiza tus fuerzas: te sugiero revisar las claves de nuestra sección <strong>Empleo</strong> para estructurar tu búsqueda con serenidad y estrategia. Cuéntame, ¿en qué área te desempeñás habitualmente para pensar juntos ideas que te abran caminos?`;
                     versiculoSugerido = `«Todo lo puedo en Cristo que me fortalece.» — Filipenses 4:13`;
-                } else {
-                    // SEGUIMIENTO NATURAL DE LA LÍNEA DEL USUARIO
-                    respuestaPrincipal = `Te sigo el hilo de lo que mencionas sobre "${texto}". Es interesante lo que planteas; cuéntame cómo ves este asunto o qué te gustaría profundizar al respecto.`;
+                }
+                else if (mencionaTristeza) {
+                    respuestaPrincipal = `Te abrazo con profundo respeto en este momento. La tristeza duele físicamente y sé que a veces las palabras sobran, pero quiero estar a tu lado para que no lo lleves en solitaria angustia. ¿Te sientes cómodo/a contándome qué es lo que ha provocado esta tristeza tan hondo en tu corazón? Estoy aquí para leerte sin juzgarte.`;
+                    versiculoSugerido = `«Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu.» — Salmo 34:18`;
+                }
+                else if (mencionaAnsiedad) {
+                    respuestaPrincipal = `Detente un instante y respira profundo conmigo. La ansiedad intenta adelantarse al futuro robándote la paz del presente. No tienes que resolver el mañana en este mismo segundo. ¿Qué es lo que más te ronda la cabeza ahora mismo? Desahógate con total confianza.`;
+                    versiculoSugerido = `«Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego...» — Filipenses 4:6-7`;
+                }
+                else {
+                    respuestaPrincipal = `Te sigo con atención y calidez en cada palabra que me compartes sobre "${texto}". Me importa mucho lo que piensas y cómo te afecta el día a día. ¿Cómo te gustaría que sigamos explorando esto juntos?`;
                     versiculoSugerido = `«Lámpara es a mis pies tu palabra, y lumbrera a mi camino.» — Salmo 119:105`;
                 }
 
                 // ARMAR LA RESPUESTA CON LA SUGERENCIA BÍBLICA UBICADA ABAJO
                 const contenidoHTML = `
-                    <p class="font-serif text-[#2c3531] text-[15px]">${respuestaPrincipal}</p>
-                    <p class="text-xs text-[#5c7265] italic bg-[#f7f5ef] p-2.5 rounded-xl border border-[#efece4] mt-2">Sugerencia espiritual: ${versiculoSugerido}</p>
+                    <p class="font-serif text-[#2c3531] text-[15px] leading-relaxed">${respuestaPrincipal}</p>
+                    <p class="text-xs text-[#5c7265] italic bg-[#f7f5ef] p-2.5 rounded-xl border border-[#efece4] mt-3">Sugerencia espiritual: ${versiculoSugerido}</p>
                 `;
 
                 chat.innerHTML += `
                     <div class="flex items-start gap-2.5">
                         <div class="w-8 h-8 rounded-2xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-sm">🌿</div>
-                        <div class="bg-white border border-[#e8e2d5] p-4 rounded-3xl rounded-tl-none text-sm shadow-xs max-w-[88%] space-y-2.5 text-[#3a4440] leading-relaxed">
+                        <div class="bg-white border border-[#e8e2d5] p-4 rounded-3xl rounded-tl-none text-sm shadow-xs max-w-[88%] space-y-1 text-[#3a4440] leading-relaxed">
                             ${contenidoHTML}
                         </div>
                     </div>`;
@@ -381,8 +386,7 @@
                 <div class="flex items-start gap-2.5">
                     <div class="w-8 h-8 rounded-2xl bg-[#5c7265] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-sm">🌿</div>
                     <div class="bg-white border border-[#e8e2d5] p-4 rounded-3xl rounded-tl-none text-sm shadow-xs max-w-[88%] text-[#3a4440] leading-relaxed space-y-2.5">
-                        <p class="font-serif text-[#2c3531]">Conversación reiniciada en absoluta calma. Estoy aquí para seguir tu línea de diálogo sin apuros.</p>
-                        <p class="text-xs text-[#5a6460]">¿De qué te gustaría que hablemos?</p>
+                        <p class="font-serif text-[#2c3531]">Conversación reiniciada. Estoy aquí, con total disposición humana y afecto, para escucharte sin apuros.</p>
                         <p class="text-xs text-[#5c7265] italic bg-[#f7f5ef] p-2.5 rounded-xl border border-[#efece4]">Sugerencia espiritual: «Echa sobre Jehová tu carga, y él te sustentará» — Salmo 55:22</p>
                     </div>
                 </div>`;
